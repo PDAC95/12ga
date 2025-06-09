@@ -1,12 +1,12 @@
 [
     {
         "title": "Gallery",
-        "link": "/gallery",
+        "link": "/",
         "key": "gallery"
     },
     {
         "title": "Parts",
-        "link": "/parts",
+        "link": "/",
         "key": "parts"
     },
     {
