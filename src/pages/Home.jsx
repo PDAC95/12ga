@@ -1,8 +1,8 @@
 import React from "react";
 
 import HeroSlider from "../components/Sliders/HeroSlider";
-import ServiceProgres from "../components/ServiceProgres/ServiceProgres";
-import ChooseUs from "../components/ChooseUs/ChooseUs";
+import SearchOptions from "../components/SearchOptions/SearchOptions";
+import CategoriesPreview from "../components/CategoriesPreview/CategoriesPreview";
 import Services from "../components/Services/ServicesSection";
 import Videos from "../components/VideoPopUp/Videos";
 import TrustedClient from "../components/TrustedClient/TrustedClient";
@@ -16,8 +16,8 @@ export default function Home() {
   return (
     <>
       <HeroSlider />
-      <ServiceProgres />
-      <ChooseUs />
+      <SearchOptions />
+      <CategoriesPreview />
       <Services styleTypeTwo={true} />
       <Videos videoId={"VcaAVWtP48A"} />
       <AutoCounter />

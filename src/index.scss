@@ -16,3 +16,32 @@
 @import "lightgallery/css/lg-share.css";
 
 @import "/public/assets/sass/style.scss";
+
+// Pagination Styles for Categories
+.pagination-style {
+  margin: 20px 0;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination-btn {
+  background: transparent;
+  border: 2px solid #FF3D24;
+  color: #FF3D24;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: 500;
+
+  &:hover,
+  &.active {
+    background: #FF3D24;
+    color: white;
+  }
+}
