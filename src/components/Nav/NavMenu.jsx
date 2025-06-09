@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MenuItem from "./MenuItem";
 
-import logo from "/assets/img/icon/logo.svg";
+import logo from "/assets/img/icon/12galogo.png";
 
 import navitemlist from "../../dataJson/navitemlist.json";
 
@@ -50,14 +50,14 @@ export default function NavMenu() {
             </div>
           </div>
           <div className="ak-main-header-right">
-            <Link to="tel:1-800-915-6271">
+            <Link to="tel:1-519-766-0943">
               <div className="d-flex align-items-center gap-3">
                 <div className="heartbeat-icon">
                   <span className="ak-heartbeat-btn">
                     <img src="/assets/img/icon/phone.svg" alt="..." />
                   </span>
                 </div>
-                <h6> 1-800-915-6271</h6>
+                <h6> 1-519-766-0943</h6>
               </div>
             </Link>
           </div>
