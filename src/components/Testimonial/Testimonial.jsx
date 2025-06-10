@@ -8,17 +8,24 @@ import testimaonialBgImg from "/assets/img/bg/testimaonial-img-bg.png";
 const sliderData = [
   {
     id: 1,
-    name: "Roberts Bush",
-    from: "From Canada",
-    desp: "“There are many variations of passages of Lorem Ipsum available,butthe majority have suffered alteration in some form injected humour, or randomised”",
+    name: "Jake Morrison",
+    from: "Long Haul Driver, Alberta",
+    desp: "Been running their flip bumper for two years now. Still looks brand new after countless miles. Built tough, works as advertised. No BS, just solid parts that last.",
     img: "/assets/img/testmaonail/testimaonial.png",
   },
   {
     id: 2,
-    name: "Butthe Bush",
-    from: "From Canada",
-    desp: "“There are many variations of passages of Lorem Ipsum available,butthe majority have suffered alteration in some form injected humour, or randomised”",
+    name: "Tom Rodriguez", 
+    from: "Fleet Supervisor, Texas",
+    desp: "We run 30+ trucks. Twelve GA parts hold up better than anything else we've tried. Worth every penny when you're talking about equipment that needs to work 24/7.",
     img: "/assets/img/testmaonail/testmaonail_1.png",
+  },
+  {
+    id: 3,
+    name: "Rick Thompson",
+    from: "Custom Shop Owner, Ontario", 
+    desp: "I've been building custom rigs for 15 years. When clients want quality stainless work, I use Twelve GA. They deliver what they promise, when they promise it.",
+    img: "/assets/img/testmaonail/testimaonial.png",
   },
 ];
 

@@ -19,8 +19,6 @@ const About = () => {
       <AutoCounter />
       <Testimonial />
       <Teams />
-      <PricingTable />
-      <TrustedClient />
       <Cta />
     </>
   );

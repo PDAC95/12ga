@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { CtaBtn } from "../Button/Button";
 
 const ctaData = {
-  title: "Get in touch with our experts",
+  title: "Ready to Transform Your Truck?",
   description:
-    " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan.",
+    "Get in touch with our fabrication experts to discuss your custom stainless steel project. From flip bumpers to complete truck makeovers, we'll help bring your vision to life with award-winning quality and craftsmanship.",
 };
 
 const Cta = () => {
@@ -22,7 +22,7 @@ const Cta = () => {
             {title}
           </h2>
           <p className="cta-desp">{description}</p>
-          <CtaBtn to="/contact">GET IN TOUCH WITH US</CtaBtn>
+          <CtaBtn to="/contact">START YOUR PROJECT</CtaBtn>
         </div>
       </div>
     </div>

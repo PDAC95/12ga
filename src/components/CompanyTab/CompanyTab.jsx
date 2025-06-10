@@ -4,17 +4,17 @@ const tabContents = [
   {
     title: "Mission",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan. Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "Our mission is to craft premium stainless steel truck parts that elevate the look, functionality, and durability of heavy-duty trucks. We're committed to delivering award-winning custom solutions that exceed expectations and help truck owners express their unique style while maintaining professional standards.",
   },
   {
     title: "Vision",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. been the industry's stanLorem Ipsum has.",
+      "To be the leading manufacturer of custom stainless steel truck parts globally, recognized for exceptional craftsmanship, innovative design, and uncompromising quality. We envision a future where every truck on the road can showcase the perfect blend of style and functionality through our products.",
   },
   {
     title: "History",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan.",
+      "Founded in Ontario, Canada, Twelve GA Customs has grown from a small fabrication shop to an award-winning manufacturer of premium truck parts. Our journey began with a passion for precision craftsmanship and a vision to create the highest quality stainless steel accessories for the trucking industry.",
   },
 ];
 

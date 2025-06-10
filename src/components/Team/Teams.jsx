@@ -6,56 +6,56 @@ import TeamCard from "./TeamCard";
 const membersData = [
   {
     id: 1,
-    name: "Darrell T. Beedle",
-    title: "Lead Mechanic",
+    name: "Dave Mitchell",
+    title: "Head Fabricator",
     image: "/assets/img/member/member_1.jpg",
-    desp: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form injected humour, or randomised. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form injected humour, or randomised.",
+    desp: "20+ years in stainless steel fabrication. Dave leads our shop floor operations and oversees quality control for all custom builds. His expertise in precision welding and metal forming ensures every part meets our exacting standards.",
     socialLinks: {
-      linkedin: "https://www.facebook.com/",
-      facebook: "https://bd.linkedin.com/",
+      linkedin: "https://www.linkedin.com/",
+      facebook: "https://www.facebook.com/",
       twitter: "https://www.instagram.com/",
     },
     contact: {
-      address: "2118 Thornridge Cir, 35624",
-      email: "example@example.com",
-      phone: "+7 (903) 679-96-15",
-      website: "www.website.com",
+      address: "Guelph, Ontario, Canada",
+      email: "fabrication@12gacustoms.com",
+      phone: "+1 (519) 766-0943",
+      website: "www.12gacustoms.com",
     },
   },
   {
     id: 2,
-    name: "Michael Jack",
-    title: "Service Advisor",
+    name: "Lisa Parker",
+    title: "Design Engineer",
     image: "/assets/img/member/member_2.jpg",
-    desp: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    desp: "Mechanical engineer specializing in custom truck part design. Lisa transforms customer ideas into manufacturable designs using CAD software and ensures all parts meet structural and safety requirements.",
     socialLinks: {
-      linkedin: "https://www.facebook.com/",
-      facebook: "https://bd.linkedin.com/",
+      linkedin: "https://www.linkedin.com/",
+      facebook: "https://www.facebook.com/",
       twitter: "https://www.instagram.com/",
     },
     contact: {
-      address: "2118 Thornridge Cir, 35624",
-      email: "example@example.com",
-      phone: "+7 (903) 679-96-15",
-      website: "www.website.com",
+      address: "Guelph, Ontario, Canada",
+      email: "design@12gacustoms.com",
+      phone: "+1 (519) 766-0943",
+      website: "www.12gacustoms.com",
     },
   },
   {
     id: 3,
-    name: "Cathy Sparkman",
-    title: "Diagnostic Technician",
+    name: "Mark Stevens",
+    title: "Quality Supervisor",
     image: "/assets/img/member/member_3.jpg",
-    desp: "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+    desp: "Former heavy-duty mechanic with deep understanding of truck applications. Mark inspects every finished part and coordinates with customers to ensure perfect fit and finish on all deliveries.",
     socialLinks: {
-      linkedin: "https://www.facebook.com/",
-      facebook: "https://bd.linkedin.com/",
+      linkedin: "https://www.linkedin.com/",
+      facebook: "https://www.facebook.com/",
       twitter: "https://www.instagram.com/",
     },
     contact: {
-      address: "2118 Thornridge Cir, 35624",
-      email: "example@example.com",
-      phone: "+7 (903) 679-96-15",
-      website: "www.website.com",
+      address: "Guelph, Ontario, Canada",
+      email: "quality@12gacustoms.com",
+      phone: "+1 (519) 766-0943",
+      website: "www.12gacustoms.com",
     },
   },
 ];
@@ -68,9 +68,9 @@ const Teams = () => {
         <div className="team-heading" data-aos="fade-right">
           <SectionHeading
             bgText={"Team"}
-            title={"Our Team"}
+            title={"Our Expert Team"}
             desp={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard."
+              "Meet the skilled craftsmen and professionals behind Twelve GA Customs. Our team combines decades of fabrication experience with a passion for innovation, ensuring every part we create meets the highest standards of quality and precision."
             }
           />
           <div className="ak-height-50 ak-height-lg-10"></div>
@@ -93,4 +93,5 @@ const Teams = () => {
     </div>
   );
 };
+
 export default Teams;

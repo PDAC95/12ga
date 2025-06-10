@@ -3,15 +3,15 @@ import SectionHeading from "../SectionHeading/SectionHeading";
 import { ButtonCommon } from "../Button/Button";
 
 const chooseUsData = {
-  bgText: "Feature",
-  title: "why Choose Us",
-  desp: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan. Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's stan.",
+  bgText: "Excellence",
+  title: "Why Choose Twelve GA Customs",
+  desp: "When it comes to premium stainless steel truck parts, Twelve GA Customs stands apart from the competition. Our commitment to quality, innovation, and customer satisfaction has made us the trusted choice for truck owners worldwide who demand nothing but the best.",
   img: "/assets/img/chooseus/choose-us.png",
   list: [
-    { title: "Certified Technicians" },
-    { title: "Comprehensive Repair Services" },
-    { title: "900 Five Star Reviews" },
-    { title: "Warranty on Repairs" },
+    { title: "Award-Winning Quality" },
+    { title: "Premium Stainless Steel" },
+    { title: "Custom Fabrication" },
+    { title: "Worldwide Shipping" },
   ],
 };
 
@@ -45,11 +45,6 @@ const ChooseUs = () => {
             data-aos-delay="150"
           >
             <img src={img} alt="..." />
-            <img
-              className="circle-img"
-              src="/assets/img/chooseus/Circle.png"
-              alt="..."
-            />
           </div>
         </div>
       </div>
