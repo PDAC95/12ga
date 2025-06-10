@@ -19,6 +19,7 @@ import CommingSoon from "./pages/CommingSoon";
 import Faq from "./pages/Faq";
 import Contact from "./pages/Contact";
 import SingleService from "./pages/SingleService";
+import TruckGallery from "./pages/TruckGallery";
 
 export default function App() {
   useEffect(() => {
@@ -47,6 +48,7 @@ export default function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/comming-soon" element={<CommingSoon />} />
+        <Route path="/truck-gallery" element={<TruckGallery />} />
       </Route>
       <Route path="/*" element={<ErrorPages />}></Route>
     </Routes>
