@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const searchOptionsData = [
   {
@@ -12,23 +11,27 @@ const searchOptionsData = [
   {
     id: 2,
     number: "02",
-    icon: "/assets/img/icon/car-repair.svg",
+    icon: "/assets/img//icon/car-repair.svg",
     title: "SELECT MAKE",
     desp: "After selecting the year, choose the manufacturer of your truck to narrow down compatible parts and configurations.",
   },
   {
     id: 3,
     number: "03",
-    icon: "/assets/img/icon/car.svg",
+    icon: "/assets/img//icon/car.svg",
     title: "SELECT MODEL",
     desp: "Once you've selected the year and brand, pick your exact model to see all available parts, upgrades, and customization options.",
   },
 ];
 
-const SearchOptions = () => {
-  const openSidebar = () => {
-    // Función para abrir sidebar - implementaremos después
-    console.log("Opening truck selector sidebar");
+const SearchOptions = ({ openSidebar }) => {
+  const handleOpenSidebar = (e) => {
+    e.preventDefault();
+    if (openSidebar) {
+      openSidebar();
+    } else {
+      console.log("openSidebar function not provided");
+    }
   };
 
   return (
@@ -40,11 +43,12 @@ const SearchOptions = () => {
             SEARCH
           </div>
           <div className="text-md-center">
-            <a href="#" onClick={openSidebar}>
+            <a href="#" onClick={handleOpenSidebar}>
               <h2 className="ak-section-title">SEARCH</h2>
             </a>
             <p className="ak-section-subtitle">
               Start your search by selecting your truck's year, brand, and model. Once selected, you'll unlock the full
+              <br />
               list of compatible parts and customization options tailored just for your build.
             </p>
           </div>
@@ -67,15 +71,17 @@ const SearchOptions = () => {
               </div>
               <div className="service-item">
                 <div className="heartbeat-icon">
-                  <a href="#" onClick={openSidebar}>
+                  <a href="#" onClick={handleOpenSidebar}>
                     <span className="ak-heartbeat-btn">
                       <img src={item.icon} alt="..." />
                     </span>
                   </a>
                 </div>
                 <div className="service-info">
+                  <a href="#" onClick={handleOpenSidebar}>
                   <h4 className="title">{item.title}</h4>
                   <p className="desp">{item.desp}</p>
+                  </a>
                 </div>
               </div>
             </div>

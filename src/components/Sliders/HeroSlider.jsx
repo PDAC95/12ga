@@ -1,9 +1,13 @@
 import React from "react";
 
-const HeroSlider = () => {
-  const openSidebar = () => {
-    // Función para abrir sidebar - implementaremos después
-    console.log("Opening truck selector sidebar");
+const HeroSlider = ({ openSidebar }) => {
+  const handleOpenSidebar = (e) => {
+    e.preventDefault();
+    if (openSidebar) {
+      openSidebar();
+    } else {
+      console.log("openSidebar function not provided");
+    }
   };
 
   return (
@@ -23,19 +27,20 @@ const HeroSlider = () => {
         <div className="hero-contact-info">
           <div className="d-flex align-items-center gap-2">
             <div className="heartbeat-icon">
+              <a href="#" onClick={handleOpenSidebar}>
               <svg width="61" height="60" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.5">
                   <circle opacity="0.3" cx="30.5" cy="30" r="25" fill="#FF3D24" />
                   <circle opacity="0.3" cx="30.5" cy="30" r="30" fill="#FF3D24" />
                   <circle cx="30.5" cy="30" r="20" fill="#FF3D24" />
                 </g>
-                {/* Ícono de lupa */}
                 <g transform="translate(20,20)">
                   <circle cx="8" cy="8" r="7" stroke="white" strokeWidth="2" fill="none"/>
                   <line x1="13" y1="13" x2="18" y2="18" stroke="white" strokeWidth="2" />
                 </g>
               </svg>
-            </div>
+              </a>
+            </div>   
             <a href="#" onClick={openSidebar}>
               <p className="ak-font-18 ak-white-color ak-semi-bold">Select my Truck</p>
             </a>

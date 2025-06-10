@@ -14,15 +14,25 @@ import AutoCounter from "../components/AutoCounter/AutoCounter";
 import Cta from "../components/Cta/Cta";
 import TruckGalleryPreview from "../components/TruckGalleryPreview/TruckGalleryPreview";
 
+import TruckSidebar from "../components/TruckSidebar/TruckSidebar";
+import { useTruckSidebar } from "../helper/useTruckSidebar";
+
 export default function Home() {
+  const { isSidebarOpen, openSidebar, closeSidebar } = useTruckSidebar();
+
   return (
     <>
-      <HeroSlider />
-      <SearchOptions />
+      <HeroSlider openSidebar={openSidebar} />
+      <SearchOptions openSidebar={openSidebar} />
       <CategoriesPreview />
       <Cta />
       <TruckGalleryPreview />
       <VideoSection videoId={"SWB6-NBV8Qs"} />
+      
+      <TruckSidebar 
+        isOpen={isSidebarOpen} 
+        onClose={closeSidebar} 
+      />
     </>
   );
 }
