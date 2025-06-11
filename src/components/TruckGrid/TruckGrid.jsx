@@ -191,7 +191,6 @@ const TruckGrid = ({ filters = {} }) => {
               <option value="newest">Newest First</option>
               <option value="oldest">Oldest First</option>
               <option value="make">Make (A-Z)</option>
-              <option value="status">Status</option>
             </select>
           </div>
 

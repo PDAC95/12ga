@@ -178,7 +178,7 @@ const TruckCard = ({ truck, viewMode = "grid" }) => {
         </div>
 
         <h3 className="truck-title">
-          <Link to={`/truck-details/${truck.id}`}>
+          <Link to={`/truck/${truck.id}`}>
             {viewMode === "grid" ? truncateText(truck.title, 30) : truck.title}
           </Link>
         </h3>
@@ -212,7 +212,7 @@ const TruckCard = ({ truck, viewMode = "grid" }) => {
             <span>{truck.category}</span>
           </div>
           
-          <Link to={`/truck-details/${truck.id}`} className="details-link">
+          <Link to={`/truck/${truck.id}`} className="details-link">
             View Project
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

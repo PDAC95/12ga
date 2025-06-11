@@ -20,6 +20,7 @@ import Faq from "./pages/Faq";
 import Contact from "./pages/Contact";
 import SingleService from "./pages/SingleService";
 import TruckGallery from "./pages/TruckGallery";
+import SingleTruck from "./pages/SingleTruck";
 
 export default function App() {
   useEffect(() => {
@@ -49,6 +50,7 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/comming-soon" element={<CommingSoon />} />
         <Route path="/truck-gallery" element={<TruckGallery />} />
+        <Route path="/truck/:id" element={<SingleTruck />} />
       </Route>
       <Route path="/*" element={<ErrorPages />}></Route>
     </Routes>

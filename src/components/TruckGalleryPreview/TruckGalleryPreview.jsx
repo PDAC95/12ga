@@ -110,7 +110,7 @@ const TruckGalleryPreview = () => {
           {truckImages.map((truck, index) => (
             <SwiperSlide key={truck.id} className="truck-slide">
               <div className="slide-content">
-                <div className="image-container" onClick={() => openModal(truck)}>
+                <Link to={`/truck/${truck.id}`} className="image-container">
                   <img 
                     src={truck.image} 
                     alt={truck.alt}
@@ -131,15 +131,15 @@ const TruckGalleryPreview = () => {
                           <span className="spec-value">{truck.specs.finish}</span>
                         </div>
                       </div>
-                      <div className="expand-hint">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                          <path d="M15 3H21V9M14 10L21 3M9 21H3V15M10 14L3 21" stroke="currentColor" strokeWidth="2"/>
+                      <div className="view-details-btn">
+                        <span>View Details</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2"/>
                         </svg>
-                        Click to expand
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </div>
             </SwiperSlide>
           ))}
