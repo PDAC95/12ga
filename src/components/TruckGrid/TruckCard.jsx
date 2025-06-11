@@ -14,19 +14,6 @@ const TruckCard = ({ truck, viewMode = "grid" }) => {
     setImageLoaded(true);
   };
 
-  const getStatusBadgeClass = (status) => {
-    switch (status.toLowerCase()) {
-      case "completed":
-        return "status-completed";
-      case "in progress":
-        return "status-progress";
-      case "planned":
-        return "status-planned";
-      default:
-        return "status-default";
-    }
-  };
-
   const truncateText = (text, maxLength) => {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength) + "...";
@@ -87,9 +74,6 @@ const TruckCard = ({ truck, viewMode = "grid" }) => {
               <span className="truck-year">{truck.year}</span>
               <span className="truck-make">{truck.make}</span>
               {truck.model && <span className="truck-model">{truck.model}</span>}
-            </div>
-            <div className={`status-badge ${getStatusBadgeClass(truck.status)}`}>
-              {truck.status}
             </div>
           </div>
 
@@ -175,10 +159,6 @@ const TruckCard = ({ truck, viewMode = "grid" }) => {
                 <span>View Details</span>
               </button>
             </div>
-          </div>
-
-          <div className={`status-badge ${getStatusBadgeClass(truck.status)}`}>
-            {truck.status}
           </div>
 
           <div className="corner-accents">
