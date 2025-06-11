@@ -3,30 +3,30 @@ import { Link } from "react-router-dom";
 
 import CommonPageHero from "../components/CommonPageHero/CommonPageHero";
 
-// Zone definitions with colors and categories
+// Zone definitions with English names and colors
 const zonesData = {
   frontal: {
-    name: "Frontal",
+    name: "Front",
     color: "#FF3D24",
     categories: ["GRILLES", "BUMPERS", "LIGHTS", "FLIP BUMPERS", "LIFT BUMPERS"]
   },
   motor: {
-    name: "Motor/Air System", 
+    name: "Engine/Air System", 
     color: "#FF8C24",
     categories: ["AIR CLEANER LIGHT BARS", "AIR CLEANER SCREENS", "AIR CLEANER STRAPS", "AIR CLEANER BAR STRAPLESS", "AIR CLEANER WRAPS", "DPF COVERS"]
   },
   superior: {
-    name: "Superior/Cabina",
+    name: "Top/Cabin",
     color: "#FFD624", 
     categories: ["VISORS", "OVERHEAD CONSOLES", "MIRROR BRACKETS", "LIGHT PANELS", "CAB AND COWL PANELS"]
   },
   lateral: {
-    name: "Lateral/Storage",
+    name: "Side/Storage",
     color: "#24FF57",
     categories: ["FENDERS", "FENDER BRACES", "BATTERY/TOOL BOXES", "BATTERY/TOOL STEP PLATES", "FUEL TANK PANELS", "FUEL TANK STRAPS", "FUEL TANK WRAPS", "FUEL TANK BRACKET COVERS"]
   },
   escape: {
-    name: "Escape/Air",
+    name: "Exhaust/Air",
     color: "#2489FF", 
     categories: ["AIR TANK STRAPS", "AIR LINE BOX", "AIR RIDE GEN III", "SHOCK BOXES"]
   },
@@ -89,7 +89,13 @@ const vehicleData = {
     "2024": ["Peterbilt", "Kenworth", "Freightliner", "Mack", "Volvo", "International"],
     "2023": ["Peterbilt", "Kenworth", "Freightliner", "Mack", "Volvo", "International"],
     "2022": ["Peterbilt", "Kenworth", "Freightliner", "Mack", "Volvo", "International"],
-    // ... more years
+    "2021": ["Peterbilt", "Kenworth", "Freightliner", "Mack", "Volvo", "International"],
+    "2020": ["Peterbilt", "Kenworth", "Freightliner", "Mack", "Volvo", "International"],
+    "2019": ["Peterbilt", "Kenworth", "Freightliner", "Mack", "Volvo", "International"],
+    "2018": ["Peterbilt", "Kenworth", "Freightliner", "Mack", "Volvo", "International"],
+    "2017": ["Peterbilt", "Kenworth", "Freightliner", "Mack", "Volvo", "International"],
+    "2016": ["Peterbilt", "Kenworth", "Freightliner", "Mack", "Volvo", "International"],
+    "2015": ["Peterbilt", "Kenworth", "Freightliner", "Mack", "Volvo", "International"]
   },
   models: {
     "Peterbilt": ["579", "389", "567", "520", "348"],
@@ -112,6 +118,42 @@ const Parts = () => {
   const [hoveredZone, setHoveredZone] = useState(null);
   const [viewMode, setViewMode] = useState("areas"); // "areas" or "hotspots"
 
+  // Fixed: Zone click handler to sync with legend buttons
+  const handleVisualZoneClick = (zoneKey) => {
+    setVisualZoneFilter(zoneKey);
+    setSelectedZone(zoneKey); // Sync with legend filter state
+    
+    if (zoneKey) {
+      const zoneCategories = categoriesData.filter(cat => cat.zone === zoneKey);
+      setFilteredCategories(zoneCategories);
+    } else {
+      filterCategories(selectedYear, selectedMake, selectedModel, "");
+    }
+  };
+
+  // Fixed: Zone change handler to sync with visual zones
+  const handleZoneChange = (zone) => {
+    setSelectedZone(zone);
+    setVisualZoneFilter(zone); // Sync with visual filter state
+    filterCategories(selectedYear, selectedMake, selectedModel, zone);
+  };
+
+  // Fixed: Hover handlers with debouncing to prevent flickering
+  const handleZoneMouseEnter = (zoneKey) => {
+    // Clear any pending timeouts
+    if (window.zoneHoverTimeout) {
+      clearTimeout(window.zoneHoverTimeout);
+    }
+    setHoveredZone(zoneKey);
+  };
+
+  const handleZoneMouseLeave = () => {
+    // Delay the hover state change to prevent flickering
+    window.zoneHoverTimeout = setTimeout(() => {
+      setHoveredZone(null);
+    }, 100);
+  };
+
   const handleYearChange = (year) => {
     setSelectedYear(year);
     setSelectedMake("");
@@ -128,24 +170,6 @@ const Parts = () => {
   const handleModelChange = (model) => {
     setSelectedModel(model);
     filterCategories(selectedYear, selectedMake, model, selectedZone);
-  };
-
-  const handleZoneChange = (zone) => {
-    setSelectedZone(zone);
-    setVisualZoneFilter(""); // Clear visual filter when using dropdown
-    filterCategories(selectedYear, selectedMake, selectedModel, zone);
-  };
-
-  const handleVisualZoneClick = (zoneKey) => {
-    setVisualZoneFilter(zoneKey);
-    setSelectedZone(""); // Clear dropdown when using visual filter
-    
-    if (zoneKey) {
-      const zoneCategories = categoriesData.filter(cat => cat.zone === zoneKey);
-      setFilteredCategories(zoneCategories);
-    } else {
-      filterCategories(selectedYear, selectedMake, selectedModel, "");
-    }
   };
 
   const filterCategories = (year, make, model, zone) => {
@@ -246,26 +270,27 @@ const Parts = () => {
               className="truck-diagram"
             />
             
-            {/* Areas Mode */}
+            {/* Areas Mode - Magnifying glass SVG icons */}
             {viewMode === "areas" && (
               <>
-                {/* Zone circles that expand on hover */}
                 {Object.entries(zonesData).map(([zoneKey, zone]) => (
                   <div key={zoneKey} className={`zone-circle-container zone-${zoneKey}`}>
                     <div
                       className={`zone-circle ${visualZoneFilter === zoneKey ? 'active' : ''}`}
-                      style={{ '--zone-color': zone.color }}
                       onClick={() => handleVisualZoneClick(visualZoneFilter === zoneKey ? "" : zoneKey)}
-                      onMouseEnter={() => setHoveredZone(zoneKey)}
-                      onMouseLeave={() => setHoveredZone(null)}
+                      onMouseEnter={() => handleZoneMouseEnter(zoneKey)}
+                      onMouseLeave={handleZoneMouseLeave}
                     >
-                      <div className="circle-indicator"></div>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
+                        <path d="m21 21-4.35-4.35" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
                     </div>
                     
-                    {/* Expanded area overlay */}
                     <div
-                      className={`zone-overlay zone-${zoneKey} ${visualZoneFilter === zoneKey ? 'active' : ''} ${hoveredZone === zoneKey ? 'hovered' : ''}`}
-                      style={{ '--zone-color': zone.color }}
+                      className={`zone-overlay zone-${zoneKey} ${
+                        visualZoneFilter === zoneKey ? 'active' : ''
+                      } ${hoveredZone === zoneKey ? 'hovered' : ''}`}
                     >
                       <div className="zone-label">
                         <span>{zone.name}</span>
@@ -310,20 +335,18 @@ const Parts = () => {
             )}
           </div>
           
-          {/* Instructions based on mode */}
+          {/* Instructions based on mode - Fixed */}
           <div className="mode-instructions" data-aos="fade-up" data-aos-delay="100">
             {viewMode === "areas" ? (
               <>
-                <h4>Click on colored circles to filter by truck area</h4>
+                <h4>Click on circles to filter by truck area</h4>
                 <div className="legend-items">
                   {Object.entries(zonesData).map(([zoneKey, zone]) => (
                     <button
                       key={zoneKey}
                       className={`legend-item ${visualZoneFilter === zoneKey ? 'active' : ''}`}
                       onClick={() => handleVisualZoneClick(visualZoneFilter === zoneKey ? "" : zoneKey)}
-                      style={{ '--zone-color': zone.color }}
                     >
-                      <div className="legend-color"></div>
                       <span>{zone.name}</span>
                     </button>
                   ))}
@@ -404,8 +427,8 @@ const Parts = () => {
               </div>
             )}
             
-            {/* Step 4: Zone (optional) */}
-            {selectedModel && (
+            {/* Zone Filter */}
+            {selectedYear && selectedMake && selectedModel && (
               <div className="search-step" data-aos="fade-in">
                 <div className="step-number">4</div>
                 <div className="step-content">
@@ -416,7 +439,6 @@ const Parts = () => {
                         key={zoneKey}
                         className={`option-btn ${selectedZone === zoneKey ? 'active' : ''}`}
                         onClick={() => handleZoneChange(selectedZone === zoneKey ? "" : zoneKey)}
-                        style={{ '--zone-color': zone.color }}
                       >
                         {zone.name}
                       </button>
