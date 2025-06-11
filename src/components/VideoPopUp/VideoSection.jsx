@@ -67,16 +67,16 @@ const VideoSection = ({ videoId = "VcaAVWtP48A" }) => {
       <div className="ak-height-80"></div>
       
       {/* Call to Action */}
-      <div className="video-cta" data-aos="fade-up" data-aos-delay="400">
-        <div className="container">
-          <Link to="/gallery" className="cta-button">
-            View All Trucks
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2"/>
-            </svg>
-          </Link>
-        </div>
-      </div>
+      <div className="ak-height-75 ak-height-lg-50"></div>
+                    <div className="container text-center">
+                      <Link to="/video-gallery" className="view-all-btn">
+                        <span>VIEW ALL VIDEOS</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2"/>
+                        </svg>
+                      </Link>
+                    </div>
+      <div className="ak-height-125 ak-height-lg-80"></div>
       
       <div className="ak-height-125 ak-height-lg-80"></div>
     </div>

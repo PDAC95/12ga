@@ -293,3 +293,36 @@
     }
   }
 }
+
+
+  // View All Button
+  .view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    background: linear-gradient(135deg, #FF3D24, #ff6b24);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 32px rgba(255, 61, 36, 0.3);
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(255, 61, 36, 0.4);
+      text-decoration: none;
+      color: #fff;
+
+      svg {
+        transform: rotate(45deg);
+      }
+    }
+
+    svg {
+      transition: all 0.3s ease;
+    }
+  }

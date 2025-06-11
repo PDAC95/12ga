@@ -1,8 +1,20 @@
 [
     {
         "title": "Gallery",
-        "link": "/",
-        "key": "gallery"
+        "link": "#",
+        "key": "gallery",
+        "childern": [
+            {
+                "title": "Trucks",
+                "link": "/truck-gallery",
+                "key": "trucks"
+            },
+            {
+                "title": "Video",
+                "link": "/video-gallery",
+                "key": "video"
+            }
+        ]
     },
     {
         "title": "Parts",
