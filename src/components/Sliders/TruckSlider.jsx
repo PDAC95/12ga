@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, EffectFade, Parallax } from "swiper/modules";
+import { Link } from "react-router-dom";
 
 // Datos de los trucks
 const truckImages = [
@@ -59,9 +60,14 @@ const TruckSlider = () => {
     setCurrentSlide(swiper.realIndex);
   };
 
-  const openTruckSelector = () => {
-    // Función para abrir el selector de trucks
-    console.log("Opening truck selector...");
+  const scrollToFilters = () => {
+    const filtersSection = document.querySelector('.truck-filters-section');
+    if (filtersSection) {
+      filtersSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   };
 
   return (
@@ -131,13 +137,13 @@ const TruckSlider = () => {
                         {truck.description}
                       </p>
                       <div className="hero-actions" data-swiper-parallax="0">
-                        <button className="hero-btn primary" onClick={openTruckSelector}>
+                        <Link to={`/truck/${truck.id}`} className="hero-btn primary">
                           <span>View Project</span>
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                             <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
-                        </button>
-                        <button className="hero-btn secondary" onClick={openTruckSelector}>
+                        </Link>
+                        <button className="hero-btn secondary" onClick={scrollToFilters}>
                           <span>Find My Truck</span>
                         </button>
                       </div>
