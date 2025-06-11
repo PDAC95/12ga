@@ -23,6 +23,7 @@ import TruckGallery from "./pages/TruckGallery";
 import SingleTruck from "./pages/SingleTruck";
 import VideoGallery from "./pages/VideoGallery";
 import SingleVideo from "./pages/SingleVideo";
+import Parts from "./pages/Parts";
 
 export default function App() {
   useEffect(() => {
@@ -54,7 +55,8 @@ export default function App() {
         <Route path="/truck-gallery" element={<TruckGallery />} />
         <Route path="/truck/:id" element={<SingleTruck />} />
         <Route path="/video-gallery" element={<VideoGallery />} />
-        <Route path="/video/:id" element={<SingleVideo />} /> en App.jsx
+        <Route path="/video/:id" element={<SingleVideo />} />
+        <Route path="/parts" element={<Parts />} />
         </Route>
       <Route path="/*" element={<ErrorPages />}></Route>
     </Routes>

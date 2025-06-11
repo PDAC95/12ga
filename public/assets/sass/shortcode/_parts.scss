@@ -1,0 +1,1016 @@
+/*--------------------------------------------------------------
+  Parts Page - Interactive Modern Design
+----------------------------------------------------------------*/
+
+.parts-container {
+  min-height: 100vh;
+  
+  // Interactive Truck Section
+  .truck-interactive-section {
+    position: relative;
+    margin-bottom: 6rem;
+    
+    // View Mode Toggle
+    .view-mode-toggle {
+      text-align: center;
+      margin-bottom: 3rem;
+      
+      h4 {
+        color: var(--heading-color);
+        font-family: var(--heading-font-family);
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        opacity: 0.9;
+      }
+      
+      .toggle-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 8px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        max-width: 500px;
+        margin: 0 auto;
+        
+        .toggle-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          background: transparent;
+          border: 2px solid transparent;
+          color: var(--body-color);
+          padding: 1rem 1.5rem;
+          border-radius: 12px;
+          font-weight: 600;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          flex: 1;
+          justify-content: center;
+          
+          svg {
+            transition: transform 0.3s ease;
+          }
+          
+          &:hover {
+            color: var(--primary-color);
+            background: rgba(255, 61, 36, 0.05);
+            border-color: rgba(255, 61, 36, 0.2);
+            
+            svg {
+              transform: scale(1.1);
+            }
+          }
+          
+          &.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 61, 36, 0.3);
+            
+            svg {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
+    
+    .truck-image-container {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(135deg, rgba(255, 61, 36, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+      
+      .truck-diagram {
+        width: 100%;
+        height: auto;
+        min-height: 500px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+        
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
+      
+      // Zone Circle Containers (Areas Mode)
+      .zone-circle-container {
+        position: absolute;
+        z-index: 10;
+        
+        &.zone-frontal {
+          top: 60%;
+          right: 12%;
+        }
+        
+        &.zone-motor {
+          top: 55%;
+          right: 35%;
+        }
+        
+        &.zone-superior {
+          top: 22%;
+          right: 45%;
+        }
+        
+        &.zone-lateral {
+          top: 52%;
+          right: 65%;
+        }
+        
+        &.zone-escape {
+          top: 18%;
+          right: 72%;
+        }
+        
+        &.zone-sleeper {
+          top: 48%;
+          right: 78%;
+        }
+        
+        &.zone-trasera {
+          top: 58%;
+          right: 90%;
+        }
+        
+        .zone-circle {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: var(--zone-color);
+          cursor: pointer;
+          position: relative;
+          transform: translate(-50%, -50%);
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px color-mix(in srgb, var(--zone-color) 40%, transparent);
+          border: 3px solid rgba(255, 255, 255, 0.2);
+          
+          .circle-indicator {
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            animation: circlePulse 2s infinite;
+          }
+          
+          &:hover {
+            transform: translate(-50%, -50%) scale(1.3);
+            box-shadow: 0 8px 25px color-mix(in srgb, var(--zone-color) 60%, transparent);
+            border-color: rgba(255, 255, 255, 0.5);
+            z-index: 15;
+          }
+          
+          &.active {
+            transform: translate(-50%, -50%) scale(1.5);
+            box-shadow: 0 8px 25px color-mix(in srgb, var(--zone-color) 80%, transparent);
+            border-color: white;
+            z-index: 15;
+            
+            .circle-indicator {
+              animation: none;
+              background: rgba(255, 255, 255, 0.8);
+            }
+          }
+        }
+        
+        // Zone overlay areas (shown on hover/active)
+        .zone-overlay {
+          position: absolute;
+          cursor: pointer;
+          transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          border: 3px solid transparent;
+          backdrop-filter: blur(5px);
+          opacity: 0;
+          pointer-events: none;
+          transform: scale(0.8);
+          
+          &.zone-frontal {
+            top: -80%;
+            right: -200%;
+            width: 350%;
+            height: 180%;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--zone-color) 25%, transparent), color-mix(in srgb, var(--zone-color) 8%, transparent));
+            border-radius: 0 20px 20px 0;
+          }
+          
+          &.zone-motor {
+            top: -100%;
+            right: -150%;
+            width: 300%;
+            height: 200%;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--zone-color) 25%, transparent), color-mix(in srgb, var(--zone-color) 8%, transparent));
+            border-radius: 15px;
+          }
+          
+          &.zone-superior {
+            top: -200%;
+            right: -300%;
+            width: 600%;
+            height: 350%;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--zone-color) 25%, transparent), color-mix(in srgb, var(--zone-color) 8%, transparent));
+            border-radius: 20px 20px 10px 10px;
+          }
+          
+          &.zone-lateral {
+            top: -120%;
+            right: -100%;
+            width: 250%;
+            height: 200%;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--zone-color) 25%, transparent), color-mix(in srgb, var(--zone-color) 8%, transparent));
+            border-radius: 15px;
+          }
+          
+          &.zone-escape {
+            top: -200%;
+            right: -80%;
+            width: 200%;
+            height: 300%;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--zone-color) 25%, transparent), color-mix(in srgb, var(--zone-color) 8%, transparent));
+            border-radius: 15px;
+          }
+          
+          &.zone-sleeper {
+            top: -150%;
+            right: -50%;
+            width: 200%;
+            height: 250%;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--zone-color) 25%, transparent), color-mix(in srgb, var(--zone-color) 8%, transparent));
+            border-radius: 20px 10px 10px 20px;
+          }
+          
+          &.zone-trasera {
+            top: -100%;
+            right: -25%;
+            width: 150%;
+            height: 180%;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--zone-color) 25%, transparent), color-mix(in srgb, var(--zone-color) 8%, transparent));
+            border-radius: 20px 0 0 20px;
+          }
+          
+          .zone-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+            
+            small {
+              display: block;
+              font-size: 0.8rem;
+              opacity: 0.9;
+              margin-top: 4px;
+            }
+          }
+        }
+        
+        // Show overlay on hover or active
+        &:hover .zone-overlay,
+        .zone-circle.active ~ .zone-overlay {
+          opacity: 1;
+          transform: scale(1);
+          border-color: var(--zone-color);
+          z-index: 12;
+        }
+      }
+      
+      // Individual Hotspots (Parts Mode)
+      .parts-hotspot {
+        position: absolute;
+        z-index: 10;
+        cursor: pointer;
+        text-decoration: none;
+        
+        .hotspot-indicator {
+          position: relative;
+          width: 20px;
+          height: 20px;
+          transform: translate(-50%, -50%);
+          
+          .hotspot-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            opacity: 0.8;
+          }
+          
+          .hotspot-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(255, 61, 36, 0.3);
+            transition: all 0.3s ease;
+          }
+        }
+        
+        .hotspot-tooltip {
+          position: absolute;
+          bottom: 120%;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(0, 0, 0, 0.9);
+          color: white;
+          padding: 8px 12px;
+          border-radius: 8px;
+          font-size: 0.85rem;
+          font-weight: 600;
+          white-space: nowrap;
+          border: 1px solid rgba(255, 61, 36, 0.3);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+          animation: tooltipFadeIn 0.3s ease;
+          z-index: 15;
+          
+          &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: rgba(0, 0, 0, 0.9);
+          }
+        }
+        
+        &:hover {
+          .hotspot-dot {
+            transform: translate(-50%, -50%) scale(1.5);
+            box-shadow: 0 0 0 8px rgba(255, 61, 36, 0.4);
+          }
+        }
+      }
+    }
+    
+    // Mode Instructions
+    .mode-instructions {
+      margin-top: 3rem;
+      text-align: center;
+      
+      h4 {
+        color: var(--heading-color);
+        font-family: var(--heading-font-family);
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+      
+      .legend-items {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        
+        .legend-item {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 2px solid rgba(255, 255, 255, 0.1);
+          padding: 0.75rem 1.25rem;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-weight: 600;
+          font-size: 0.9rem;
+          color: var(--body-color);
+          
+          .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--zone-color);
+            transition: all 0.3s ease;
+          }
+          
+          &:hover {
+            border-color: var(--zone-color);
+            background: color-mix(in srgb, var(--zone-color) 10%, transparent);
+            color: var(--heading-color);
+            transform: translateY(-2px);
+            
+            .legend-color {
+              transform: scale(1.2);
+              box-shadow: 0 0 0 4px color-mix(in srgb, var(--zone-color) 20%, transparent);
+            }
+          }
+          
+          &.active {
+            border-color: var(--zone-color);
+            background: color-mix(in srgb, var(--zone-color) 15%, transparent);
+            color: var(--heading-color);
+            box-shadow: 0 8px 25px color-mix(in srgb, var(--zone-color) 30%, transparent);
+            
+            .legend-color {
+              transform: scale(1.3);
+              box-shadow: 0 0 0 6px color-mix(in srgb, var(--zone-color) 25%, transparent);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Search Section
+  .parts-search-section {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 25px;
+    padding: 3rem;
+    margin-bottom: 6rem;
+    text-align: center;
+    
+    .search-title {
+      color: var(--heading-color);
+      font-family: var(--heading-font-family);
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .search-subtitle {
+      color: var(--body-color);
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      opacity: 0.9;
+    }
+    
+    .search-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+      
+      .search-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 2rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px);
+        }
+        
+        .step-number {
+          width: 50px;
+          height: 50px;
+          background: var(--primary-color);
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          font-weight: 800;
+          font-family: var(--heading-font-family);
+          flex-shrink: 0;
+          box-shadow: 0 8px 25px rgba(255, 61, 36, 0.3);
+        }
+        
+        .step-content {
+          flex: 1;
+          text-align: left;
+          
+          .step-title {
+            color: var(--heading-color);
+            font-family: var(--heading-font-family);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+          }
+          
+          .step-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            
+            .option-btn {
+              background: rgba(255, 255, 255, 0.05);
+              border: 2px solid rgba(255, 255, 255, 0.1);
+              color: var(--body-color);
+              padding: 0.75rem 1.5rem;
+              border-radius: 15px;
+              font-weight: 600;
+              font-size: 0.95rem;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              
+              &:hover {
+                border-color: rgba(255, 61, 36, 0.5);
+                background: rgba(255, 61, 36, 0.1);
+                color: var(--primary-color);
+                transform: translateY(-2px);
+              }
+              
+              &.active {
+                background: var(--primary-color);
+                border-color: var(--primary-color);
+                color: white;
+                box-shadow: 0 8px 25px rgba(255, 61, 36, 0.4);
+              }
+              
+              // Zone-specific buttons
+              &.zone-btn {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                
+                .zone-indicator {
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 50%;
+                  background: var(--zone-color);
+                  transition: all 0.3s ease;
+                }
+                
+                &:hover {
+                  border-color: var(--zone-color);
+                  background: color-mix(in srgb, var(--zone-color) 10%, transparent);
+                  color: var(--heading-color);
+                  
+                  .zone-indicator {
+                    transform: scale(1.2);
+                    box-shadow: 0 0 0 4px color-mix(in srgb, var(--zone-color) 20%, transparent);
+                  }
+                }
+                
+                &.active {
+                  background: var(--zone-color);
+                  border-color: var(--zone-color);
+                  color: white;
+                  box-shadow: 0 8px 25px color-mix(in srgb, var(--zone-color) 40%, transparent);
+                  
+                  .zone-indicator {
+                    background: white;
+                    transform: scale(1.3);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      .search-reset {
+        text-align: center;
+        
+        .reset-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.75rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 2px solid rgba(255, 255, 255, 0.1);
+          color: var(--body-color);
+          padding: 1rem 2rem;
+          border-radius: 50px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--heading-color);
+            transform: translateY(-2px);
+          }
+          
+          svg {
+            transition: transform 0.3s ease;
+          }
+          
+          &:hover svg {
+            transform: rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+  
+  // Categories Section
+  .categories-section {
+    .categories-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      
+      .categories-title {
+        color: var(--heading-color);
+        font-family: var(--heading-font-family);
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -12px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
+          height: 3px;
+          background: linear-gradient(90deg, var(--primary-color), transparent);
+          border-radius: 2px;
+        }
+      }
+      
+      .categories-count {
+        color: var(--body-color);
+        font-size: 1.1rem;
+        opacity: 0.8;
+      }
+    }
+    
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      
+      .category-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        overflow: hidden;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        backdrop-filter: blur(10px);
+        position: relative;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 61, 36, 0.3);
+          transform: translateY(-8px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          
+          .category-image {
+            img {
+              transform: scale(1.1);
+            }
+            
+            .category-overlay {
+              opacity: 1;
+              
+              svg {
+                transform: translateX(3px);
+              }
+            }
+          }
+          
+          .category-info {
+            .category-name {
+              color: var(--primary-color);
+            }
+          }
+        }
+        
+        .category-image {
+          position: relative;
+          height: 200px;
+          overflow: hidden;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+          }
+          
+          .category-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(255, 61, 36, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            
+            svg {
+              color: white;
+              filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+              transition: transform 0.3s ease;
+            }
+          }
+        }
+        
+        .category-info {
+          padding: 1.5rem;
+          text-align: center;
+          
+          .category-name {
+            color: var(--heading-color);
+            font-family: var(--heading-font-family);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0 0 0.75rem 0;
+            transition: color 0.3s ease;
+            line-height: 1.3;
+          }
+          
+          .category-zone {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: color-mix(in srgb, var(--zone-color) 15%, transparent);
+            color: var(--zone-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid color-mix(in srgb, var(--zone-color) 25%, transparent);
+            
+            &::before {
+              content: '';
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background: var(--zone-color);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes circlePulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// Responsive Design
+@media screen and (max-width: 1024px) {
+  .parts-container {
+    .truck-interactive-section {
+      .truck-image-container {
+        .truck-diagram {
+          min-height: 400px;
+        }
+        
+        .parts-hotspot {
+          .hotspot-indicator {
+            width: 18px;
+            height: 18px;
+            
+            .hotspot-dot {
+              width: 10px;
+              height: 10px;
+            }
+          }
+        }
+      }
+    }
+    
+    .parts-search-section {
+      padding: 2.5rem;
+      
+      .search-title {
+        font-size: 2rem;
+      }
+      
+      .search-steps {
+        .search-step {
+          flex-direction: column;
+          text-align: center;
+          gap: 1.5rem;
+          
+          .step-content {
+            text-align: center;
+          }
+        }
+      }
+    }
+    
+    .categories-section {
+      .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .parts-container {
+    .truck-interactive-section {
+      margin-bottom: 4rem;
+      
+      .truck-image-container {
+        .truck-diagram {
+          min-height: 300px;
+        }
+        
+        .parts-hotspot {
+          .hotspot-indicator {
+            width: 16px;
+            height: 16px;
+            
+            .hotspot-dot {
+              width: 8px;
+              height: 8px;
+            }
+          }
+          
+          .hotspot-tooltip {
+            font-size: 0.75rem;
+            padding: 6px 10px;
+          }
+        }
+      }
+    }
+    
+    .parts-search-section {
+      padding: 2rem;
+      margin-bottom: 4rem;
+      
+      .search-title {
+        font-size: 1.8rem;
+      }
+      
+      .search-subtitle {
+        font-size: 1rem;
+      }
+      
+      .search-steps {
+        .search-step {
+          padding: 1.5rem;
+          
+          .step-number {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+          }
+          
+          .step-content {
+            .step-title {
+              font-size: 1.2rem;
+            }
+            
+            .step-options {
+              gap: 0.75rem;
+              
+              .option-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    .categories-section {
+      .categories-header {
+        .categories-title {
+          font-size: 1.8rem;
+        }
+      }
+      
+      .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.25rem;
+        
+        .category-card {
+          .category-image {
+            height: 160px;
+          }
+          
+          .category-info {
+            padding: 1.25rem;
+            
+            .category-name {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .parts-container {
+    .truck-interactive-section {
+      .truck-image-container {
+        border-radius: 15px;
+        
+        .truck-diagram {
+          min-height: 250px;
+        }
+      }
+    }
+    
+    .parts-search-section {
+      padding: 1.5rem;
+      border-radius: 20px;
+      
+      .search-title {
+        font-size: 1.5rem;
+      }
+      
+      .search-steps {
+        .search-step {
+          padding: 1.25rem;
+          border-radius: 15px;
+          
+          .step-content {
+            .step-options {
+              .option-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    .categories-section {
+      .categories-grid {
+        grid-template-columns: 1fr;
+        
+        .category-card {
+          .category-image {
+            height: 140px;
+          }
+          
+          .category-info {
+            padding: 1rem;
+            
+            .category-name {
+              font-size: 0.95rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
