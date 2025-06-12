@@ -77,9 +77,6 @@ const categoriesData = [
   { id: 31, name: "VISORS", slug: "visors", image: "/assets/img/parts/visors.jpg", zone: "superior", hotspot: { x: 58, y: 32 } },
   { id: 32, name: "WINDOW ACCESSORIES", slug: "window-accessories", image: "/assets/img/parts/window-accessories.jpg", zone: "sleeper", hotspot: { x: 43, y: 36 } },
   { id: 33, name: "LIGHTS", slug: "lights", image: "/assets/img/parts/lights.jpg", zone: "frontal", hotspot: { x: 55, y: 27 } },
-  { id: 34, name: "ONE OFF CUSTOM PARTS", slug: "one-off-custom-parts", image: "/assets/img/parts/one-off-custom-parts.jpg", zone: "trasera", hotspot: null },
-  { id: 35, name: "APPAREL", slug: "apparel", image: "/assets/img/parts/apparel.jpg", zone: "trasera", hotspot: null },
-  { id: 36, name: "SAFETY MANUAL/WARRANTY", slug: "safety-manual-warranty", image: "/assets/img/parts/safety-manual-warranty.jpg", zone: "trasera", hotspot: null }
 ];
 
 // Vehicle data for search
@@ -354,7 +351,11 @@ const Parts = () => {
           </div>
         </div>
         
-        <div className="ak-height-100 ak-height-lg-60"></div>
+        <div className="or-separator" data-aos="fade-in">
+          <div className="separator-line"></div>
+          <span className="separator-text">OR</span>
+          <div className="separator-line"></div>
+        </div>
         
         {/* Vertical Search Section */}
         <div className="parts-search-section" data-aos="fade-up" data-aos-delay="100">
