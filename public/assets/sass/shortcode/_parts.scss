@@ -4,17 +4,17 @@
 
 .parts-container {
   min-height: 100vh;
-  
+
   // Interactive Truck Section
   .truck-interactive-section {
     position: relative;
     margin-bottom: 6rem;
-    
+
     // View Mode Toggle
     .view-mode-toggle {
       text-align: center;
       margin-bottom: 3rem;
-      
+
       h4 {
         color: var(--heading-color);
         font-family: var(--heading-font-family);
@@ -23,7 +23,7 @@
         margin-bottom: 1.5rem;
         opacity: 0.9;
       }
-      
+
       .toggle-buttons {
         display: flex;
         justify-content: center;
@@ -35,7 +35,7 @@
         backdrop-filter: blur(10px);
         max-width: 500px;
         margin: 0 auto;
-        
+
         .toggle-btn {
           display: flex;
           align-items: center;
@@ -51,27 +51,27 @@
           transition: all 0.3s ease;
           flex: 1;
           justify-content: center;
-          
+
           svg {
             transition: transform 0.3s ease;
           }
-          
+
           &:hover {
             color: var(--primary-color);
             background: rgba(255, 61, 36, 0.05);
             border-color: rgba(255, 61, 36, 0.2);
-            
+
             svg {
               transform: scale(1.1);
             }
           }
-          
+
           &.active {
             background: var(--primary-color);
             border-color: var(--primary-color);
             color: white;
             box-shadow: 0 8px 25px rgba(255, 61, 36, 0.3);
-            
+
             svg {
               transform: scale(1.1);
             }
@@ -79,7 +79,7 @@
         }
       }
     }
-    
+
     .truck-image-container {
       position: relative;
       width: 100%;
@@ -88,61 +88,65 @@
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-      background: linear-gradient(135deg, rgba(255, 61, 36, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
-      
+      background: linear-gradient(
+        135deg,
+        rgba(255, 61, 36, 0.1) 0%,
+        rgba(0, 0, 0, 0.3) 100%
+      );
+
       .truck-diagram {
         width: 100%;
         height: auto;
         min-height: 500px;
         object-fit: cover;
         transition: transform 0.3s ease;
-        
+
         &:hover {
           transform: scale(1.02);
         }
       }
-      
+
       // Zone Circle Containers (Areas Mode) - UPDATED WITH ORIGINAL POSITIONS
       .zone-circle-container {
         position: absolute;
         z-index: 10;
-        
+
         // Original zone positions maintained
         &.zone-frontal {
           top: 60%;
           right: 12%;
         }
-        
+
         &.zone-motor {
           top: 55%;
           right: 35%;
         }
-        
+
         &.zone-superior {
           top: 22%;
           right: 45%;
         }
-        
+
         &.zone-lateral {
           top: 52%;
           right: 65%;
         }
-        
+
         &.zone-escape {
           top: 18%;
           right: 72%;
         }
-        
+
         &.zone-sleeper {
           top: 48%;
           right: 78%;
         }
-        
+
         &.zone-trasera {
           top: 58%;
           right: 90%;
         }
-        
+
         .zone-circle {
           width: 40px;
           height: 40px;
@@ -157,43 +161,43 @@
           align-items: center;
           justify-content: center;
           backdrop-filter: blur(5px);
-          
+
           .circle-indicator {
             display: none;
           }
-          
+
           svg {
             width: 18px;
             height: 18px;
             color: #ffffff;
             transition: all 0.3s ease;
           }
-          
+
           &:hover {
             transform: translate(-50%, -50%) scale(1.1);
             background: rgba(255, 61, 36, 0.25);
             border-color: rgba(255, 61, 36, 0.5);
             z-index: 15;
             box-shadow: 0 8px 25px rgba(255, 61, 36, 0.3);
-            
+
             svg {
               transform: scale(1.1);
             }
           }
-          
+
           &.active {
             transform: translate(-50%, -50%) scale(1.2);
             background: rgba(255, 61, 36, 0.3);
             border-color: rgba(255, 61, 36, 0.7);
             z-index: 15;
             box-shadow: 0 8px 25px rgba(255, 61, 36, 0.4);
-            
+
             svg {
               transform: scale(1.2);
             }
           }
         }
-        
+
         // Zone overlay areas (shown on hover/active) - UPDATED FOR STABILITY
         .zone-overlay {
           position: absolute;
@@ -207,56 +211,56 @@
           transform: scale(0);
           border-radius: 25px;
           pointer-events: none; // Prevent hover interference
-          
+
           &.zone-frontal {
             top: -40px;
             right: -120px;
             width: 200px;
             height: 60px;
           }
-          
+
           &.zone-motor {
             top: -40px;
             right: -120px;
             width: 220px;
             height: 60px;
           }
-          
+
           &.zone-superior {
             top: -40px;
             right: -130px;
             width: 240px;
             height: 60px;
           }
-          
+
           &.zone-lateral {
             top: -40px;
             right: -130px;
             width: 200px;
             height: 60px;
           }
-          
+
           &.zone-escape {
             top: -40px;
             right: -110px;
             width: 180px;
             height: 60px;
           }
-          
+
           &.zone-sleeper {
             top: -40px;
             right: -140px;
             width: 240px;
             height: 60px;
           }
-          
+
           &.zone-trasera {
             top: -40px;
             right: -150px;
             width: 230px;
             height: 60px;
           }
-          
+
           .zone-label {
             position: absolute;
             top: 50%;
@@ -267,7 +271,7 @@
             font-weight: 600;
             pointer-events: none;
             width: 100%;
-            
+
             span {
               display: block;
               font-size: 1rem;
@@ -275,7 +279,7 @@
               color: #ff3d24;
               margin-bottom: 4px;
             }
-            
+
             small {
               display: block;
               font-size: 0.85rem;
@@ -284,7 +288,7 @@
             }
           }
         }
-        
+
         // Show overlay on hover or active - UPDATED FOR STABILITY
         &:hover .zone-overlay,
         .zone-circle.active ~ .zone-overlay {
@@ -293,10 +297,10 @@
           transform: scale(1);
           z-index: 20;
         }
-        
+
         // Add hover area padding for stability
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           top: -10px;
           left: -10px;
@@ -305,20 +309,20 @@
           z-index: 5;
         }
       }
-      
+
       // Individual Hotspots (Parts Mode) - FIXED TOOLTIP
       .parts-hotspot {
         position: absolute;
         z-index: 10;
         cursor: pointer;
         text-decoration: none;
-        
+
         .hotspot-indicator {
           position: relative;
           width: 20px;
           height: 20px;
           transform: translate(-50%, -50%);
-          
+
           .hotspot-pulse {
             position: absolute;
             width: 100%;
@@ -328,7 +332,7 @@
             animation: pulse 2s infinite;
             opacity: 0.8;
           }
-          
+
           .hotspot-dot {
             position: absolute;
             top: 50%;
@@ -342,7 +346,7 @@
             transition: all 0.3s ease;
           }
         }
-        
+
         .hotspot-tooltip {
           position: absolute;
           bottom: calc(100% + 15px);
@@ -361,9 +365,9 @@
           transition: all 0.3s ease;
           z-index: 25;
           backdrop-filter: blur(10px);
-          
+
           &::after {
-            content: '';
+            content: "";
             position: absolute;
             top: 100%;
             left: 50%;
@@ -372,13 +376,13 @@
             border-top-color: #ff3d24;
           }
         }
-        
+
         &:hover {
           .hotspot-dot {
             transform: translate(-50%, -50%) scale(1.5);
             box-shadow: 0 0 0 8px rgba(255, 61, 36, 0.4);
           }
-          
+
           .hotspot-tooltip {
             opacity: 1;
             visibility: visible;
@@ -387,12 +391,12 @@
         }
       }
     }
-    
+
     // Mode Instructions & Legend - UPDATED
     .mode-instructions {
       margin-top: 3rem;
       text-align: center;
-      
+
       h4 {
         color: var(--heading-color);
         font-family: var(--heading-font-family);
@@ -401,13 +405,13 @@
         margin-bottom: 2rem;
         opacity: 0.9;
       }
-      
+
       .legend-items {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
         gap: 1rem;
-        
+
         .legend-item {
           display: flex;
           align-items: center;
@@ -420,14 +424,14 @@
           font-weight: 600;
           font-size: 0.9rem;
           color: var(--body-color);
-          
+
           &:hover {
             border-color: #ff3d24;
             background: rgba(255, 61, 36, 0.05);
             color: var(--heading-color);
             transform: translateY(-2px);
           }
-          
+
           &.active {
             border-color: #ff3d24;
             background: rgba(255, 61, 36, 0.15);
@@ -439,28 +443,28 @@
       }
     }
   }
-  
+
   // OR Separator Section
   .or-separator {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 3rem 0 2rem 0; // Reducido el espaciado
-    
+
     .separator-line {
       flex: 1;
       height: 2px;
       background: linear-gradient(
-        90deg, 
-        transparent 0%, 
-        rgba(255, 61, 36, 0.3) 20%, 
-        rgba(255, 61, 36, 0.6) 50%, 
-        rgba(255, 61, 36, 0.3) 80%, 
+        90deg,
+        transparent 0%,
+        rgba(255, 61, 36, 0.3) 20%,
+        rgba(255, 61, 36, 0.6) 50%,
+        rgba(255, 61, 36, 0.3) 80%,
         transparent 100%
       );
       max-width: 200px;
     }
-    
+
     .separator-text {
       margin: 0 2rem;
       color: var(--primary-color);
@@ -474,9 +478,9 @@
       box-shadow: 0 8px 25px rgba(255, 61, 36, 0.2);
       position: relative;
       overflow: hidden;
-      
+
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -100%;
@@ -490,7 +494,7 @@
         );
         transition: left 0.5s ease;
       }
-      
+
       &:hover::before {
         left: 100%;
       }
@@ -506,26 +510,30 @@
     padding: 3rem;
     margin-bottom: 6rem;
     text-align: center;
-    
+
     .search-title {
       color: var(--heading-color);
       font-family: var(--heading-font-family);
       font-size: 2.5rem;
       font-weight: 800;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+      background: linear-gradient(
+        135deg,
+        #fff 0%,
+        rgba(255, 255, 255, 0.7) 100%
+      );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    
+
     .search-subtitle {
       color: var(--body-color);
       font-size: 1.2rem;
       margin-bottom: 3rem;
       opacity: 0.9;
     }
-    
+
     .search-steps {
       .steps-container {
         display: grid;
@@ -644,13 +652,13 @@
       }
     }
   }
-  
+
   // Categories Section
   .categories-section {
     .categories-header {
       text-align: center;
       margin-bottom: 4rem;
-      
+
       .categories-title {
         color: var(--heading-color);
         font-family: var(--heading-font-family);
@@ -658,19 +666,19 @@
         font-weight: 800;
         margin-bottom: 1rem;
       }
-      
+
       .categories-count {
         color: var(--body-color);
         font-size: 1.1rem;
         opacity: 0.8;
       }
     }
-    
+
     .categories-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      
+
       .category-card {
         background: rgba(255, 255, 255, 0.02);
         border: 1px solid rgba(255, 255, 255, 0.08);
@@ -678,46 +686,50 @@
         overflow: hidden;
         transition: all 0.3s ease;
         text-decoration: none;
-        
+
         &:hover {
           transform: translateY(-8px);
           border-color: rgba(255, 61, 36, 0.3);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-          
+
           .category-overlay {
             opacity: 1;
           }
-          
+
           .category-image img {
             transform: scale(1.1);
           }
         }
-        
+
         .category-image {
           position: relative;
           height: 200px;
           overflow: hidden;
-          
+
           img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
           }
-          
+
           .category-overlay {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 61, 36, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+            background: linear-gradient(
+              135deg,
+              rgba(255, 61, 36, 0.8) 0%,
+              rgba(0, 0, 0, 0.6) 100%
+            );
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             transition: all 0.3s ease;
-            
+
             svg {
               color: white;
               transform: rotate(-45deg);
@@ -725,10 +737,10 @@
             }
           }
         }
-        
+
         .category-info {
           padding: 1.5rem;
-          
+
           .category-name {
             color: var(--heading-color);
             font-family: var(--heading-font-family);
@@ -737,7 +749,7 @@
             margin-bottom: 0.5rem;
             text-transform: uppercase;
           }
-          
+
           .category-zone {
             display: inline-flex;
             align-items: center;
@@ -748,10 +760,11 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
-            border: 1px solid color-mix(in srgb, var(--zone-color) 25%, transparent);
-            
+            border: 1px solid
+              color-mix(in srgb, var(--zone-color) 25%, transparent);
+
             &::before {
-              content: '';
+              content: "";
               width: 8px;
               height: 8px;
               border-radius: 50%;
@@ -821,12 +834,12 @@
         .truck-diagram {
           min-height: 400px;
         }
-        
+
         .parts-hotspot {
           .hotspot-indicator {
             width: 18px;
             height: 18px;
-            
+
             .hotspot-dot {
               width: 10px;
               height: 10px;
@@ -835,15 +848,15 @@
         }
       }
     }
-    
+
     .parts-search-section {
       padding: 2.5rem;
-      
+
       .search-title {
         font-size: 2rem;
       }
     }
-    
+
     .categories-section {
       .categories-grid {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -857,23 +870,23 @@
   .parts-container {
     .truck-interactive-section {
       margin-bottom: 4rem;
-      
+
       .truck-image-container {
         .truck-diagram {
           min-height: 300px;
         }
-        
+
         .parts-hotspot {
           .hotspot-indicator {
             width: 16px;
             height: 16px;
-            
+
             .hotspot-dot {
               width: 8px;
               height: 8px;
             }
           }
-          
+
           .hotspot-tooltip {
             font-size: 0.75rem;
             padding: 6px 10px;
@@ -881,15 +894,15 @@
         }
       }
     }
-    
+
     .parts-search-section {
       padding: 2rem;
       margin-bottom: 4rem;
-      
+
       .search-title {
         font-size: 1.8rem;
       }
-      
+
       .search-subtitle {
         font-size: 1rem;
       }
@@ -914,26 +927,26 @@
         }
       }
     }
-    
+
     .categories-section {
       .categories-header {
         .categories-title {
           font-size: 1.8rem;
         }
       }
-      
+
       .categories-grid {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 1.25rem;
-        
+
         .category-card {
           .category-image {
             height: 160px;
           }
-          
+
           .category-info {
             padding: 1.25rem;
-            
+
             .category-name {
               font-size: 1rem;
             }
@@ -948,11 +961,11 @@
 @media screen and (max-width: 768px) {
   .parts-container .or-separator {
     margin: 2rem 0 1.5rem 0;
-    
+
     .separator-line {
       max-width: 100px;
     }
-    
+
     .separator-text {
       font-size: 1.2rem;
       margin: 0 1rem;
@@ -966,34 +979,34 @@
     .truck-interactive-section {
       .truck-image-container {
         border-radius: 15px;
-        
+
         .truck-diagram {
           min-height: 250px;
         }
       }
     }
-    
+
     .parts-search-section {
       padding: 1.5rem;
       border-radius: 20px;
-      
+
       .search-title {
         font-size: 1.5rem;
       }
     }
-    
+
     .categories-section {
       .categories-grid {
         grid-template-columns: 1fr;
-        
+
         .category-card {
           .category-image {
             height: 140px;
           }
-          
+
           .category-info {
             padding: 1rem;
-            
+
             .category-name {
               font-size: 0.95rem;
             }
@@ -1004,15 +1017,67 @@
 
     .or-separator {
       margin: 1.5rem 0 1rem 0;
-      
+
       .separator-line {
         max-width: 60px;
       }
-      
+
       .separator-text {
         font-size: 1rem;
         margin: 0 0.75rem;
         padding: 0.5rem 1rem;
+      }
+    }
+  }
+}
+// Selected Filters Display
+.selected-filters-display {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 61, 36, 0.1);
+  border: 1px solid rgba(255, 61, 36, 0.2);
+  border-radius: 12px;
+
+  .filters-title {
+    color: var(--heading-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .filters-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .filter-item {
+      background: rgba(255, 61, 36, 0.15);
+      color: var(--body-color);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255, 61, 36, 0.3);
+
+      strong {
+        color: var(--primary-color);
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+// Responsive adjustments for filters
+@media screen and (max-width: 768px) {
+  .selected-filters-display {
+    padding: 1rem;
+
+    .filters-list {
+      gap: 0.5rem;
+
+      .filter-item {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
       }
     }
   }
