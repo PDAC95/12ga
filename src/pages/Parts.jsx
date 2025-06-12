@@ -656,10 +656,8 @@ const Parts = () => {
   return (
     <div className="parts-container">
       <CommonPageHero title={"Parts Catalogue"} />
-
       <div className="container">
-        <div className="ak-height-125 ak-height-lg-80"></div>
-
+        <div className="ak-height-50 ak-height-lg-30"></div>
         {/* Interactive Truck Image */}
         <div className="truck-interactive-section" data-aos="fade-up">
           {/* View Mode Toggle */}
@@ -1056,7 +1054,7 @@ const Parts = () => {
           </div>
         </div>
 
-        <div className="ak-height-100 ak-height-lg-60"></div>
+        <div className="ak-height-50 ak-height-lg-30"></div>
 
         {/* Categories Grid */}
         <div
