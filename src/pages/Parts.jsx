@@ -48,21 +48,21 @@ const categoriesData = [
   { id: 2, name: "AIR CLEANER LIGHT BARS", slug: "air-cleaner-light-bars", image: "/assets/img/parts/air-cleaner-light-bars.jpg", zone: "motor", hotspot: { x: 47, y: 50 } },
   { id: 3, name: "AIR CLEANER SCREENS", slug: "air-cleaner-screens", image: "/assets/img/parts/air-cleaner-screens.jpg", zone: "motor", hotspot: { x: 45, y: 45 } },
   { id: 4, name: "AIR CLEANER STRAPS", slug: "air-cleaner-straps", image: "/assets/img/parts/air-cleaner-straps.jpg", zone: "motor", hotspot: { x: 45, y: 59 } },
-  { id: 5, name: "AIR CLEANER BAR STRAPLESS", slug: "air-cleaner-bar-strapless", image: "/assets/img/parts/air-cleaner-bar-strapless.jpg", zone: "motor", hotspot: { x: 48, y: 46 } },
-  { id: 6, name: "AIR CLEANER WRAPS", slug: "air-cleaner-wraps", image: "/assets/img/parts/air-cleaner-wraps.jpg", zone: "motor", hotspot: { x: 45, y: 53 } },
-  { id: 7, name: "AIR LINE BOX", slug: "air-line-box", image: "/assets/img/parts/air-line-box.jpg", zone: "escape", hotspot: { x: 23, y: 65 } },
-  { id: 8, name: "AIR TANK STRAPS", slug: "air-tank-straps", image: "/assets/img/parts/air-tank-straps.jpg", zone: "escape", hotspot: { x: 35, y: 72 } },
-  { id: 9, name: "BATTERY/TOOL BOXES", slug: "battery/tool-boxes", image: "/assets/img/parts/battery/tool-boxes.jpg", zone: "lateral", hotspot: { x: 43, y: 74 } },
-  { id: 10, name: "BATTERY/TOOL STEP PLATES", slug: "battery/tool-step-plates", image: "/assets/img/parts/battery/tool-step-plates.jpg", zone: "lateral", hotspot: { x: 39, y: 81 } },
-  { id: 11, name: "BUMPERS", slug: "bumpers", image: "/assets/img/parts/bumpers.jpg", zone: "frontal", hotspot: { x: 86, y: 80 } },
-  { id: 12, name: "CAB AND COWL PANELS", slug: "cab-and-cowl-panels", image: "/assets/img/parts/cab-and-cowl-panels.jpg", zone: "superior", hotspot: { x: 39, y: 65 } },
-  { id: 13, name: "BUNK/SLEEPER PANELS", slug: "bunk/sleeper-panels", image: "/assets/img/parts/bunk/sleeper-panels.jpg", zone: "sleeper", hotspot: { x: 28, y: 66 } },
-  { id: 14, name: "CUSTOM FLOORS", slug: "custom-floors", image: "/assets/img/parts/custom-floors.jpg", zone: "sleeper", hotspot: { x: 44, y: 68 } },
-  { id: 15, name: "DECK PLATES", slug: "deck-plates", image: "/assets/img/parts/deck-plates.jpg", zone: "sleeper", hotspot: { x: 25, y: 68 } },
-  { id: 16, name: "DPF COVERS", slug: "dpf-covers", image: "/assets/img/parts/dpf-covers.jpg", zone: "motor", hotspot: { x: 39, y: 75 } },
-  { id: 17, name: "FENDER BRACES", slug: "fender-braces", image: "/assets/img/parts/fender-braces.jpg", zone: "lateral", hotspot: { x: 69, y: 74 } },
-  { id: 18, name: "FENDERS", slug: "fenders", image: "/assets/img/parts/fenders.jpg", zone: "lateral", hotspot: { x: 14, y: 70 }},
-  { id: 19, name: "FLIP BUMPERS", slug: "flip-bumpers", image: "/assets/img/parts/flip-bumpers.jpg", zone: "frontal", hotspot: { x: 80, y: 81 } },
+  { id: 5, name: "AIR CLEANER BAR STRAPLESS", slug: "air-cleaner-bar-strapless", image: "/assets/img/parts/air-cleaner-bar-strapless.jpg", zone: "motor", hotspot: { x: 48, y: 55 } },
+  { id: 6, name: "AIR CLEANER WRAPS", slug: "air-cleaner-wraps", image: "/assets/img/parts/air-cleaner-wraps.jpg", zone: "motor", hotspot: { x: 46, y: 47 } },
+  { id: 7, name: "AIR LINE BOX", slug: "air-line-box", image: "/assets/img/parts/air-line-box.jpg", zone: "escape", hotspot: { x: 20, y: 75 } },
+  { id: 8, name: "AIR TANK STRAPS", slug: "air-tank-straps", image: "/assets/img/parts/air-tank-straps.jpg", zone: "escape", hotspot: { x: 24, y: 79 } },
+  { id: 9, name: "BATTERY/TOOL BOXES", slug: "battery-tool-boxes", image: "/assets/img/parts/battery-tool-boxes.jpg", zone: "lateral", hotspot: { x: 32, y: 70 } },
+  { id: 10, name: "BATTERY/TOOL STEP PLATES", slug: "battery-tool-step-plates", image: "/assets/img/parts/battery-tool-step-plates.jpg", zone: "lateral", hotspot: { x: 34, y: 72 } },
+  { id: 11, name: "BUMPERS", slug: "bumpers", image: "/assets/img/parts/bumpers.jpg", zone: "frontal", hotspot: { x: 78, y: 75 } },
+  { id: 12, name: "BUNK/SLEEPER PANELS", slug: "bunk-sleeper-panels", image: "/assets/img/parts/bunk-sleeper-panels.jpg", zone: "sleeper", hotspot: { x: 38, y: 45 } },
+  { id: 13, name: "CAB AND COWL PANELS", slug: "cab-cowl-panels", image: "/assets/img/parts/cab-cowl-panels.jpg", zone: "superior", hotspot: { x: 52, y: 40 } },
+  { id: 14, name: "CUSTOM FLOORS", slug: "custom-floors", image: "/assets/img/parts/custom-floors.jpg", zone: "sleeper", hotspot: { x: 40, y: 50 } },
+  { id: 15, name: "DECK PLATES", slug: "deck-plates", image: "/assets/img/parts/deck-plates.jpg", zone: "sleeper", hotspot: { x: 42, y: 48 } },
+  { id: 16, name: "DPF COVERS", slug: "dpf-covers", image: "/assets/img/parts/dpf-covers.jpg", zone: "motor", hotspot: { x: 44, y: 65 } },
+  { id: 17, name: "FENDERS", slug: "fenders", image: "/assets/img/parts/fenders.jpg", zone: "lateral", hotspot: { x: 68, y: 85 } },
+  { id: 18, name: "FENDER BRACES", slug: "fender-braces", image: "/assets/img/parts/fender-braces.jpg", zone: "lateral", hotspot: { x: 70, y: 82 } },
+  { id: 19, name: "FLIP BUMPERS", slug: "flip-bumpers", image: "/assets/img/parts/flip-bumpers.jpg", zone: "frontal", hotspot: { x: 76, y: 78 } },
   { id: 20, name: "FUEL TANK BRACKET COVERS", slug: "fuel-tank-bracket-covers", image: "/assets/img/parts/fuel-tank-bracket-covers.jpg", zone: "lateral", hotspot: { x: 31, y: 78} },
   { id: 21, name: "FUEL TANK PANELS", slug: "fuel-tank-panels", image: "/assets/img/parts/fuel-tank-panels.jpg", zone: "lateral", hotspot: { x: 24, y: 74 } },
   { id: 22, name: "FUEL TANK STRAPS", slug: "fuel-tank-straps", image: "/assets/img/parts/fuel-tank-straps.jpg", zone: "lateral", hotspot: { x: 26, y: 74 }  },
@@ -77,6 +77,9 @@ const categoriesData = [
   { id: 31, name: "VISORS", slug: "visors", image: "/assets/img/parts/visors.jpg", zone: "superior", hotspot: { x: 58, y: 32 } },
   { id: 32, name: "WINDOW ACCESSORIES", slug: "window-accessories", image: "/assets/img/parts/window-accessories.jpg", zone: "sleeper", hotspot: { x: 43, y: 36 } },
   { id: 33, name: "LIGHTS", slug: "lights", image: "/assets/img/parts/lights.jpg", zone: "frontal", hotspot: { x: 55, y: 27 } },
+  { id: 34, name: "ONE OFF CUSTOM PARTS", slug: "one-off-custom-parts", image: "/assets/img/parts/one-off-custom-parts.jpg", zone: "trasera", hotspot: null },
+  { id: 35, name: "APPAREL", slug: "apparel", image: "/assets/img/parts/apparel.jpg", zone: "trasera", hotspot: null },
+  { id: 36, name: "SAFETY MANUAL/WARRANTY", slug: "safety-manual-warranty", image: "/assets/img/parts/safety-manual-warranty.jpg", zone: "trasera", hotspot: null }
 ];
 
 // Vehicle data for search
@@ -351,23 +354,26 @@ const Parts = () => {
           </div>
         </div>
         
+        {/* OR Separator */}
         <div className="or-separator" data-aos="fade-in">
           <div className="separator-line"></div>
           <span className="separator-text">OR</span>
           <div className="separator-line"></div>
         </div>
         
-        {/* Vertical Search Section */}
+        {/* Horizontal Search Section */}
         <div className="parts-search-section" data-aos="fade-up" data-aos-delay="100">
           <h3 className="search-title">Find Parts for Your Truck</h3>
           <p className="search-subtitle">Select your vehicle specifications to see compatible parts</p>
           
           <div className="search-steps">
-            {/* Step 1: Year */}
-            <div className="search-step">
-              <div className="step-number">1</div>
-              <div className="step-content">
-                <h4 className="step-title">Select Year</h4>
+            <div className="steps-container">
+              {/* Step 1: Year */}
+              <div className="search-step step-year">
+                <div className="step-header">
+                  <div className="step-number">1</div>
+                  <h4 className="step-title">Select Year</h4>
+                </div>
                 <div className="step-options">
                   {vehicleData.years.map((year) => (
                     <button
@@ -380,70 +386,66 @@ const Parts = () => {
                   ))}
                 </div>
               </div>
-            </div>
-            
-            {/* Step 2: Make */}
-            {selectedYear && (
-              <div className="search-step" data-aos="fade-in">
-                <div className="step-number">2</div>
-                <div className="step-content">
+
+              {/* Step 2: Make */}
+              <div className="search-step step-make">
+                <div className="step-header">
+                  <div className="step-number">2</div>
                   <h4 className="step-title">Select Make</h4>
-                  <div className="step-options">
-                    {availableMakes.map((make) => (
-                      <button
-                        key={make}
-                        className={`option-btn ${selectedMake === make ? 'active' : ''}`}
-                        onClick={() => handleMakeChange(make)}
-                      >
-                        {make}
-                      </button>
-                    ))}
-                  </div>
+                </div>
+                <div className="step-options">
+                  {availableMakes.map((make) => (
+                    <button
+                      key={make}
+                      className={`option-btn ${selectedMake === make ? 'active' : ''} ${!selectedYear ? 'disabled' : ''}`}
+                      onClick={() => selectedYear && handleMakeChange(make)}
+                      disabled={!selectedYear}
+                    >
+                      {make}
+                    </button>
+                  ))}
                 </div>
               </div>
-            )}
-            
-            {/* Step 3: Model */}
-            {selectedMake && (
-              <div className="search-step" data-aos="fade-in">
-                <div className="step-number">3</div>
-                <div className="step-content">
+
+              {/* Step 3: Model */}
+              <div className="search-step step-model">
+                <div className="step-header">
+                  <div className="step-number">3</div>
                   <h4 className="step-title">Select Model</h4>
-                  <div className="step-options">
-                    {availableModels.map((model) => (
-                      <button
-                        key={model}
-                        className={`option-btn ${selectedModel === model ? 'active' : ''}`}
-                        onClick={() => handleModelChange(model)}
-                      >
-                        {model}
-                      </button>
-                    ))}
-                  </div>
+                </div>
+                <div className="step-options">
+                  {availableModels.map((model) => (
+                    <button
+                      key={model}
+                      className={`option-btn ${selectedModel === model ? 'active' : ''} ${!selectedMake ? 'disabled' : ''}`}
+                      onClick={() => selectedMake && handleModelChange(model)}
+                      disabled={!selectedMake}
+                    >
+                      {model}
+                    </button>
+                  ))}
                 </div>
               </div>
-            )}
-            
-            {/* Zone Filter */}
-            {selectedYear && selectedMake && selectedModel && (
-              <div className="search-step" data-aos="fade-in">
-                <div className="step-number">4</div>
-                <div className="step-content">
+
+              {/* Step 4: Zone */}
+              <div className="search-step step-zone">
+                <div className="step-header">
+                  <div className="step-number">4</div>
                   <h4 className="step-title">Select Zone (Optional)</h4>
-                  <div className="step-options">
-                    {Object.entries(zonesData).map(([zoneKey, zone]) => (
-                      <button
-                        key={zoneKey}
-                        className={`option-btn ${selectedZone === zoneKey ? 'active' : ''}`}
-                        onClick={() => handleZoneChange(selectedZone === zoneKey ? "" : zoneKey)}
-                      >
-                        {zone.name}
-                      </button>
-                    ))}
-                  </div>
+                </div>
+                <div className="step-options">
+                  {Object.entries(zonesData).map(([zoneKey, zone]) => (
+                    <button
+                      key={zoneKey}
+                      className={`option-btn ${selectedZone === zoneKey ? 'active' : ''}`}
+                      onClick={() => handleZoneChange(selectedZone === zoneKey ? "" : zoneKey)}
+                    >
+                      {zone.name}
+                    </button>
+                  ))}
                 </div>
               </div>
-            )}
+            </div>
             
             {/* Reset Button */}
             {(selectedYear || visualZoneFilter) && (
