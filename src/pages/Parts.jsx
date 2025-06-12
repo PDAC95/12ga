@@ -351,30 +351,6 @@ const categoriesData = [
     zone: "frontal",
     hotspot: { x: 55, y: 27 },
   },
-  {
-    id: 34,
-    name: "ONE OFF CUSTOM PARTS",
-    slug: "one-off-custom-parts",
-    image: "/assets/img/parts/one-off-custom-parts.jpg",
-    zone: "trasera",
-    hotspot: null,
-  },
-  {
-    id: 35,
-    name: "APPAREL",
-    slug: "apparel",
-    image: "/assets/img/parts/apparel.jpg",
-    zone: "trasera",
-    hotspot: null,
-  },
-  {
-    id: 36,
-    name: "SAFETY MANUAL/WARRANTY",
-    slug: "safety-manual-warranty",
-    image: "/assets/img/parts/safety-manual-warranty.jpg",
-    zone: "trasera",
-    hotspot: null,
-  },
 ];
 
 // Vehicle data for search

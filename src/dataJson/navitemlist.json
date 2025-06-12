@@ -1,41 +1,41 @@
 [
-    {
-        "title": "Gallery",
-        "link": "#",
-        "key": "gallery",
-        "childern": [
-            {
-                "title": "Trucks",
-                "link": "/truck-gallery",
-                "key": "trucks"
-            },
-            {
-                "title": "Video",
-                "link": "/video-gallery",
-                "key": "video"
-            }
-        ]
-    },
-    {
-        "title": "Parts",
-        "link": "/",
-        "key": "parts"
-    },
-    {
-        "title": "More",
-        "link": "#",
-        "key": "more",
-        "childern": [
-            {
-                "title": "About",
-                "link": "/about",
-                "key": "about"
-            },
-            {
-                "title": "Contact",
-                "link": "/contact",
-                "key": "contact"
-            }
-        ]
-    }
+  {
+    "title": "Gallery",
+    "link": "#",
+    "key": "gallery",
+    "childern": [
+      {
+        "title": "Trucks",
+        "link": "/truck-gallery",
+        "key": "trucks"
+      },
+      {
+        "title": "Video",
+        "link": "/video-gallery",
+        "key": "video"
+      }
+    ]
+  },
+  {
+    "title": "Parts",
+    "link": "/parts",
+    "key": "parts"
+  },
+  {
+    "title": "More",
+    "link": "#",
+    "key": "more",
+    "childern": [
+      {
+        "title": "About",
+        "link": "/about",
+        "key": "about"
+      },
+      {
+        "title": "Contact",
+        "link": "/contact",
+        "key": "contact"
+      }
+    ]
+  }
 ]
