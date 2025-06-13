@@ -26,6 +26,8 @@ import SingleVideo from "./pages/SingleVideo";
 import Parts from "./pages/Parts";
 import CategoryPage from "./pages/CategoryPage";
 import CategoryPageEcommerce from "./pages/CategoryPageEcommerce";
+import ProductPage from "./pages/ProductPage";
+import ProductPageImmersive from "./pages/ProductPageImmersive";
 
 export default function App() {
   useEffect(() => {
@@ -60,6 +62,12 @@ export default function App() {
         <Route path="/video/:id" element={<SingleVideo />} />
         <Route path="/parts" element={<Parts />} />
         <Route path="/parts/:slug" element={<CategoryPage />} />
+        <Route path="/product/:slug" element={<ProductPage />} />
+        <Route
+          path="/product-immersive/:slug"
+          element={<ProductPageImmersive />}
+        />
+
         <Route
           path="/parts-ecommerce/:slug"
           element={<CategoryPageEcommerce />}
