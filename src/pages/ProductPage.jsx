@@ -14,6 +14,8 @@ const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isInfoVisible, setIsInfoVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   // Mock product data - In real app, this would come from API
   const mockProduct = {
@@ -157,6 +159,16 @@ const ProductPage = () => {
     fetchProduct();
   }, [slug]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      setIsInfoVisible(window.scrollY > 400);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleRequestQuote = (quoteData) => {
     console.log("Quote requested for:", quoteData);
     // In real app, this would send data to backend
@@ -257,6 +269,72 @@ const ProductPage = () => {
 
       {/* Related Products */}
       <RelatedProducts currentProduct={product} category={product.category} />
+
+      {/* Sticky Related Products (shows on scroll) */}
+      <div
+        className={`sticky-related-products ${isInfoVisible ? "visible" : ""}`}
+      >
+        <div className="sticky-content">
+          <div className="sticky-header">
+            <h4>You might also like</h4>
+            <span className="sticky-category">{product.category?.name}</span>
+          </div>
+
+          <div className="sticky-products-grid">
+            <div className="sticky-product-item">
+              <img
+                src="/assets/img/products/product-2.png"
+                alt="LED Light Bar"
+                className="sticky-product-image"
+              />
+              <div className="sticky-product-info">
+                <span className="sticky-product-name">LED Light Bar</span>
+                <span className="sticky-product-price">$320 - $480</span>
+              </div>
+            </div>
+
+            <div className="sticky-product-item">
+              <img
+                src="/assets/img/products/product-3.png"
+                alt="Custom Bumper"
+                className="sticky-product-image"
+              />
+              <div className="sticky-product-info">
+                <span className="sticky-product-name">Custom Bumper</span>
+                <span className="sticky-product-price">$800 - $1200</span>
+              </div>
+            </div>
+
+            <div className="sticky-product-item">
+              <img
+                src="/assets/img/products/product-4.png"
+                alt="Visor Shield"
+                className="sticky-product-image"
+              />
+              <div className="sticky-product-info">
+                <span className="sticky-product-name">Visor Shield</span>
+                <span className="sticky-product-price">$180 - $280</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="sticky-actions">
+            <button className="btn-sticky-view-all">View All Parts</button>
+            <button
+              className="btn-sticky-quote"
+              onClick={() =>
+                handleRequestQuote({
+                  product,
+                  selectedOptions: {},
+                  quantity: 1,
+                })
+              }
+            >
+              Get Quote
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

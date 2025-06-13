@@ -271,6 +271,216 @@
   }
 }
 
+// Sticky Related Products (updated)
+.sticky-related-products {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 0;
+  transform: translateY(-100%);
+  transition: all 0.4s ease;
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+
+  &.visible {
+    transform: translateY(0);
+  }
+
+  .sticky-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 180px 1fr 180px;
+    gap: 1.5rem;
+    align-items: center;
+
+    .sticky-header {
+      h4 {
+        color: var(--heading-color);
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+        font-family: var(--heading-font-family);
+      }
+
+      .sticky-category {
+        color: var(--primary-color);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .sticky-products-grid {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+
+      .sticky-product-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0.5rem;
+        border-radius: 10px;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+          transform: translateY(-2px);
+        }
+
+        .sticky-product-image {
+          width: 45px;
+          height: 45px;
+          border-radius: 8px;
+          object-fit: cover;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sticky-product-info {
+          display: flex;
+          flex-direction: column;
+
+          .sticky-product-name {
+            color: var(--heading-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+          }
+
+          .sticky-product-price {
+            color: var(--primary-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .sticky-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+
+      .btn-sticky-view-all,
+      .btn-sticky-quote {
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+
+      .btn-sticky-view-all {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--body-color);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.15);
+          color: var(--heading-color);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+      }
+
+      .btn-sticky-quote {
+        background: var(--primary-color);
+        color: white;
+
+        &:hover {
+          background: #e53e2c;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 15px rgba(255, 61, 36, 0.3);
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design for Sticky Related Products
+@media screen and (max-width: 1024px) {
+  .sticky-related-products {
+    .sticky-content {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      text-align: center;
+
+      .sticky-products-grid {
+        .sticky-product-item {
+          .sticky-product-info {
+            .sticky-product-name {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sticky-related-products {
+    .sticky-content {
+      padding: 0 1rem;
+
+      .sticky-products-grid {
+        flex-direction: column;
+        gap: 0.75rem;
+
+        .sticky-product-item {
+          justify-content: center;
+        }
+      }
+
+      .sticky-actions {
+        justify-content: center;
+        width: 100%;
+
+        .btn-sticky-view-all,
+        .btn-sticky-quote {
+          flex: 1;
+          padding: 0.75rem 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .sticky-related-products {
+    .sticky-content {
+      .sticky-products-grid {
+        .sticky-product-item {
+          .sticky-product-image {
+            width: 35px;
+            height: 35px;
+          }
+
+          .sticky-product-info {
+            .sticky-product-name {
+              font-size: 0.75rem;
+            }
+
+            .sticky-product-price {
+              font-size: 0.7rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 // Loading State
 .product-hero-loading {
   padding: 2rem 0 3rem 0;

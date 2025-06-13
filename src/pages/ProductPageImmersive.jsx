@@ -229,77 +229,85 @@ const ProductPageImmersive = () => {
 
         {/* Product Info Overlay */}
         <div className="hero-content">
-          <div className="product-badges-immersive">
-            {product.isNew && <span className="badge-immersive new">New</span>}
-            {product.isFeatured && (
-              <span className="badge-immersive featured">Featured</span>
-            )}
-            {product.isCustomizable && (
-              <span className="badge-immersive custom">Customizable</span>
-            )}
+          <div className="hero-left-content">
+            <div className="product-badges-immersive">
+              {product.isNew && (
+                <span className="badge-immersive new">New</span>
+              )}
+              {product.isFeatured && (
+                <span className="badge-immersive featured">Featured</span>
+              )}
+              {product.isCustomizable && (
+                <span className="badge-immersive custom">Customizable</span>
+              )}
+            </div>
+
+            <div className="product-title-section">
+              <h1 className="immersive-title">{product.name}</h1>
+              <p className="immersive-subtitle">{product.shortDescription}</p>
+            </div>
+
+            <div className="hero-actions">
+              <button className="btn-hero-primary" onClick={handleRequestQuote}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                </svg>
+                Request Custom Quote
+              </button>
+
+              <button className="btn-hero-secondary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                </svg>
+                Speak with Expert
+              </button>
+            </div>
           </div>
 
-          <div className="product-title-section">
-            <h1 className="immersive-title">{product.name}</h1>
-            <p className="immersive-subtitle">{product.shortDescription}</p>
-          </div>
+          <div className="hero-right-content">
+            <div className="product-meta-immersive">
+              <div className="meta-item">
+                <span className="meta-label">SKU:</span>
+                <span className="meta-value">{product.sku}</span>
+              </div>
+              <div className="meta-item">
+                <span className="meta-label">Category:</span>
+                <span className="meta-value">{product.category.name}</span>
+              </div>
+              <div className="meta-item">
+                <span className="meta-label">Compatibility:</span>
+                <span className="meta-value">
+                  {product.compatibility[0]} +{product.compatibility.length - 1}{" "}
+                  more
+                </span>
+              </div>
+            </div>
 
-          <div className="product-meta-immersive">
-            <div className="meta-item">
-              <span className="meta-label">SKU:</span>
-              <span className="meta-value">{product.sku}</span>
-            </div>
-            <div className="meta-item">
-              <span className="meta-label">Category:</span>
-              <span className="meta-value">{product.category.name}</span>
-            </div>
-            <div className="meta-item">
-              <span className="meta-label">Compatibility:</span>
-              <span className="meta-value">
-                {product.compatibility[0]} +{product.compatibility.length - 1}{" "}
-                more
+            <div className="pricing-immersive">
+              <span className="price-range-immersive">
+                {product.priceRange}
               </span>
+              <div className="availability-immersive">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M20 6L9 17l-5-5"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span>{product.inStock ? "In Stock" : "Made to Order"}</span>
+              </div>
             </div>
-          </div>
-
-          <div className="pricing-immersive">
-            <span className="price-range-immersive">{product.priceRange}</span>
-            <div className="availability-immersive">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20 6L9 17l-5-5"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span>{product.inStock ? "In Stock" : "Made to Order"}</span>
-            </div>
-          </div>
-
-          <div className="hero-actions">
-            <button className="btn-hero-primary" onClick={handleRequestQuote}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-              </svg>
-              Request Custom Quote
-            </button>
-
-            <button className="btn-hero-secondary">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-              </svg>
-              Speak with Expert
-            </button>
           </div>
         </div>
 
