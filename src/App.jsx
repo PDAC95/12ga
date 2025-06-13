@@ -24,6 +24,8 @@ import SingleTruck from "./pages/SingleTruck";
 import VideoGallery from "./pages/VideoGallery";
 import SingleVideo from "./pages/SingleVideo";
 import Parts from "./pages/Parts";
+import CategoryPage from "./pages/CategoryPage";
+import CategoryPageEcommerce from "./pages/CategoryPageEcommerce";
 
 export default function App() {
   useEffect(() => {
@@ -57,7 +59,12 @@ export default function App() {
         <Route path="/video-gallery" element={<VideoGallery />} />
         <Route path="/video/:id" element={<SingleVideo />} />
         <Route path="/parts" element={<Parts />} />
-        </Route>
+        <Route path="/parts/:slug" element={<CategoryPage />} />
+        <Route
+          path="/parts-ecommerce/:slug"
+          element={<CategoryPageEcommerce />}
+        />
+      </Route>
       <Route path="/*" element={<ErrorPages />}></Route>
     </Routes>
   );
