@@ -18,114 +18,265 @@ const ProductPage = () => {
   const [scrollY, setScrollY] = useState(0);
 
   // Mock product data - In real app, this would come from API
-  const mockProduct = {
-    id: 1,
-    name: "Premium Chrome Grille Assembly",
-    slug: "premium-chrome-grille-assembly",
-    sku: "12GA-GRL-001",
-    category: {
-      name: "GRILLES",
-      slug: "grilles",
+  const mockProducts = {
+    "premium-chrome-grille-assembly": {
+      id: 1,
+      name: "Premium Chrome Grille Assembly",
+      slug: "premium-chrome-grille-assembly",
+      sku: "12GA-GRL-001",
+      category: { name: "GRILLES", slug: "grilles" },
+      shortDescription:
+        "Transform your truck's front end with our premium chrome grille assembly, designed for perfect fit and superior durability.",
+      description:
+        "Our Premium Chrome Grille Assembly represents the pinnacle of truck customization excellence. Crafted from high-grade materials and finished with a mirror-like chrome coating, this grille assembly is designed to make a bold statement while maintaining the highest standards of quality and durability.",
+      longDescription:
+        "This premium grille assembly features advanced manufacturing techniques and premium materials that set it apart from standard alternatives. The chrome finish is applied using a multi-layer process that includes copper plating, nickel plating, and final chrome coating for maximum durability and resistance to corrosion.",
+      image: "/assets/img/products/product-1.png",
+      gallery: [
+        "/assets/img/products/product-1.png",
+        "/assets/img/products/product-2.png",
+        "/assets/img/products/product-3.png",
+        "/assets/img/products/product-4.png",
+      ],
+      priceRange: "$450 - $650",
+      inStock: true,
+      leadTime: "2-3 weeks",
+      isNew: true,
+      isFeatured: true,
+      isCustomizable: true,
+      rating: 4.8,
+      reviewCount: 127,
+      compatibility: [
+        "Peterbilt 579 (2013-2024)",
+        "Peterbilt 567 (2013-2024)",
+        "Kenworth T680 (2013-2024)",
+        "Kenworth T880 (2013-2024)",
+      ],
+      keyFeatures: [
+        "Mirror-finish chrome coating for superior shine",
+        "Precision-engineered for perfect OEM fit",
+        "Corrosion-resistant multi-layer plating",
+        "High-strength steel construction",
+        "Professional installation recommended",
+        "Lifetime warranty on finish",
+        "Made in USA with premium materials",
+        "Compatible with OEM mounting hardware",
+      ],
+      specifications: {
+        Material: "High-strength steel with chrome plating",
+        Finish: "Triple-layer chrome (copper/nickel/chrome)",
+        Mounting: "OEM-compatible bolt-on installation",
+        Warranty: "Lifetime finish warranty",
+        Manufacturing: "Made in USA",
+        Weight: "18.5 lbs",
+        "Package Dimensions": '48" x 24" x 8"',
+        "Installation Time": "2-3 hours professional installation",
+        "Hardware Included": "Complete mounting hardware kit",
+        "Compatibility Check": "VIN verification recommended",
+      },
+      dimensions: {
+        length: "47.5 inches",
+        width: "23.2 inches",
+        height: "7.8 inches",
+        weight: "18.5 lbs",
+      },
+      materials: [
+        {
+          type: "Base Material",
+          description: "High-strength automotive grade steel",
+        },
+        {
+          type: "Plating Process",
+          description: "Multi-layer chrome plating with copper and nickel base",
+        },
+        {
+          type: "Hardware",
+          description:
+            "Stainless steel mounting hardware with corrosion protection",
+        },
+      ],
+      options: [
+        {
+          name: "Finish Type",
+          type: "select",
+          values: [
+            { name: "Mirror Chrome", price: null },
+            { name: "Satin Chrome", price: "+$50" },
+            { name: "Black Chrome", price: "+$100" },
+          ],
+        },
+        {
+          name: "Logo Placement",
+          type: "radio",
+          values: [
+            { name: "No Logo", price: null },
+            { name: "12GA Custom Logo", price: "+$75" },
+            { name: "Custom Logo (Customer Provided)", price: "+$125" },
+          ],
+        },
+        {
+          name: "Installation Service",
+          type: "select",
+          values: [
+            { name: "Self Installation", price: null },
+            { name: "Professional Installation", price: "+$200" },
+            { name: "White Glove Service", price: "+$350" },
+          ],
+        },
+      ],
     },
-    shortDescription:
-      "Transform your truck's front end with our premium chrome grille assembly, designed for perfect fit and superior durability.",
-    description:
-      "Our Premium Chrome Grille Assembly represents the pinnacle of truck customization excellence. Crafted from high-grade materials and finished with a mirror-like chrome coating, this grille assembly is designed to make a bold statement while maintaining the highest standards of quality and durability. Each piece is precision-engineered for your specific truck model, ensuring a perfect fit that integrates seamlessly with your vehicle's existing design elements.",
-    longDescription:
-      "This premium grille assembly features advanced manufacturing techniques and premium materials that set it apart from standard alternatives. The chrome finish is applied using a multi-layer process that includes copper plating, nickel plating, and final chrome coating for maximum durability and resistance to corrosion. The structural components are made from high-strength steel that's designed to withstand the rigors of daily use while maintaining its appearance for years to come.",
-    image: "/assets/img/products/product-1.png",
-    gallery: [
-      "/assets/img/products/product-1.png",
-      "/assets/img/products/product-2.png",
-      "/assets/img/products/product-3.png",
-      "/assets/img/products/product-4.png",
-    ],
-    priceRange: "$450 - $650",
-    inStock: true,
-    leadTime: "2-3 weeks",
-    isNew: true,
-    isFeatured: true,
-    isCustomizable: true,
-    rating: 4.8,
-    reviewCount: 127,
-    compatibility: [
-      "Peterbilt 579 (2013-2024)",
-      "Peterbilt 567 (2013-2024)",
-      "Kenworth T680 (2013-2024)",
-      "Kenworth T880 (2013-2024)",
-    ],
-    keyFeatures: [
-      "Mirror-finish chrome coating for superior shine",
-      "Precision-engineered for perfect OEM fit",
-      "Corrosion-resistant multi-layer plating",
-      "High-strength steel construction",
-      "Professional installation recommended",
-      "Lifetime warranty on finish",
-      "Made in USA with premium materials",
-      "Compatible with OEM mounting hardware",
-    ],
-    specifications: {
-      Material: "High-strength steel with chrome plating",
-      Finish: "Triple-layer chrome (copper/nickel/chrome)",
-      Mounting: "OEM-compatible bolt-on installation",
-      Warranty: "Lifetime finish warranty",
-      Manufacturing: "Made in USA",
-      Weight: "18.5 lbs",
-      "Package Dimensions": '48" x 24" x 8"',
-      "Installation Time": "2-3 hours professional installation",
-      "Hardware Included": "Complete mounting hardware kit",
-      "Compatibility Check": "VIN verification recommended",
+    "custom-chrome-grille": {
+      id: 2,
+      name: "Custom Chrome Grille",
+      slug: "custom-chrome-grille",
+      sku: "12GA-GRL-002",
+      category: { name: "GRILLES", slug: "grilles" },
+      shortDescription:
+        "Premium chrome-finished grille designed for maximum style and airflow optimization.",
+      description:
+        "Our Custom Chrome Grille combines exceptional craftsmanship with innovative design to deliver a premium aftermarket solution that enhances both the appearance and performance of your truck.",
+      longDescription:
+        "Engineered for the discerning truck owner who demands nothing but the best, this custom chrome grille features precision-cut openings that optimize airflow while maintaining structural integrity. The high-grade chrome finish is applied through a rigorous multi-step process that ensures long-lasting brilliance and protection against the elements.",
+      image: "/assets/img/products/grille-1.png",
+      gallery: [
+        "/assets/img/products/grille-1.png",
+        "/assets/img/products/product-2.png",
+        "/assets/img/products/product-3.png",
+      ],
+      priceRange: "$299 - $450",
+      inStock: true,
+      leadTime: "1-2 weeks",
+      isNew: false,
+      isFeatured: true,
+      isCustomizable: true,
+      rating: 4.6,
+      reviewCount: 89,
+      compatibility: [
+        "Peterbilt 579 (2013-2024)",
+        "Peterbilt 567 (2013-2024)",
+        "Kenworth T680 (2013-2024)",
+      ],
+      keyFeatures: [
+        "High-Grade Chrome Finish",
+        "Custom Logo Integration",
+        "Enhanced Airflow Design",
+        "Easy Installation Kit",
+        "5-Year Warranty",
+      ],
+      specifications: {
+        Material: "High-strength steel with chrome plating",
+        Finish: "Premium chrome coating",
+        Mounting: "Bolt-on installation",
+        Warranty: "5-year finish warranty",
+        Manufacturing: "Made in USA",
+        Weight: "16.2 lbs",
+        "Package Dimensions": '46" x 22" x 6"',
+        "Installation Time": "1-2 hours",
+        "Hardware Included": "Complete mounting kit",
+      },
+      dimensions: {
+        length: "45.5 inches",
+        width: "21.8 inches",
+        height: "6.5 inches",
+        weight: "16.2 lbs",
+      },
+      materials: [
+        {
+          type: "Base Material",
+          description: "High-strength automotive steel",
+        },
+        { type: "Finish", description: "Premium chrome plating process" },
+        { type: "Hardware", description: "Stainless steel mounting hardware" },
+      ],
+      options: [
+        {
+          name: "Finish Type",
+          type: "select",
+          values: [
+            { name: "Chrome", price: null },
+            { name: "Black Chrome", price: "+$75" },
+          ],
+        },
+        {
+          name: "Logo Options",
+          type: "radio",
+          values: [
+            { name: "No Logo", price: null },
+            { name: "12GA Logo", price: "+$50" },
+          ],
+        },
+      ],
     },
-    dimensions: {
-      length: "47.5 inches",
-      width: "23.2 inches",
-      height: "7.8 inches",
-      weight: "18.5 lbs",
+    "blackout-performance-grille": {
+      id: 3,
+      name: "Blackout Performance Grille",
+      slug: "blackout-performance-grille",
+      sku: "12GA-GRL-003",
+      category: { name: "GRILLES", slug: "grilles" },
+      shortDescription:
+        "Aggressive blackout design for enhanced performance and bold appearance.",
+      description:
+        "The Blackout Performance Grille delivers an aggressive, stealth aesthetic while maintaining optimal airflow for enhanced engine performance. Perfect for operators who prefer a bold, understated look.",
+      longDescription:
+        "Featuring a sophisticated matte black finish that resists glare and maintains its appearance in all weather conditions. The performance-oriented design includes strategically placed openings that maximize airflow while providing protection from road debris.",
+      image: "/assets/img/products/grille-2.png",
+      gallery: [
+        "/assets/img/products/grille-2.png",
+        "/assets/img/products/product-1.png",
+        "/assets/img/products/product-4.png",
+      ],
+      priceRange: "$275 - $400",
+      inStock: true,
+      leadTime: "1-2 weeks",
+      isNew: false,
+      isFeatured: false,
+      isCustomizable: true,
+      rating: 4.7,
+      reviewCount: 112,
+      compatibility: [
+        "Peterbilt 579 (2013-2024)",
+        "Kenworth T680 (2013-2024)",
+        "Freightliner Cascadia (2015-2024)",
+      ],
+      keyFeatures: [
+        "Matte Black Finish",
+        "Performance Optimized",
+        "Durable Steel Construction",
+        "Weather Resistant",
+        "Custom Fitment Available",
+      ],
+      specifications: {
+        Material: "High-strength steel",
+        Finish: "Matte black powder coating",
+        Mounting: "OEM-compatible mounting",
+        Warranty: "3-year finish warranty",
+        Manufacturing: "Made in USA",
+        Weight: "17.1 lbs",
+      },
+      dimensions: {
+        length: "47.0 inches",
+        width: "22.5 inches",
+        height: "7.2 inches",
+        weight: "17.1 lbs",
+      },
+      materials: [
+        {
+          type: "Base Material",
+          description: "High-strength steel construction",
+        },
+        { type: "Finish", description: "Durable matte black powder coating" },
+      ],
+      options: [
+        {
+          name: "Mesh Style",
+          type: "select",
+          values: [
+            { name: "Standard Mesh", price: null },
+            { name: "Fine Mesh", price: "+$25" },
+          ],
+        },
+      ],
     },
-    materials: [
-      {
-        type: "Base Material",
-        description: "High-strength automotive grade steel",
-      },
-      {
-        type: "Plating Process",
-        description: "Multi-layer chrome plating with copper and nickel base",
-      },
-      {
-        type: "Hardware",
-        description:
-          "Stainless steel mounting hardware with corrosion protection",
-      },
-    ],
-    options: [
-      {
-        name: "Finish Type",
-        type: "select",
-        values: [
-          { name: "Mirror Chrome", price: null },
-          { name: "Satin Chrome", price: "+$50" },
-          { name: "Black Chrome", price: "+$100" },
-        ],
-      },
-      {
-        name: "Logo Placement",
-        type: "radio",
-        values: [
-          { name: "No Logo", price: null },
-          { name: "12GA Custom Logo", price: "+$75" },
-          { name: "Custom Logo (Customer Provided)", price: "+$125" },
-        ],
-      },
-      {
-        name: "Installation Service",
-        type: "select",
-        values: [
-          { name: "Self Installation", price: null },
-          { name: "Professional Installation", price: "+$200" },
-          { name: "White Glove Service", price: "+$350" },
-        ],
-      },
-    ],
   };
 
   useEffect(() => {
@@ -138,13 +289,11 @@ const ProductPage = () => {
         // Simulate network delay
         await new Promise((resolve) => setTimeout(resolve, 800));
 
-        // In real app, you would make an API call here
-        // const response = await fetch(`/api/products/${slug}`);
-        // const productData = await response.json();
+        // Check if product exists in our mock data
+        const productData = mockProducts[slug];
 
-        // For now, use mock data
-        if (slug === mockProduct.slug) {
-          setProduct(mockProduct);
+        if (productData) {
+          setProduct(productData);
         } else {
           // Product not found
           setError("Product not found");
