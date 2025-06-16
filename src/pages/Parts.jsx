@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 import CommonPageHero from "../components/CommonPageHero/CommonPageHero";
 
@@ -449,6 +449,7 @@ const vehicleData = {
       "International",
     ],
   },
+
   models: {
     Peterbilt: ["579", "389", "567", "520", "348"],
     Kenworth: ["T680", "W900", "T880", "T800", "T270"],
@@ -460,6 +461,7 @@ const vehicleData = {
 };
 
 const Parts = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedMake, setSelectedMake] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
@@ -468,9 +470,67 @@ const Parts = () => {
   const [filteredCategories, setFilteredCategories] = useState(categoriesData);
   const [hoveredHotspot, setHoveredHotspot] = useState(null);
   const [hoveredZone, setHoveredZone] = useState(null);
-  const [viewMode, setViewMode] = useState("areas"); // "areas" or "hotspots"
-  const [currentStep, setCurrentStep] = useState(1); // Control current step in selector
-  const [openSteps, setOpenSteps] = useState({}); // Control which steps are open/collapsed
+  const [viewMode, setViewMode] = useState("areas");
+  const [currentStep, setCurrentStep] = useState(1);
+  const [openSteps, setOpenSteps] = useState({});
+
+  // Load filters from URL parameters on component mount
+  useEffect(() => {
+    const year = searchParams.get("year");
+    const make = searchParams.get("make");
+    const model = searchParams.get("model");
+    const category = searchParams.get("category");
+
+    if (year || make || model || category) {
+      // Set filters from URL
+      if (year) setSelectedYear(year);
+      if (make) setSelectedMake(make);
+      if (model) setSelectedModel(model);
+      if (category) {
+        // Map category slug to zone if needed
+        const categoryItem = categoriesData.find(
+          (cat) => cat.slug === category
+        );
+        if (categoryItem) {
+          setSelectedZone(categoryItem.zone);
+          setVisualZoneFilter(categoryItem.zone);
+        }
+      }
+
+      // Auto-open appropriate steps based on URL params
+      const stepsToOpen = {};
+      if (year) stepsToOpen[1] = false; // Close year step since it's selected
+      if (make) stepsToOpen[2] = false; // Close make step since it's selected
+      if (model) stepsToOpen[3] = false; // Close model step since it's selected
+
+      setOpenSteps(stepsToOpen);
+
+      // Apply filters
+      filterCategories(
+        year || "",
+        make || "",
+        model || "",
+        category
+          ? categoriesData.find((cat) => cat.slug === category)?.zone || ""
+          : ""
+      );
+    }
+  }, [searchParams]);
+
+  // Update URL when filters change manually
+  const updateURLParams = (year, make, model, zone) => {
+    const params = new URLSearchParams();
+    if (year) params.set("year", year);
+    if (make) params.set("make", make);
+    if (model) params.set("model", model);
+    if (zone) {
+      // Find a category in this zone to represent it
+      const zoneCategory = categoriesData.find((cat) => cat.zone === zone);
+      if (zoneCategory) params.set("category", zoneCategory.slug);
+    }
+
+    setSearchParams(params);
+  };
 
   // Fixed: Zone click handler to sync with legend buttons
   const handleVisualZoneClick = (zoneKey) => {
@@ -485,6 +545,9 @@ const Parts = () => {
     } else {
       filterCategories(selectedYear, selectedMake, selectedModel, "");
     }
+
+    // Update URL
+    updateURLParams(selectedYear, selectedMake, selectedModel, zoneKey);
   };
 
   // Fixed: Zone change handler to sync with visual zones
@@ -492,6 +555,7 @@ const Parts = () => {
     setSelectedZone(zone);
     setVisualZoneFilter(zone); // Sync with visual filter state
     filterCategories(selectedYear, selectedMake, selectedModel, zone);
+    updateURLParams(selectedYear, selectedMake, selectedModel, zone);
   };
 
   // Fixed: Hover handlers with debouncing to prevent flickering
@@ -525,7 +589,9 @@ const Parts = () => {
       1: false, // Close year step
       2: true, // Open make step
     }));
+    updateURLParams(year, "", "", "");
   };
+
   const handleStepToggle = (stepNumber) => {
     setOpenSteps((prev) => ({
       ...prev,
@@ -554,6 +620,7 @@ const Parts = () => {
         2: false, // Close make step only
       }));
     }
+    updateURLParams(selectedYear, make, "", "");
   };
 
   const handleModelChange = (model) => {
@@ -568,6 +635,7 @@ const Parts = () => {
       ...prev,
       3: false, // Close model step
     }));
+    updateURLParams(selectedYear, selectedMake, model, "");
   };
 
   const filterCategories = (year, make, model, zone) => {
@@ -606,6 +674,7 @@ const Parts = () => {
     setSelectedZone("");
     setVisualZoneFilter("");
     setFilteredCategories(categoriesData);
+    setSearchParams({}); // Clear URL parameters
   };
 
   const availableMakes = selectedYear
@@ -634,6 +703,7 @@ const Parts = () => {
       <CommonPageHero title={"Parts Catalogue"} />
       <div className="container">
         <div className="ak-height-50 ak-height-lg-30"></div>
+
         {/* Interactive Truck Image */}
         <div className="truck-interactive-section" data-aos="fade-up">
           {/* View Mode Toggle */}
