@@ -30,7 +30,6 @@ export default function Home() {
       <TruckGalleryPreview />
       <VideoSection videoId={"SWB6-NBV8Qs"} />
 
-      {/* Sidebar SIEMPRE debe renderizarse */}
       <TruckSidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
     </>
   );
