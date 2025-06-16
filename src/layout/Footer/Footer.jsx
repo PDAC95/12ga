@@ -27,43 +27,50 @@ const Footer = () => {
       <footer className="footer style-1 footer-bg">
         <div className="container">
           <div className="ak-height-40 ak-height-lg-60"></div>
-          
+
           {/* Newsletter Section */}
-          <div 
-            className="footer-email" 
-            data-aos="fade-zoom-in" 
-            data-aos-easing="ease-in-back" 
+          <div
+            className="footer-email"
+            data-aos="fade-zoom-in"
+            data-aos-easing="ease-in-back"
             data-aos-delay="100"
             data-aos-offset="0"
           >
-            <div 
-              className="background-text" 
-              data-aos="fade-left" 
-              data-aos-delay="200" 
+            <div
+              className="background-text"
+              data-aos="fade-left"
+              data-aos-delay="200"
               data-aos-duration="1000"
             >
               Newsletter
             </div>
             <div className="footer-heading-email">
               <h5 className="email-title">
-                Sign up for our newsletter to get weekly updates on exclusive offers and discounts!
+                Sign up for our newsletter to get weekly updates on exclusive
+                offers and discounts!
               </h5>
               <div>
                 <p id="ak-alert-footer">{message}</p>
                 <form className="email-form" onSubmit={handleSubmit}>
-                  <input 
-                    type="email" 
-                    name="footerEmail" 
-                    id="footerEmail" 
+                  <input
+                    type="email"
+                    name="footerEmail"
+                    id="footerEmail"
                     placeholder="Enter your email..."
-                    className="email-input" 
+                    className="email-input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required 
+                    required
                   />
                   <button type="submit" className="submit-btn">
                     <span className="send">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="25"
+                        height="25"
+                        viewBox="0 0 25 25"
+                        fill="none"
+                      >
                         <path
                           d="M23.0345 3.91676C23.5566 2.42362 22.157 0.976718 20.7126 1.51775L3.06022 8.11754C1.61105 8.65982 1.43579 10.704 2.76894 11.5024L8.40369 14.8748L13.4353 9.67315C13.6633 9.44555 13.9686 9.31961 14.2855 9.32246C14.6024 9.3253 14.9055 9.45671 15.1296 9.68837C15.3537 9.92004 15.4808 10.2334 15.4836 10.561C15.4863 10.8887 15.3645 11.2043 15.1444 11.4399L10.1127 16.6415L13.3761 22.4667C14.1472 23.8448 16.1246 23.6624 16.6491 22.1655L23.0345 3.91676Z"
                           fill="white"
@@ -75,25 +82,21 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="ak-height-70 ak-height-lg-30"></div>
           <div className="primary-color-border"></div>
           <div className="ak-height-35 ak-height-lg-30"></div>
-          
+
           {/* Logo Section */}
           <div className="footer-logo">
             <img src="/assets/img/icon/12galogo.png" alt="12GA Customs Logo" />
             <div className="ak-height-15 ak-height-lg-10"></div>
           </div>
-          
+
           {/* Footer Content */}
           <div className="footer-content">
             {/* Company Info */}
             <div className="footer-info" data-aos="fade-up">
-              <p className="desp">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                Ipsum has been the industry's stan. Lorem Ipsum is.
-              </p>
               <div className="ak-height-35 ak-height-lg-30"></div>
               <div className="d-flex align-items-center gap-3">
                 <div className="heartbeat-icon">
@@ -103,43 +106,112 @@ const Footer = () => {
                     </span>
                   </Link>
                 </div>
-                <Link to="tel:(519) 766-0943" className="phone text-hover-animaiton white">
+                <Link
+                  to="tel:(519) 766-0943"
+                  className="phone text-hover-animaiton white"
+                >
                   (519) 766-0943
                 </Link>
               </div>
             </div>
 
             {/* Quick Links 1 */}
-            <div className="footer-menu-one" data-aos="fade-up" data-aos-delay="50" data-aos-duration="500">
+            <div
+              className="footer-menu-one"
+              data-aos="fade-up"
+              data-aos-delay="50"
+              data-aos-duration="500"
+            >
               <div className="footer-menu">
                 <p className="menu-title">QUICK LINK</p>
-                <Link to="/about" className="menu-item text-hover-animaiton white">About</Link>
-                <Link to="/service" className="menu-item text-hover-animaiton white">Services</Link>
-                <Link to="/pricing" className="menu-item text-hover-animaiton white">Pricing</Link>
-                <Link to="/team" className="menu-item text-hover-animaiton white">Team</Link>
-                <Link to="/contact" className="menu-item text-hover-animaiton white">Contact Us</Link>
+                <Link
+                  to="/about"
+                  className="menu-item text-hover-animaiton white"
+                >
+                  About
+                </Link>
+                <Link
+                  to="/service"
+                  className="menu-item text-hover-animaiton white"
+                >
+                  Services
+                </Link>
+                <Link
+                  to="/pricing"
+                  className="menu-item text-hover-animaiton white"
+                >
+                  Pricing
+                </Link>
+                <Link
+                  to="/team"
+                  className="menu-item text-hover-animaiton white"
+                >
+                  Team
+                </Link>
+                <Link
+                  to="/contact"
+                  className="menu-item text-hover-animaiton white"
+                >
+                  Contact Us
+                </Link>
               </div>
             </div>
 
             {/* Quick Links 2 */}
-            <div className="footer-menu-two" data-aos="fade-up" data-aos-delay="100" data-aos-duration="500">
+            <div
+              className="footer-menu-two"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              data-aos-duration="500"
+            >
               <div className="footer-menu">
                 <p className="menu-title">QUICK LINK</p>
-                <Link to="/appointment" className="menu-item text-hover-animaiton white">Appointment</Link>
-                <Link to="/blog" className="menu-item text-hover-animaiton white">Blog / News</Link>
-                <Link to="/faq" className="menu-item text-hover-animaiton white">FA Question</Link>
-                <Link to="/team" className="menu-item text-hover-animaiton white">Team</Link>
+                <Link
+                  to="/appointment"
+                  className="menu-item text-hover-animaiton white"
+                >
+                  Appointment
+                </Link>
+                <Link
+                  to="/blog"
+                  className="menu-item text-hover-animaiton white"
+                >
+                  Blog / News
+                </Link>
+                <Link
+                  to="/faq"
+                  className="menu-item text-hover-animaiton white"
+                >
+                  FA Question
+                </Link>
+                <Link
+                  to="/team"
+                  className="menu-item text-hover-animaiton white"
+                >
+                  Team
+                </Link>
               </div>
             </div>
 
             {/* Contact Information */}
-            <div className="footer-address" data-aos="fade-up" data-aos-delay="150" data-aos-duration="500">
+            <div
+              className="footer-address"
+              data-aos="fade-up"
+              data-aos-delay="150"
+              data-aos-duration="500"
+            >
               <p className="adress-title">LOCATION & CONTACT</p>
-              
+
               {/* Address */}
               <Link to="#" className="location">
                 <span className="me-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="19" viewBox="0 0 15 19" fill="none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="19"
+                    viewBox="0 0 15 19"
+                    fill="none"
+                  >
                     <path
                       d="M7.83533 0.501953C3.9756 0.501953 0.835327 3.4927 0.835327 7.16863C0.835327 8.27215 1.12502 9.36629 1.67574 10.3368L7.45253 18.2871C7.52943 18.4198 7.67598 18.502 7.83533 18.502C7.99467 18.502 8.14122 18.4198 8.21813 18.2871L13.9971 10.3335C14.5456 9.36629 14.8353 8.27211 14.8353 7.16859C14.8353 3.4927 11.6951 0.501953 7.83533 0.501953ZM7.83533 10.502C5.90546 10.502 4.33535 9.0066 4.33535 7.16863C4.33535 5.33066 5.90546 3.83531 7.83533 3.83531C9.76519 3.83531 11.3353 5.33066 11.3353 7.16863C11.3353 9.0066 9.76519 10.502 7.83533 10.502Z"
                       fill="white"
@@ -152,7 +224,13 @@ const Footer = () => {
               {/* Email */}
               <Link to="mailto:hello@12gacustoms.com" className="email">
                 <span className="me-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18" viewBox="0 0 22 18" fill="none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="18"
+                    viewBox="0 0 22 18"
+                    fill="none"
+                  >
                     <g clipPath="url(#clip0_365_2422)">
                       <path
                         d="M19.2194 16.3586C19.669 16.3586 20.0585 16.2102 20.3897 15.9171L14.7234 10.2505C14.5874 10.3479 14.4557 10.4426 14.3312 10.5326C13.9071 10.845 13.563 11.0888 13.2987 11.2635C13.0345 11.4386 12.6829 11.617 12.2441 11.7993C11.8049 11.9817 11.3958 12.0726 11.0163 12.0726H11.0051H10.994C10.6145 12.0726 10.2054 11.9817 9.76625 11.7993C9.32714 11.617 8.97557 11.4386 8.71159 11.2635C8.44736 11.0888 8.10338 10.845 7.67912 10.5326C7.56089 10.4459 7.42977 10.3508 7.28801 10.249L1.62061 15.9171C1.95173 16.2102 2.34153 16.3586 2.79106 16.3586H19.2194Z"
@@ -173,7 +251,12 @@ const Footer = () => {
                     </g>
                     <defs>
                       <clipPath id="clip0_365_2422">
-                        <rect width="21" height="17" fill="white" transform="translate(0.835327 0.238281)" />
+                        <rect
+                          width="21"
+                          height="17"
+                          fill="white"
+                          transform="translate(0.835327 0.238281)"
+                        />
                       </clipPath>
                     </defs>
                   </svg>
@@ -184,26 +267,44 @@ const Footer = () => {
               {/* Business Hours */}
               <p className="date">
                 <span className="me-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12,6 12,12 16,14"/>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="21"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12,6 12,12 16,14" />
                   </svg>
                 </span>
                 Mon - Fri: 9am - 5pm
               </p>
             </div>
           </div>
-          
+
           <div className="ak-height-70 ak-height-lg-30"></div>
           <div className="primary-color-border"></div>
-          
+
           {/* Copyright and Social */}
           <div className="copy-right">
-            <p className="title text-hover-animaiton">Copyright 2025, All Right reserved</p>
+            <p className="title text-hover-animaiton">
+              Copyright 2025, All Right reserved
+            </p>
             <div className="social-icon">
               {/* Facebook */}
               <Link to="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                >
                   <g clipPath="url(#clip0_365_2385)">
                     <path
                       d="M9.2381 16.9756L9.2381 9.67777L11.6867 9.67777L12.0541 6.83284H9.2381V5.01676C9.2381 4.19335 9.46582 3.6322 10.6479 3.6322L12.1532 3.63158V1.08697C11.8929 1.05314 10.9993 0.975586 9.95931 0.975586C7.78764 0.975586 6.30087 2.30116 6.30087 4.735L6.30087 6.83284H3.84485L3.84485 9.67777H6.30087L6.30087 16.9756H9.2381Z"
@@ -212,15 +313,26 @@ const Footer = () => {
                   </g>
                   <defs>
                     <clipPath id="clip0_365_2385">
-                      <rect width="16" height="16" fill="white" transform="translate(-0.000976562 0.975586)" />
+                      <rect
+                        width="16"
+                        height="16"
+                        fill="white"
+                        transform="translate(-0.000976562 0.975586)"
+                      />
                     </clipPath>
                   </defs>
                 </svg>
               </Link>
-              
+
               {/* Instagram */}
               <Link to="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                >
                   <g clipPath="url(#clip0_365_2391)">
                     <path
                       d="M15.9833 4.94233C15.9459 4.09218 15.8084 3.50772 15.6114 3.00127C15.4083 2.46369 15.0957 1.9824 14.6862 1.58229C14.2861 1.17596 13.8016 0.860229 13.2703 0.660239C12.7609 0.463301 12.1795 0.325823 11.3294 0.28834C10.4729 0.247682 10.201 0.238281 8.02866 0.238281C5.85636 0.238281 5.58446 0.247682 4.73114 0.285165C3.881 0.322648 3.29654 0.460248 2.79021 0.657064C2.25251 0.860229 1.77121 1.17279 1.37111 1.58229C0.964783 1.9824 0.649169 2.46687 0.449057 2.99822C0.252119 3.50772 0.114641 4.08901 0.0771582 4.93915C0.0365009 5.79564 0.0270996 6.06754 0.0270996 8.23984C0.0270996 10.4121 0.0365009 10.684 0.0739838 11.5374C0.111467 12.3875 0.249067 12.972 0.446005 13.4784C0.649169 14.016 0.964783 14.4973 1.37111 14.8974C1.77121 15.3037 2.25568 15.6195 2.78704 15.8195C3.29654 16.0164 3.87783 16.1539 4.72809 16.1913C5.58129 16.229 5.85331 16.2382 8.02561 16.2382C10.1979 16.2382 10.4698 16.229 11.3231 16.1913C12.1733 16.1539 12.7577 16.0164 13.2641 15.8195C14.3393 15.4037 15.1895 14.5536 15.6052 13.4784C15.802 12.9689 15.9396 12.3875 15.9771 11.5374C16.0146 10.684 16.024 10.4121 16.024 8.23984C16.024 6.06754 16.0208 5.79564 15.9833 4.94233ZM14.5425 11.4749C14.5081 12.2563 14.3768 12.6782 14.2674 12.9595C13.9986 13.6566 13.4454 14.2098 12.7483 14.4786C12.467 14.588 12.042 14.7193 11.2637 14.7536C10.4198 14.7912 10.1667 14.8005 8.03184 14.8005C5.89702 14.8005 5.64075 14.7912 4.79988 14.7536C4.01848 14.7193 3.59652 14.588 3.31522 14.4786C2.96835 14.3504 2.65261 14.1472 2.39634 13.8816C2.13066 13.6221 1.9275 13.3096 1.7993 12.9627C1.6899 12.6814 1.55865 12.2563 1.52434 11.478C1.48674 10.6341 1.47746 10.3809 1.47746 8.24607C1.47746 6.11125 1.48674 5.85498 1.52434 5.01424C1.55865 4.23284 1.6899 3.81088 1.7993 3.52957C1.9275 3.18258 2.13066 2.86697 2.39951 2.61057C2.65884 2.34489 2.9714 2.14173 3.31839 2.01365C3.5997 1.90426 4.02483 1.773 4.80306 1.73857C5.64697 1.70109 5.9002 1.69169 8.03489 1.69169C10.1729 1.69169 10.426 1.70109 11.2668 1.73857C12.0482 1.773 12.4702 1.90426 12.7515 2.01365C13.0984 2.14173 13.4141 2.34489 13.6704 2.61057C13.9361 2.87002 14.1392 3.18258 14.2674 3.52957C14.3768 3.81088 14.5081 4.23589 14.5425 5.01424C14.58 5.85815 14.5894 6.11125 14.5894 8.24607C14.5894 10.3809 14.58 10.6309 14.5425 11.4749Z"
@@ -237,31 +349,51 @@ const Footer = () => {
                   </g>
                   <defs>
                     <clipPath id="clip0_365_2391">
-                      <rect width="16" height="16" fill="white" transform="translate(-0.000976562 0.238281)" />
+                      <rect
+                        width="16"
+                        height="16"
+                        fill="white"
+                        transform="translate(-0.000976562 0.238281)"
+                      />
                     </clipPath>
                   </defs>
                 </svg>
               </Link>
-              
+
               {/* YouTube */}
               <Link to="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                >
                   <path
                     d="M15.6 4.84c-.2-.8-.8-1.4-1.6-1.6C12.8 3 8 3 8 3s-4.8 0-6 .24c-.8.2-1.4.8-1.6 1.6C0 6.04 0 8.84 0 8.84s0 2.8.4 4c.2.8.8 1.4 1.6 1.6C3.2 14.68 8 14.68 8 14.68s4.8 0 6-.24c.8-.2 1.4-.8 1.6-1.6.4-1.2.4-4 .4-4s0-2.8-.4-4zM6.4 11.44V6.24l4 2.6-4 2.6z"
                     fill="white"
                   />
                 </svg>
               </Link>
-              
+
               {/* LinkedIn */}
               <Link to="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                >
                   <g clipPath="url(#clip0_365_2387)">
                     <path
                       d="M15.995 16.9761L15.999 16.9754L15.999 11.1074C15.999 8.23672 15.381 6.02539 12.025 6.02539C10.4117 6.02539 9.32899 6.91072 8.88699 7.75006H8.84033V6.29339L5.65833 6.29339L5.65833 16.9754H8.97166L8.97166 11.6861C8.97166 10.2934 9.23566 8.94672 10.9603 8.94672C12.6597 8.94672 12.685 10.5361 12.685 11.7754L12.685 16.9761H15.995Z"
                       fill="white"
                     />
-                    <path d="M0.263062 6.29395L3.5804 6.29395L3.5804 16.9759H0.263062L0.263062 6.29395Z" fill="white" />
+                    <path
+                      d="M0.263062 6.29395L3.5804 6.29395L3.5804 16.9759H0.263062L0.263062 6.29395Z"
+                      fill="white"
+                    />
                     <path
                       d="M1.92036 0.975586C0.85969 0.975586 -0.000976563 1.83625 -0.000976563 2.89692C-0.000976563 3.95759 0.85969 4.83625 1.92036 4.83625C2.98102 4.83625 3.84169 3.95759 3.84169 2.89692C3.84102 1.83625 2.98036 0.975586 1.92036 0.975586Z"
                       fill="white"
@@ -269,7 +401,12 @@ const Footer = () => {
                   </g>
                   <defs>
                     <clipPath id="clip0_365_2387">
-                      <rect width="16" height="16" fill="white" transform="translate(-0.000976562 0.975586)" />
+                      <rect
+                        width="16"
+                        height="16"
+                        fill="white"
+                        transform="translate(-0.000976562 0.975586)"
+                      />
                     </clipPath>
                   </defs>
                 </svg>

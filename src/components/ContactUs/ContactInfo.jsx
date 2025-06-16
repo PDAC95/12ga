@@ -5,22 +5,22 @@ const contactData = [
   {
     label: "Mail",
     icon: "/assets/img/icon/email.svg",
-    info: ["example@email.com", "crasauto@email.com"],
+    info: ["sales@12gacustoms.com", "accounting@12gacustoms.com"],
   },
   {
     label: "Location",
     icon: "/assets/img/icon/location.svg",
-    info: ["901 N Pitt Str., Suite 170", "Alexandria, NY, USA"],
+    info: ["45 Massey Road", "Guelph, On Canada"],
   },
   {
     label: "Phone",
     icon: "/assets/img/icon/phone.svg",
-    info: ["(406) 555-0120"],
+    info: ["519-766-0943"],
   },
   {
     label: "Open Hour",
     icon: "/assets/img/icon/date-icon.svg",
-    info: ["Sun - Thu: Open 24/7"],
+    info: ["Mon - Fri 7AM – 5PM"],
   },
 ];
 
@@ -35,7 +35,7 @@ const ContactInfo = () => {
               bgText={"Contact"}
               title={"Contact"}
               desp={
-                " There are many variations of passages of Lorem Ipsum available,but the majority have suffered alteration in some form."
+                "We create custom truck parts that combine style, durability, and performance. Our skilled craftsmen use premium materials to manufacture everything from chrome grilles to custom sleeper panels, ensuring your truck stands out on the road."
               }
             />
           </div>

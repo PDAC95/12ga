@@ -94,9 +94,10 @@ const ContactForm = () => {
           <div>
             <h5 className="mb-3">How can we help?</h5>
             <p>
-              There are many variations of passages of Lorem Ipsum available,
-              but the majority have suffered alteration in some form, by
-              injected humour
+              We're here to help bring your custom truck vision to life. Our
+              experienced team works closely with each customer to design and
+              manufacture parts that meet your exact specifications. Contact us
+              today to discuss your project and get a personalized quote.
             </p>
             <div className="ak-height-45 ak-height-lg-30"></div>
           </div>
