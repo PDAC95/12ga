@@ -18,6 +18,7 @@ import TruckSidebar from "../components/TruckSidebar/TruckSidebar";
 import { useTruckSidebar } from "../helper/useTruckSidebar";
 
 export default function Home() {
+  // IMPORTANTE: Este hook DEBE llamarse SIEMPRE en el mismo lugar
   const { isSidebarOpen, openSidebar, closeSidebar } = useTruckSidebar();
 
   return (
@@ -28,11 +29,9 @@ export default function Home() {
       <Cta />
       <TruckGalleryPreview />
       <VideoSection videoId={"SWB6-NBV8Qs"} />
-      
-      <TruckSidebar 
-        isOpen={isSidebarOpen} 
-        onClose={closeSidebar} 
-      />
+
+      {/* Sidebar SIEMPRE debe renderizarse */}
+      <TruckSidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
     </>
   );
 }
