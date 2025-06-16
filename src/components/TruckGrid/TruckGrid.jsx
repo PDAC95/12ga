@@ -10,10 +10,11 @@ const trucksData = [
     model: "579",
     image: "/assets/img/trucks/peterbilt-579-custom.jpg",
     title: "Custom Peterbilt 579",
-    description: "Full custom paint job with performance exhaust and interior upgrade",
+    description:
+      "Full custom paint job with performance exhaust and interior upgrade",
     features: ["Custom Paint", "Performance Exhaust", "Interior Upgrade"],
     status: "Completed",
-    category: "Long Haul"
+    category: "Long Haul",
   },
   {
     id: 2,
@@ -22,10 +23,11 @@ const trucksData = [
     model: "W900",
     image: "/assets/img/trucks/kenworth-w900-custom.png",
     title: "Classic Kenworth W900",
-    description: "Chrome package with custom lighting and polished aluminum wheels",
+    description:
+      "Chrome package with custom lighting and polished aluminum wheels",
     features: ["Chrome Package", "Custom Lighting", "Polished Wheels"],
     status: "Completed",
-    category: "Show Truck"
+    category: "Show Truck",
   },
   {
     id: 3,
@@ -37,7 +39,7 @@ const trucksData = [
     description: "Aerodynamic modifications with fuel efficiency upgrades",
     features: ["Aero Mods", "Fuel Efficiency", "Custom Bumper"],
     status: "In Progress",
-    category: "Efficiency"
+    category: "Efficiency",
   },
   {
     id: 4,
@@ -49,7 +51,7 @@ const trucksData = [
     description: "Luxury sleeper conversion with high-end entertainment system",
     features: ["Luxury Sleeper", "Entertainment", "Custom Interior"],
     status: "Completed",
-    category: "Luxury"
+    category: "Luxury",
   },
   {
     id: 5,
@@ -61,7 +63,7 @@ const trucksData = [
     description: "Performance engine tuning with heavy-duty suspension upgrade",
     features: ["Engine Tuning", "HD Suspension", "Custom Grille"],
     status: "Completed",
-    category: "Performance"
+    category: "Performance",
   },
   {
     id: 6,
@@ -73,7 +75,7 @@ const trucksData = [
     description: "Complete exterior makeover with LED light package",
     features: ["Exterior Makeover", "LED Package", "Custom Mirrors"],
     status: "Completed",
-    category: "Styling"
+    category: "Styling",
   },
   {
     id: 7,
@@ -85,7 +87,7 @@ const trucksData = [
     description: "Traditional styling with modern performance enhancements",
     features: ["Traditional Style", "Modern Performance", "Custom Stack"],
     status: "Completed",
-    category: "Classic"
+    category: "Classic",
   },
   {
     id: 8,
@@ -97,8 +99,33 @@ const trucksData = [
     description: "Fuel-efficient build with aerodynamic enhancements",
     features: ["Fuel Efficient", "Aero Enhanced", "Smart Technology"],
     status: "In Progress",
-    category: "Efficiency"
-  }
+    category: "Efficiency",
+  },
+  {
+    id: 9,
+    make: "Peterbilt",
+    year: "2023",
+    model: "567",
+    image: "/assets/img/trucks/peterbilt-567-custom.png",
+    title: "Red Dragon Peterbilt",
+    description:
+      "Fire-themed custom paint with flame details and performance upgrades",
+    features: ["Flame Paint", "Performance Upgrades", "Custom Interior"],
+    status: "Completed",
+    category: "Show Truck",
+  },
+  {
+    id: 10,
+    make: "Freightliner",
+    year: "2022",
+    model: "Columbia",
+    image: "/assets/img/trucks/freightliner-columbia-custom.png",
+    title: "Blue Thunder Columbia",
+    description: "Electric blue finish with chrome accents and LED underglow",
+    features: ["Electric Blue Paint", "Chrome Accents", "LED Underglow"],
+    status: "Completed",
+    category: "Show Truck",
+  },
 ];
 
 const TruckGrid = ({ filters = {} }) => {
@@ -110,23 +137,38 @@ const TruckGrid = ({ filters = {} }) => {
   // Filter trucks based on selected filters
   useEffect(() => {
     setIsLoading(true);
-    
+
     // Simulate loading delay for better UX
     const timer = setTimeout(() => {
       let filtered = trucksData;
 
+      // Apply name filter (search in title and description)
+      if (filters.name && filters.name.trim() !== "") {
+        const searchTerm = filters.name.toLowerCase().trim();
+        filtered = filtered.filter(
+          (truck) =>
+            truck.title.toLowerCase().includes(searchTerm) ||
+            truck.description.toLowerCase().includes(searchTerm) ||
+            truck.make.toLowerCase().includes(searchTerm) ||
+            truck.model.toLowerCase().includes(searchTerm) ||
+            truck.category.toLowerCase().includes(searchTerm) ||
+            (truck.features &&
+              truck.features.some((feature) =>
+                feature.toLowerCase().includes(searchTerm)
+              ))
+        );
+      }
+
       // Apply make filter
       if (filters.make && filters.make !== "") {
-        filtered = filtered.filter(truck => 
-          truck.make.toLowerCase() === filters.make.toLowerCase()
+        filtered = filtered.filter(
+          (truck) => truck.make.toLowerCase() === filters.make.toLowerCase()
         );
       }
 
       // Apply year filter
       if (filters.year && filters.year !== "") {
-        filtered = filtered.filter(truck => 
-          truck.year === filters.year
-        );
+        filtered = filtered.filter((truck) => truck.year === filters.year);
       }
 
       // Sort results
@@ -149,7 +191,7 @@ const TruckGrid = ({ filters = {} }) => {
 
       setFilteredTrucks(filtered);
       setIsLoading(false);
-    }, 500);
+    }, 300); // Reduced delay for better responsiveness with search
 
     return () => clearTimeout(timer);
   }, [filters, sortBy]);
@@ -162,29 +204,49 @@ const TruckGrid = ({ filters = {} }) => {
     setViewMode(mode);
   };
 
+  // Helper function to get filter description
+  const getFilterDescription = () => {
+    const activeFilters = [];
+
+    if (filters.name && filters.name.trim() !== "") {
+      activeFilters.push(`searching for "${filters.name}"`);
+    }
+    if (filters.make && filters.make !== "") {
+      activeFilters.push(`${filters.make} trucks`);
+    }
+    if (filters.year && filters.year !== "") {
+      activeFilters.push(`from ${filters.year}`);
+    }
+
+    if (activeFilters.length === 0) {
+      return "Showing all our custom truck builds";
+    }
+
+    return `Showing ${activeFilters.join(", ")}`;
+  };
+
   return (
     <div className="truck-grid">
       {/* Results Header */}
       <div className="truck-grid-header" data-aos="fade-up">
         <div className="results-info">
           <h3 className="results-count">
-            {isLoading ? "Loading..." : `${filteredTrucks.length} Trucks Found`}
+            {isLoading
+              ? "Searching..."
+              : `${filteredTrucks.length} Truck${
+                  filteredTrucks.length !== 1 ? "s" : ""
+                } Found`}
           </h3>
-          <p className="results-description">
-            {filters.make || filters.year 
-              ? `Showing custom builds ${filters.make ? `for ${filters.make}` : ''} ${filters.year ? `from ${filters.year}` : ''}`.trim()
-              : "Showing all our custom truck builds"
-            }
-          </p>
+          <p className="results-description">{getFilterDescription()}</p>
         </div>
 
         <div className="grid-controls">
           {/* Sort Dropdown */}
           <div className="sort-control">
             <label htmlFor="sort-select">Sort by:</label>
-            <select 
+            <select
               id="sort-select"
-              value={sortBy} 
+              value={sortBy}
               onChange={(e) => handleSortChange(e.target.value)}
               className="sort-select"
             >
@@ -196,30 +258,112 @@ const TruckGrid = ({ filters = {} }) => {
 
           {/* View Mode Toggle */}
           <div className="view-toggle">
-            <button 
-              className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
-              onClick={() => handleViewModeChange('grid')}
+            <button
+              className={`view-btn ${viewMode === "grid" ? "active" : ""}`}
+              onClick={() => handleViewModeChange("grid")}
               title="Grid View"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="3" width="7" height="7" stroke="currentColor" strokeWidth="2"/>
-                <rect x="14" y="3" width="7" height="7" stroke="currentColor" strokeWidth="2"/>
-                <rect x="14" y="14" width="7" height="7" stroke="currentColor" strokeWidth="2"/>
-                <rect x="3" y="14" width="7" height="7" stroke="currentColor" strokeWidth="2"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <rect
+                  x="3"
+                  y="3"
+                  width="7"
+                  height="7"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <rect
+                  x="14"
+                  y="3"
+                  width="7"
+                  height="7"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <rect
+                  x="14"
+                  y="14"
+                  width="7"
+                  height="7"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <rect
+                  x="3"
+                  y="14"
+                  width="7"
+                  height="7"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
               </svg>
             </button>
-            <button 
-              className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
-              onClick={() => handleViewModeChange('list')}
+            <button
+              className={`view-btn ${viewMode === "list" ? "active" : ""}`}
+              onClick={() => handleViewModeChange("list")}
               title="List View"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <line x1="8" y1="6" x2="21" y2="6" stroke="currentColor" strokeWidth="2"/>
-                <line x1="8" y1="12" x2="21" y2="12" stroke="currentColor" strokeWidth="2"/>
-                <line x1="8" y1="18" x2="21" y2="18" stroke="currentColor" strokeWidth="2"/>
-                <line x1="3" y1="6" x2="3.01" y2="6" stroke="currentColor" strokeWidth="2"/>
-                <line x1="3" y1="12" x2="3.01" y2="12" stroke="currentColor" strokeWidth="2"/>
-                <line x1="3" y1="18" x2="3.01" y2="18" stroke="currentColor" strokeWidth="2"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <line
+                  x1="8"
+                  y1="6"
+                  x2="21"
+                  y2="6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="8"
+                  y1="12"
+                  x2="21"
+                  y2="12"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="8"
+                  y1="18"
+                  x2="21"
+                  y2="18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="3"
+                  y1="6"
+                  x2="3.01"
+                  y2="6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="3"
+                  y1="12"
+                  x2="3.01"
+                  y2="12"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <line
+                  x1="3"
+                  y1="18"
+                  x2="3.01"
+                  y2="18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
               </svg>
             </button>
           </div>
@@ -234,7 +378,7 @@ const TruckGrid = ({ filters = {} }) => {
           <div className="loading-spinner">
             <div className="spinner"></div>
           </div>
-          <p>Loading trucks...</p>
+          <p>Searching trucks...</p>
         </div>
       )}
 
@@ -242,51 +386,83 @@ const TruckGrid = ({ filters = {} }) => {
       {!isLoading && filteredTrucks.length === 0 && (
         <div className="empty-state" data-aos="fade-up">
           <div className="empty-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none">
-              <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
-              <path d="m21 21-4.35-4.35" stroke="currentColor" strokeWidth="2"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <circle
+                cx="11"
+                cy="11"
+                r="8"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+              <path
+                d="m21 21-4.35-4.35"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
             </svg>
           </div>
           <h3>No trucks found</h3>
           <p>
-            {filters.make || filters.year 
+            {filters.name && filters.name.trim() !== ""
+              ? `No results found for "${filters.name}". Try a different search term.`
+              : filters.make || filters.year
               ? "Try adjusting your filters to see more results"
-              : "No trucks available at the moment"
-            }
+              : "No trucks available at the moment"}
           </p>
         </div>
       )}
 
       {/* Trucks Grid/List */}
       {!isLoading && filteredTrucks.length > 0 && (
-        <div className={`trucks-container ${viewMode === 'list' ? 'list-view' : 'grid-view'}`}>
+        <div
+          className={`trucks-container ${
+            viewMode === "list" ? "list-view" : "grid-view"
+          }`}
+        >
           {filteredTrucks.map((truck, index) => (
-            <div 
-              key={truck.id} 
+            <div
+              key={truck.id}
               className="truck-item"
               data-aos="fade-up"
               data-aos-delay={index < 6 ? index * 100 : 0}
             >
-              <TruckCard 
-                truck={truck} 
-                viewMode={viewMode}
-              />
+              <TruckCard truck={truck} viewMode={viewMode} />
             </div>
           ))}
         </div>
       )}
 
       {/* Load More Button (for future pagination) */}
-      {!isLoading && filteredTrucks.length > 0 && filteredTrucks.length >= 8 && (
-        <div className="load-more-section" data-aos="fade-up">
-          <button className="btn-load-more">
-            <span>Load More Trucks</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M12 5V19M5 12L12 19L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      )}
+      {!isLoading &&
+        filteredTrucks.length > 0 &&
+        filteredTrucks.length >= 8 && (
+          <div className="load-more-section" data-aos="fade-up">
+            <button className="btn-load-more">
+              <span>Load More Trucks</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 5V19M5 12L12 19L19 12"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
     </div>
   );
 };

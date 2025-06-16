@@ -27,6 +27,43 @@
         color: var(--primary-color);
       }
 
+      // Product Content Grid Layout
+      .product-content-grid {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 3rem;
+        align-items: start;
+
+        .product-gallery-section {
+          // Gallery takes the larger left column
+        }
+
+        .product-info-section {
+          // Info takes the smaller right column
+          position: sticky;
+          top: 120px;
+        }
+      }
+
+      // Responsive adjustments for content grid
+      @media screen and (max-width: 1200px) {
+        .product-content-grid {
+          grid-template-columns: 1fr 350px;
+          gap: 2rem;
+        }
+      }
+
+      @media screen and (max-width: 1024px) {
+        .product-content-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+
+          .product-info-section {
+            position: static;
+          }
+        }
+      }
+
       svg {
         transition: transform 0.3s ease;
       }

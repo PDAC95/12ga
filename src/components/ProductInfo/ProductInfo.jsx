@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ProductInfo = ({ product, onRequestQuote }) => {
+const ProductInfo = ({ product, onRequestQuote, layout = "default" }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [showFullSpecs, setShowFullSpecs] = useState(false);
@@ -34,7 +34,10 @@ const ProductInfo = ({ product, onRequestQuote }) => {
   };
 
   return (
-    <div className="product-info" data-aos="fade-left">
+    <div
+      className={`product-info ${layout === "sidebar" ? "sidebar-layout" : ""}`}
+      data-aos="fade-left"
+    >
       {/* Product Summary */}
       <div className="product-summary">
         <div className="price-section">

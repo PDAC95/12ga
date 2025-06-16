@@ -248,6 +248,7 @@ const ProductPage = () => {
               <ProductInfo
                 product={product}
                 onRequestQuote={handleRequestQuote}
+                layout="sidebar"
               />
             </div>
           </div>
