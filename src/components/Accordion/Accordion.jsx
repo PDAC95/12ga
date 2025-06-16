@@ -3,37 +3,54 @@ import AccordionItem from "./AccordionItem";
 
 const faqItems = [
   {
-    title: "What services do you offer at your auto repair shop?",
+    title: "What truck makes and models do you specialize in?",
     content:
-      "Yes, we provide a warranty on our auto repairs. Please contact us for more details.",
+      "We specialize in custom parts for all major truck manufacturers including Peterbilt, Kenworth, Freightliner, Mack, Volvo, and International. Our parts are designed to fit models from 2015 onwards, with some compatibility extending to older models. Each product page shows specific fitment information.",
   },
   {
-    title: "How often should I get my car serviced?",
+    title: "How long does it take to manufacture custom parts?",
     content:
-      "It is recommended to service your car every 5,000 to 7,500 miles, or as specified in your vehicle’s manual.",
+      "Lead times vary depending on the complexity of the part and our current production schedule. Standard parts typically take 2-3 weeks, while custom or specialized parts may take 4-6 weeks. Rush orders are available for urgent needs with an additional fee.",
   },
   {
-    title: "How do I know if my brakes need to be replaced?",
+    title: "Do you offer installation services?",
     content:
-      "If you hear a squealing noise, feel vibrations, or notice that it takes longer to stop, it may be time to replace your brakes.",
+      "Yes, we offer professional installation services at our Ontario facility. We also provide detailed installation instructions and support for customers who prefer to install parts themselves. For complex installations, we recommend professional installation to ensure proper fitment and warranty coverage.",
   },
   {
-    title: "What steps can I take between services?",
+    title: "What materials do you use for your custom parts?",
     content:
-      "Regularly check tire pressure, oil levels, and keep the car clean. Ensure timely maintenance as per the vehicle’s manual.",
+      "We use only premium materials including high-grade steel, aluminum, and stainless steel. All our parts undergo rigorous quality control and are built to withstand harsh road conditions. We offer various finishes including chrome, powder coating, and polished aluminum.",
   },
   {
-    title: "Do you provide warranty on your auto repairs?",
+    title: "What warranty do you provide on your parts?",
     content:
-      "Yes, we provide a warranty on our auto repairs. Please contact us for more details.",
+      "We stand behind our craftsmanship with comprehensive warranties. Most parts come with a 2-year warranty against manufacturing defects, while chrome finishes have a lifetime warranty. Custom parts are covered for 1 year. Specific warranty details are provided with each purchase.",
+  },
+  {
+    title: "Can you create completely custom parts from my design?",
+    content:
+      "Absolutely! We specialize in bringing your custom ideas to life. Send us your sketches, CAD files, or detailed descriptions, and our design team will work with you to create a unique part for your truck. We offer design consultation and 3D modeling to ensure the final product meets your exact specifications.",
+  },
+  {
+    title: "How do I know if a part will fit my specific truck?",
+    content:
+      "Use our truck selector tool to filter parts by your exact year, make, and model. Each product page includes detailed fitment information and compatibility notes. If you're unsure, contact us with your VIN number and we'll verify compatibility before you order.",
+  },
+  {
+    title: "Do you ship internationally?",
+    content:
+      "Yes, we ship worldwide from our Ontario, Canada location. Shipping costs and delivery times vary by destination. International orders may be subject to customs duties and taxes determined by the destination country. We provide tracking information for all shipments.",
   },
 ];
 
 const Accordion = () => {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(null); // Cambiado de 0 a null
 
   const handleToggle = (index) => {
-    setOpenIndex(index);
+    // Si el item clickeado ya está abierto, cerrarlo (setear a null)
+    // Si está cerrado o es diferente, abrirlo
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (

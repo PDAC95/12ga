@@ -1,14 +1,14 @@
 import React from "react";
 import Accordion from "../Accordion/Accordion";
 
-import accordionImg from "/assets/img/accordion-side-img.jpg";
+import accordionImg from "/assets/img/accordion-side-img.png";
 
 const contactDetails = {
-  title: " Frequently Asked Questions",
-  phone: "(406) 555-0120",
-  email: "example@email.com",
-  address: "901 N Pitt Str., Suite 170, Alexandria, NY, USA",
-  workingHours: "Sun - Thu: Open 24/7",
+  title: "Frequently Asked Questions",
+  phone: "1-519-766-0943",
+  email: "info@12gacustoms.com",
+  address: "Ontario, Canada",
+  workingHours: "Mon - Fri: 8:00 AM - 6:00 PM EST",
 };
 
 const FrequentlyQuestions = () => {
@@ -29,7 +29,11 @@ const FrequentlyQuestions = () => {
           <Accordion />
         </div>
         <div className="images" data-aos="fade-up" data-aos-delay="950">
-          <img src={accordionImg} className="img-bg-faq" alt="Accordion Side" />
+          <img
+            src={accordionImg}
+            className="img-bg-faq"
+            alt="Twelve GA Customs Workshop"
+          />
           <div className="images-info">
             <div className="d-flex align-items-center gap-3">
               <div className="heartbeat-icon">
