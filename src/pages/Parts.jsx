@@ -449,7 +449,6 @@ const vehicleData = {
       "International",
     ],
   },
-
   models: {
     Peterbilt: ["579", "389", "567", "520", "348"],
     Kenworth: ["T680", "W900", "T880", "T800", "T270"],
@@ -480,14 +479,16 @@ const Parts = () => {
     const make = searchParams.get("make");
     const model = searchParams.get("model");
     const category = searchParams.get("category");
+    const zone = searchParams.get("zone");
 
-    if (year || make || model || category) {
+    if (year || make || model || category || zone) {
       // Set filters from URL
       if (year) setSelectedYear(year);
       if (make) setSelectedMake(make);
       if (model) setSelectedModel(model);
+
+      // Handle both category and zone parameters
       if (category) {
-        // Map category slug to zone if needed
         const categoryItem = categoriesData.find(
           (cat) => cat.slug === category
         );
@@ -495,6 +496,10 @@ const Parts = () => {
           setSelectedZone(categoryItem.zone);
           setVisualZoneFilter(categoryItem.zone);
         }
+      } else if (zone) {
+        // Direct zone parameter from sidebar
+        setSelectedZone(zone);
+        setVisualZoneFilter(zone);
       }
 
       // Auto-open appropriate steps based on URL params
@@ -505,15 +510,39 @@ const Parts = () => {
 
       setOpenSteps(stepsToOpen);
 
-      // Apply filters
-      filterCategories(
-        year || "",
-        make || "",
-        model || "",
-        category
+      // Apply filters - use zone directly if available, otherwise get zone from category
+      const filterZone =
+        zone ||
+        (category
           ? categoriesData.find((cat) => cat.slug === category)?.zone || ""
-          : ""
-      );
+          : "");
+      filterCategories(year || "", make || "", model || "", filterZone);
+    }
+  }, [searchParams]);
+
+  // Auto-scroll to search section when coming from sidebar
+  useEffect(() => {
+    const hasFiltersFromURL =
+      searchParams.get("year") ||
+      searchParams.get("make") ||
+      searchParams.get("model") ||
+      searchParams.get("zone") ||
+      searchParams.get("category");
+
+    if (hasFiltersFromURL) {
+      // Small delay to ensure the page has rendered
+      const timer = setTimeout(() => {
+        const searchSection = document.querySelector(".parts-search-section");
+        if (searchSection) {
+          searchSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+          });
+        }
+      }, 500); // Aumenté el delay a 500ms para mejor estabilidad
+
+      return () => clearTimeout(timer);
     }
   }, [searchParams]);
 
@@ -524,9 +553,8 @@ const Parts = () => {
     if (make) params.set("make", make);
     if (model) params.set("model", model);
     if (zone) {
-      // Find a category in this zone to represent it
-      const zoneCategory = categoriesData.find((cat) => cat.zone === zone);
-      if (zoneCategory) params.set("category", zoneCategory.slug);
+      // Use zone parameter directly instead of converting to category
+      params.set("zone", zone);
     }
 
     setSearchParams(params);

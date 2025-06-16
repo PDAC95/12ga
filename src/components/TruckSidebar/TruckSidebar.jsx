@@ -41,12 +41,23 @@ const truckModels = {
   international: ["LT", "RH", "HX", "LoneStar", "ProStar", "TranStar"],
 };
 
+// Zonas del camión
+const truckZones = [
+  { value: "frontal", label: "Front" },
+  { value: "motor", label: "Engine/Air System" },
+  { value: "superior", label: "Top/Cabin" },
+  { value: "lateral", label: "Side/Storage" },
+  { value: "escape", label: "Exhaust/Air" },
+  { value: "sleeper", label: "Sleeper/Interior" },
+  { value: "trasera", label: "Rear/Accessories" },
+];
+
 const TruckSidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedMake, setSelectedMake] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedZone, setSelectedZone] = useState("");
   const [years, setYears] = useState([]);
 
   // Generar años de 1980 al actual
@@ -94,7 +105,7 @@ const TruckSidebar = ({ isOpen, onClose }) => {
 
   // Manejar búsqueda de partes con navegación y filtros
   const handleSearchParts = () => {
-    if (!selectedYear && !selectedMake && !selectedModel && !selectedCategory) {
+    if (!selectedYear && !selectedMake && !selectedModel && !selectedZone) {
       alert("Please select at least one filter to search for parts.");
       return;
     }
@@ -105,7 +116,11 @@ const TruckSidebar = ({ isOpen, onClose }) => {
     if (selectedYear) searchParams.append("year", selectedYear);
     if (selectedMake) searchParams.append("make", selectedMake);
     if (selectedModel) searchParams.append("model", selectedModel);
-    if (selectedCategory) searchParams.append("category", selectedCategory);
+    if (selectedZone) {
+      // Para las zonas, necesitamos encontrar una categoría representativa
+      // Esto se manejará en la página Parts
+      searchParams.append("zone", selectedZone);
+    }
 
     // Navegar a la página Parts con los filtros como query parameters
     navigate(`/parts?${searchParams.toString()}`);
@@ -119,7 +134,7 @@ const TruckSidebar = ({ isOpen, onClose }) => {
     setSelectedYear(null);
     setSelectedMake("");
     setSelectedModel("");
-    setSelectedCategory("");
+    setSelectedZone("");
   };
 
   // Manejar clic en overlay
@@ -207,24 +222,20 @@ const TruckSidebar = ({ isOpen, onClose }) => {
             </select>
           </div>
 
-          {/* Part Category */}
+          {/* Truck Zone Selection */}
           <div className="filter-section">
-            <label className="filter-label">Part Category</label>
+            <label className="filter-label">Truck Area</label>
             <select
               className="filter-select"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
+              value={selectedZone}
+              onChange={(e) => setSelectedZone(e.target.value)}
             >
-              <option value="">All Categories</option>
-              <option value="dpf-covers">DPF Covers</option>
-              <option value="bumpers">Bumpers</option>
-              <option value="fenders">Fenders</option>
-              <option value="visors">Visors</option>
-              <option value="battery-boxes">Battery Boxes</option>
-              <option value="tool-boxes">Tool Boxes</option>
-              <option value="fuel-tank-straps">Fuel Tank Straps</option>
-              <option value="air-cleaners">Air Cleaners</option>
-              <option value="mirror-brackets">Mirror Brackets</option>
+              <option value="">All Areas</option>
+              {truckZones.map((zone) => (
+                <option key={zone.value} value={zone.value}>
+                  {zone.label}
+                </option>
+              ))}
             </select>
           </div>
 
