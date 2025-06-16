@@ -268,14 +268,110 @@ const CategoryPage = () => {
 
   return (
     <div className="magazine-category-page">
+      {/* Add spacing to push content below navbar */}
+      <div className="ak-height-100 ak-height-lg-80"></div>
+
       {/* Compact Header */}
       <div className="magazine-header">
         <div className="container">
-          {/* Breadcrumb */}
-          <nav className="breadcrumb">
-            <Link to="/parts">Parts</Link>
-            <span>/</span>
-            <span>{categoryInfo.name}</span>
+          {/* Enhanced Breadcrumb */}
+          <nav className="breadcrumb-navigation" data-aos="fade-up">
+            <div className="breadcrumb-container">
+              <Link to="/" className="breadcrumb-item home">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M9 22V12H15V22"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span>Home</span>
+              </Link>
+
+              <svg
+                className="breadcrumb-separator"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+
+              <Link to="/parts" className="breadcrumb-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <rect
+                    x="3"
+                    y="3"
+                    width="18"
+                    height="18"
+                    rx="2"
+                    ry="2"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <circle
+                    cx="9"
+                    cy="9"
+                    r="2"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M21 15L16 10L5 21"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span>Parts</span>
+              </Link>
+
+              <svg
+                className="breadcrumb-separator"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+
+              <span className="breadcrumb-item current">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M20 6L9 17L4 12"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span>{categoryInfo.name}</span>
+              </span>
+            </div>
           </nav>
 
           {/* Category Title & Stats */}
