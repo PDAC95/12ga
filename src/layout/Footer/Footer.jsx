@@ -123,7 +123,7 @@ const Footer = () => {
               data-aos-duration="500"
             >
               <div className="footer-menu">
-                <p className="menu-title">QUICK LINK</p>
+                <p className="menu-title">QUICK LINKS</p>
                 <Link
                   to="/about"
                   className="menu-item text-hover-animaiton white"
@@ -131,22 +131,22 @@ const Footer = () => {
                   About
                 </Link>
                 <Link
-                  to="/service"
+                  to="/parts"
                   className="menu-item text-hover-animaiton white"
                 >
-                  Services
+                  Parts
                 </Link>
                 <Link
-                  to="/pricing"
+                  to="/truck-gallery"
                   className="menu-item text-hover-animaiton white"
                 >
-                  Pricing
+                  Truck Gallery
                 </Link>
                 <Link
-                  to="/team"
+                  to="/video-gallery"
                   className="menu-item text-hover-animaiton white"
                 >
-                  Team
+                  Video Gallery
                 </Link>
                 <Link
                   to="/contact"
@@ -165,30 +165,31 @@ const Footer = () => {
               data-aos-duration="500"
             >
               <div className="footer-menu">
-                <p className="menu-title">QUICK LINK</p>
+                <p className="menu-title">HELP AND INFO</p>
                 <Link
-                  to="/appointment"
+                  to="/faq"
                   className="menu-item text-hover-animaiton white"
                 >
-                  Appointment
+                  FAQ
                 </Link>
                 <Link
                   to="/blog"
                   className="menu-item text-hover-animaiton white"
                 >
-                  Blog / News
+                  Terms and Conditions
                 </Link>
+
                 <Link
-                  to="/faq"
+                  to="/team"
                   className="menu-item text-hover-animaiton white"
                 >
-                  FA Question
+                  Privacy Policy
                 </Link>
                 <Link
                   to="/team"
                   className="menu-item text-hover-animaiton white"
                 >
-                  Team
+                  Site Map
                 </Link>
               </div>
             </div>
@@ -293,7 +294,7 @@ const Footer = () => {
           {/* Copyright and Social */}
           <div className="copy-right">
             <p className="title text-hover-animaiton">
-              Copyright 2025, All Right reserved
+              © 2025 12Ga Customs. All rights reserved.
             </p>
             <div className="social-icon">
               {/* Facebook */}
