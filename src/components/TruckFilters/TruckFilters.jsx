@@ -201,7 +201,7 @@ const TruckFilters = ({ onFiltersChange }) => {
             className="background-text"
             data-aos="fade-left"
             data-aos-delay="200"
-            data-aos-duration="1000"
+            data-aos-duration="2500"
           >
             FILTER
           </div>

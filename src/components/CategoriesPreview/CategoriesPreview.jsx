@@ -94,16 +94,11 @@ const CategoriesPreview = () => {
       <div className="ak-height-75 ak-height-lg-50"></div>
       <div className="center-section-heading" data-aos="fade-up">
         <div className="ak-section-heading ak-style-1">
-          <div
-            className="background-text"
-            data-aos="fade-left"
-            data-aos-delay="200"
-            data-aos-duration="1000"
-          >
-            Categories
+          <div className="background-text" data-aos="fade-left">
+            Parts
           </div>
           <div className="text-md-center">
-            <h2 className="ak-section-title">Categories</h2>
+            <h2 className="ak-section-title">Parts</h2>
             <p className="ak-section-subtitle">
               Browse by category to find the custom truck parts that fit your
               style and needs —

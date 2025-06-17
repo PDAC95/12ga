@@ -9,36 +9,36 @@ const truckImages = [
     image: "/assets/img/trucks/Truck-1.png",
     alt: "Custom Truck Build 1",
     title: "Peterbilt 379 Custom",
-    specs: { grade: "304 SS", finish: "Mirror" }
+    specs: { grade: "304 SS", finish: "Mirror" },
   },
   {
     id: 2,
     image: "/assets/img/trucks/Truck-2.png",
-    alt: "Custom Truck Build 2", 
+    alt: "Custom Truck Build 2",
     title: "Kenworth W900 Build",
-    specs: { grade: "316 SS", finish: "Brushed" }
+    specs: { grade: "316 SS", finish: "Brushed" },
   },
   {
     id: 3,
     image: "/assets/img/trucks/Truck-3.png",
     alt: "Custom Truck Build 3",
     title: "Freightliner Classic",
-    specs: { grade: "304 SS", finish: "Polished" }
+    specs: { grade: "304 SS", finish: "Polished" },
   },
   {
     id: 4,
     image: "/assets/img/trucks/Truck-4.png",
     alt: "Custom Truck Build 4",
-    title: "Mack Anthem Custom", 
-    specs: { grade: "304 SS", finish: "Mirror" }
+    title: "Mack Anthem Custom",
+    specs: { grade: "304 SS", finish: "Mirror" },
   },
   {
     id: 5,
     image: "/assets/img/trucks/Truck-5.png",
     alt: "Custom Truck Build 5",
     title: "Volvo VNL Custom",
-    specs: { grade: "316 SS", finish: "Satin" }
-  }
+    specs: { grade: "316 SS", finish: "Satin" },
+  },
 ];
 
 const TruckGalleryPreview = () => {
@@ -66,14 +66,22 @@ const TruckGalleryPreview = () => {
       {/* Header Section */}
       <div className="ak-height-125 ak-height-lg-80"></div>
       <div className="container">
-        <div className="gallery-header" data-aos="fade-up">
-          <div className="header-background">GALLERY</div>
-          <h2 className="gallery-title">Truck Gallery</h2>
-          <p className="gallery-subtitle">
-            Explore our Truck Gallery and witness the power of customization.
-            <br />
-            From rugged builds to standout details — this is where bold design meets top-tier craftsmanship.
-          </p>
+        <div className="center-section-heading" data-aos="fade-up">
+          <div className="ak-section-heading ak-style-1 ak-type-1">
+            <div className="background-text" data-aos="fade-left">
+              Trucks
+            </div>
+            <div className="text-md-center">
+              <h2 className="ak-section-title">Trucks</h2>
+              <p className="ak-section-subtitle">
+                Explore our Truck Gallery and witness the power of
+                customization.
+                <br />
+                From rugged builds to standout details — this is where bold
+                design meets top-tier craftsmanship.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -111,30 +119,47 @@ const TruckGalleryPreview = () => {
             <SwiperSlide key={truck.id} className="truck-slide">
               <div className="slide-content">
                 <Link to={`/truck/${truck.id}`} className="image-container">
-                  <img 
-                    src={truck.image} 
+                  <img
+                    src={truck.image}
                     alt={truck.alt}
                     className="truck-image"
                   />
                   <div className="image-overlay">
                     <div className="overlay-content">
-                      <div className="truck-number">#{String(index + 1).padStart(2, '0')}</div>
+                      <div className="truck-number">
+                        #{String(index + 1).padStart(2, "0")}
+                      </div>
                       <h3 className="truck-title">{truck.title}</h3>
-                      <p className="truck-subtitle">Handcrafted Excellence by 12GA Customs</p>
+                      <p className="truck-subtitle">
+                        Handcrafted Excellence by 12GA Customs
+                      </p>
                       <div className="truck-specs">
                         <div className="spec">
                           <span className="spec-label">Grade</span>
-                          <span className="spec-value">{truck.specs.grade}</span>
+                          <span className="spec-value">
+                            {truck.specs.grade}
+                          </span>
                         </div>
                         <div className="spec">
                           <span className="spec-label">Finish</span>
-                          <span className="spec-value">{truck.specs.finish}</span>
+                          <span className="spec-value">
+                            {truck.specs.finish}
+                          </span>
                         </div>
                       </div>
                       <div className="view-details-btn">
                         <span>View Details</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2"/>
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M7 17L17 7M17 7H7M17 7V17"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
                         </svg>
                       </div>
                     </div>
@@ -147,27 +172,35 @@ const TruckGalleryPreview = () => {
 
         {/* Navigation */}
         <div className="slider-navigation">
-          <button 
+          <button
             className="nav-btn nav-prev"
             onClick={() => swiperRef.current?.slidePrev()}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2"/>
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
             </svg>
           </button>
-          
+
           <div className="slide-counter">
-            <span className="current">{String(currentSlide).padStart(2, '0')}</span>
+            <span className="current">
+              {String(currentSlide).padStart(2, "0")}
+            </span>
             <span className="divider">—</span>
-            <span className="total">{String(truckImages.length).padStart(2, '0')}</span>
+            <span className="total">
+              {String(truckImages.length).padStart(2, "0")}
+            </span>
           </div>
-          
-          <button 
+
+          <button
             className="nav-btn nav-next"
             onClick={() => swiperRef.current?.slideNext()}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2"/>
+              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" />
             </svg>
           </button>
         </div>
@@ -179,7 +212,11 @@ const TruckGalleryPreview = () => {
         <Link to="/truck-gallery" className="view-all-btn">
           <span>VIEW ALL TRUCKS</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2"/>
+            <path
+              d="M7 17L17 7M17 7H7M17 7V17"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
           </svg>
         </Link>
       </div>
@@ -191,7 +228,11 @@ const TruckGalleryPreview = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={closeModal}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2"/>
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
               </svg>
             </button>
             <img src={selectedImage.image} alt={selectedImage.alt} />

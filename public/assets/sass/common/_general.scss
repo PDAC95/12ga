@@ -909,3 +909,54 @@
   font-weight: 700;
   margin-bottom: 5px;
 }
+// Fix para SearchOptions - mantener el comportamiento original
+.center-section-heading {
+  .ak-section-heading.ak-style-1 {
+    position: relative;
+    text-align: center;
+
+    .background-text {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      font-size: 120px;
+      opacity: 0.2;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-family: Oxanium, sans-serif;
+      color: transparent;
+      background: linear-gradient(to right, #222 0%, #fff 50%, #222 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 2.5s infinite;
+      background-size: 200px 100%;
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+
+    .text-md-center {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .ak-section-title {
+      position: relative;
+      z-index: 10;
+      font-size: 48px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .ak-section-subtitle {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+}

@@ -53,7 +53,7 @@
           offset: 120,
           delay: 0,
           easing: "ease",
-          duration: 400,
+          duration: 1200,
           disable: !1,
           once: !1,
           startEvent: "DOMContentLoaded",
