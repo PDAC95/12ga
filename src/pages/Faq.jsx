@@ -9,8 +9,6 @@ const Faq = () => {
     <>
       <CommonPageHero title={"Faq"} />
       <FrequentlyQuestions />
-      <Videos videoId={"VcaAVWtP48A"} />
-      <AppointmentForm />
     </>
   );
 };

@@ -5,19 +5,38 @@
   1. Truck Hero Slider - Fullscreen
 ----------------------------------------------------------------*/
 // Modern Truck Gallery Hero Styles
+// REPLACE THE EXISTING .modern-truck-hero STYLES WITH THIS:
 .modern-truck-hero {
   position: relative;
   height: 100vh;
   width: 100%;
   overflow: hidden;
   background: #0a0a0a;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 1s ease-out;
+  // REMOVED: opacity and transform that cause layout shifts
+  // opacity: 0;
+  // transform: translateY(20px);
+  // transition: all 1s ease-out;
 
   &.loaded {
-    opacity: 1;
-    transform: translateY(0);
+    // ONLY animate opacity, NOT transform to prevent layout shift
+    .hero-content {
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
+
+    .hero-image {
+      opacity: 1;
+      transition: opacity 1s ease-out;
+    }
+  }
+
+  // Initialize content as transparent but maintain layout
+  .hero-content {
+    opacity: 0;
+  }
+
+  .hero-image {
+    opacity: 0;
   }
 }
 
@@ -1892,5 +1911,112 @@
         height: 200px;
       }
     }
+  }
+}
+// FINAL FIX FOR TRUCK GALLERY FOOTER
+.truck-gallery-page {
+  .footer-bg {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 10 !important;
+    background-color: var(--black-color) !important;
+
+    .footer.style-1 {
+      // Newsletter section
+      .footer-email {
+        display: block !important;
+        visibility: visible !important;
+        padding: 80px 0 !important; // Padding original del newsletter
+
+        .background-text {
+          color: #333 !important;
+          opacity: 0.2 !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          text-align: center !important;
+        }
+
+        .footer-heading-email {
+          display: flex !important;
+          visibility: visible !important;
+
+          .email-title h2 {
+            color: #fff !important;
+          }
+
+          .email-form .email-input {
+            color: #fff !important;
+          }
+        }
+      }
+
+      // Main footer content - REDUCED PADDING
+      .footer-content {
+        display: flex !important;
+        visibility: visible !important;
+        padding: 20px 0 !important; // REDUCED from 60px to 20px
+        margin: 0 auto !important;
+        max-width: 1200px !important;
+
+        // Force all text to be visible
+        * {
+          color: #fff !important;
+          opacity: 1 !important;
+        }
+
+        .footer-menu a {
+          color: #ccc !important;
+
+          &:hover {
+            color: var(--primary-color) !important;
+          }
+        }
+
+        .footer-address a {
+          color: #ccc !important;
+
+          &:hover {
+            color: var(--primary-color) !important;
+          }
+        }
+      }
+
+      // Copyright section - REDUCED PADDING
+      .copy-right {
+        display: flex !important;
+        visibility: visible !important;
+        padding: 15px 0 !important; // REDUCED from 20px to 15px
+        margin-top: 0 !important;
+
+        .container .copy-right-content {
+          display: flex !important;
+          justify-content: space-between !important;
+          align-items: center !important;
+
+          .title {
+            color: #fff !important;
+          }
+
+          .social-icon a {
+            color: #fff !important;
+
+            &:hover {
+              color: var(--primary-color) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Global override for when truck-gallery is active
+[data-page="truck-gallery"] .footer-bg {
+  display: block !important;
+  visibility: visible !important;
+
+  * {
+    opacity: 1 !important;
   }
 }

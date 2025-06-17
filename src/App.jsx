@@ -27,7 +27,9 @@ import Parts from "./pages/Parts";
 import CategoryPage from "./pages/CategoryPage";
 import CategoryPageEcommerce from "./pages/CategoryPageEcommerce";
 import ProductPage from "./pages/ProductPage";
-import ProductPageImmersive from "./pages/ProductPageImmersive";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import SiteMap from "./pages/SiteMap";
 
 export default function App() {
   useEffect(() => {
@@ -39,23 +41,8 @@ export default function App() {
       <Route path="/" element={<Main />}>
         <Route index element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route path="/service" element={<Service />}></Route>
-        <Route path="/service-two" element={<ServicesTwo />}></Route>
-        <Route
-          path="/service-single/:serviceId"
-          element={<SingleService />}
-        ></Route>
-        <Route path="/blog" element={<Blog />}></Route>
-        <Route path="/blog-single/:blogId" element={<SingleBlog />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/team-member/:teamId" element={<TeamMemberDetails />} />
-        <Route path="/testimonial" element={<Testimonials />} />
-        <Route path="/appointment" element={<Appointment />} />
-        <Route path="/pricing" element={<Pricing />} />
         <Route path="/faq" element={<Faq />} />
-        <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/comming-soon" element={<CommingSoon />} />
         <Route path="/truck-gallery" element={<TruckGallery />} />
         <Route path="/truck/:id" element={<SingleTruck />} />
         <Route path="/video-gallery" element={<VideoGallery />} />
@@ -63,17 +50,15 @@ export default function App() {
         <Route path="/parts" element={<Parts />} />
         <Route path="/parts/:slug" element={<CategoryPage />} />
         <Route path="/product/:slug" element={<ProductPage />} />
-        <Route
-          path="/product-immersive/:slug"
-          element={<ProductPageImmersive />}
-        />
-
+        <Route path="/terms" element={<TermsAndConditions />}></Route>
         <Route
           path="/parts-ecommerce/:slug"
           element={<CategoryPageEcommerce />}
         />
+        <Route path="/privacy" element={<PrivacyPolicy />}></Route>
+        <Route path="/sitemap" element={<SiteMap />}></Route>
+        <Route path="/*" element={<ErrorPages />}></Route>
       </Route>
-      <Route path="/*" element={<ErrorPages />}></Route>
     </Routes>
   );
 }

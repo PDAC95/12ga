@@ -1,0 +1,20 @@
+// Terms & Conditions uses same styles as Privacy Policy
+.terms-conditions-page {
+  @extend .privacy-policy-page;
+
+  .terms-content {
+    @extend .privacy-content;
+  }
+
+  .terms-section {
+    @extend .privacy-section;
+  }
+
+  .terms-list {
+    @extend .privacy-list;
+  }
+
+  .terms-footer {
+    @extend .privacy-footer;
+  }
+}

@@ -173,20 +173,20 @@ const Footer = () => {
                   FAQ
                 </Link>
                 <Link
-                  to="/blog"
+                  to="/terms"
                   className="menu-item text-hover-animaiton white"
                 >
                   Terms and Conditions
                 </Link>
 
                 <Link
-                  to="/team"
+                  to="/privacy"
                   className="menu-item text-hover-animaiton white"
                 >
                   Privacy Policy
                 </Link>
                 <Link
-                  to="/team"
+                  to="/sitemap"
                   className="menu-item text-hover-animaiton white"
                 >
                   Site Map
@@ -298,7 +298,7 @@ const Footer = () => {
             </p>
             <div className="social-icon">
               {/* Facebook */}
-              <Link to="#">
+              <Link to="https://www.facebook.com/people/12-Ga-Customs/100064260026687/#">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -326,7 +326,7 @@ const Footer = () => {
               </Link>
 
               {/* Instagram */}
-              <Link to="#">
+              <Link to="https://www.instagram.com/12gacustoms_truck_lowrider/">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -362,7 +362,7 @@ const Footer = () => {
               </Link>
 
               {/* YouTube */}
-              <Link to="#">
+              <Link to="https://www.youtube.com/channel/UCEu6W5lxX5nhbIwG3o9LFhg">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -378,7 +378,7 @@ const Footer = () => {
               </Link>
 
               {/* LinkedIn */}
-              <Link to="#">
+              <Link to="https://www.linkedin.com/company/twelve-ga-customs-ltd-/">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
