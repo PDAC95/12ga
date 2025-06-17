@@ -67,7 +67,7 @@ const TruckGalleryPreview = () => {
       <div className="ak-height-125 ak-height-lg-80"></div>
       <div className="container">
         <div className="center-section-heading" data-aos="fade-up">
-          <div className="ak-section-heading ak-style-1 ak-type-1">
+          <div className="ak-section-heading ak-style-1">
             <div className="background-text" data-aos="fade-left">
               Trucks
             </div>

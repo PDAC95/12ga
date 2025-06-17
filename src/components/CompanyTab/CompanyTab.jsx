@@ -43,8 +43,8 @@ const CompanyTab = () => {
 
         <div className="tabs-content">
           <div className="list">
-            <div className="ak-section-heading ak-style-1 ak-type-1">
-              <div className="background-text">About Company</div>
+            <div className="ak-section-heading ak-style-1">
+              <div className="background-text">About</div>
               <h3 className="desp">{tabContents[activeTab].description}</h3>
             </div>
           </div>
