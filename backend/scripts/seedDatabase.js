@@ -46,6 +46,15 @@ const sampleTrucks = [
     },
     featured: true,
     active: true,
+    sliderConfig: {
+      isSliderItem: true,
+      heroTitle: "PREMIUM BUILDS",
+      heroSubtitle: "Crafting Excellence",
+      heroDescription:
+        "Discover our premium custom truck builds where engineering meets artistry",
+      heroImage: "/assets/img/trucks/truck-hero-1.jpg",
+      sliderOrder: 1,
+    },
   },
   {
     make: "Kenworth",
@@ -85,6 +94,15 @@ const sampleTrucks = [
     },
     featured: true,
     active: true,
+    sliderConfig: {
+      isSliderItem: true,
+      heroTitle: "PREMIUM BUILDS",
+      heroSubtitle: "Crafting Excellence",
+      heroDescription:
+        "Discover our premium custom truck builds where engineering meets artistry",
+      heroImage: "/assets/img/trucks/truck-hero-1.jpg",
+      sliderOrder: 1,
+    },
   },
   {
     make: "Freightliner",
@@ -123,6 +141,15 @@ const sampleTrucks = [
     },
     featured: false,
     active: true,
+    sliderConfig: {
+      isSliderItem: true,
+      heroTitle: "PREMIUM BUILDS",
+      heroSubtitle: "Crafting Excellence",
+      heroDescription:
+        "Discover our premium custom truck builds where engineering meets artistry",
+      heroImage: "/assets/img/trucks/truck-hero-1.jpg",
+      sliderOrder: 1,
+    },
   },
   {
     make: "Volvo",

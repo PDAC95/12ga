@@ -2119,3 +2119,196 @@
     }
   }
 }
+
+/*--------------------------------------------------------------
+  6. TruckSlider - Loading, Error & Empty States
+----------------------------------------------------------------*/
+
+// Loading State
+.loading-state,
+.error-state,
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-loading,
+.hero-error,
+.hero-empty {
+  max-width: 500px;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+
+  h2 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-family: var(--heading-font-family);
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    line-height: 1.6;
+  }
+}
+
+// Loading Spinner
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top: 4px solid #ff3d24;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+  margin: 0 auto 2rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(255, 61, 36, 0.4);
+    border-top: 2px solid #ff3d24;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 0.8s linear infinite reverse;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Error State Specific
+.error-state {
+  .hero-error {
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.05);
+
+    h2 {
+      color: #ef4444;
+    }
+
+    &::before {
+      content: "⚠️";
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+// Empty State Specific
+.empty-state {
+  .hero-empty {
+    border-color: rgba(156, 163, 175, 0.3);
+    background: rgba(156, 163, 175, 0.05);
+
+    h2 {
+      color: #9ca3af;
+    }
+
+    &::before {
+      content: "🚛";
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+  }
+}
+
+// Background particles for states
+.loading-state,
+.error-state,
+.empty-state {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at 20% 50%,
+        rgba(255, 61, 36, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        rgba(255, 61, 36, 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 40% 80%,
+        rgba(255, 61, 36, 0.08) 0%,
+        transparent 50%
+      );
+    animation: float 8s ease-in-out infinite;
+    z-index: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+    opacity: 0.6;
+  }
+}
+
+// Responsive adjustments for states
+@media (max-width: 768px) {
+  .hero-loading,
+  .hero-error,
+  .hero-empty {
+    max-width: 90%;
+    padding: 2rem;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border-width: 3px;
+
+    &::after {
+      width: 25px;
+      height: 25px;
+      border-width: 2px;
+    }
+  }
+}

@@ -3,62 +3,40 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, EffectFade, Parallax } from "swiper/modules";
 import { Link } from "react-router-dom";
 
-// Datos de los trucks
-const truckImages = [
-  {
-    id: 1,
-    image: "/assets/img/trucks/truck-hero-1.jpg",
-    alt: "Custom Truck Build 1",
-    title: "PREMIUM BUILDS",
-    subtitle: "Crafting Excellence",
-    description:
-      "Discover our premium custom truck builds where engineering meets artistry",
-  },
-  {
-    id: 2,
-    image: "/assets/img/trucks/truck-hero-2.jpg",
-    alt: "Custom Truck Build 2",
-    title: "CUSTOM DESIGNS",
-    subtitle: "Your Vision Realized",
-    description:
-      "Transform your ideas into reality with our bespoke truck customization services",
-  },
-  {
-    id: 3,
-    image: "/assets/img/trucks/truck-hero-3.jpg",
-    alt: "Custom Truck Build 3",
-    title: "PERFORMANCE MODS",
-    subtitle: "Power & Style",
-    description:
-      "Enhance both performance and aesthetics with our expert modifications",
-  },
-  {
-    id: 4,
-    image: "/assets/img/trucks/truck-hero-4.jpg",
-    alt: "Custom Truck Build 4",
-    title: "LUXURY INTERIORS",
-    subtitle: "Comfort Redefined",
-    description:
-      "Experience ultimate comfort with our premium interior customizations",
-  },
-  {
-    id: 5,
-    image: "/assets/img/trucks/truck-hero-5.jpg",
-    alt: "Custom Truck Build 5",
-    title: "RESTORATION",
-    subtitle: "Classic Revival",
-    description:
-      "Bringing classic trucks back to life with modern performance and style",
-  },
-];
-
 const TruckSlider = () => {
   const swiperRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [trucks, setTrucks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  // Fetch trucks from backend
   useEffect(() => {
-    setIsLoaded(true);
+    const fetchSliderTrucks = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/trucks/slider");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch slider trucks");
+        }
+
+        const data = await response.json();
+        setTrucks(data.trucks || []);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching slider trucks:", err);
+        setError(err.message);
+        // Fallback to empty array if fetch fails
+        setTrucks([]);
+      } finally {
+        setLoading(false);
+        setIsLoaded(true);
+      }
+    };
+
+    fetchSliderTrucks();
   }, []);
 
   const handleSlideChange = (swiper) => {
@@ -74,6 +52,42 @@ const TruckSlider = () => {
       });
     }
   };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className={`modern-truck-hero loading-state`}>
+        <div className="hero-loading">
+          <div className="loading-spinner"></div>
+          <p>Loading amazing trucks...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className={`modern-truck-hero error-state`}>
+        <div className="hero-error">
+          <h2>Unable to load trucks</h2>
+          <p>Please try refreshing the page</p>
+        </div>
+      </div>
+    );
+  }
+
+  // No trucks available
+  if (trucks.length === 0) {
+    return (
+      <div className={`modern-truck-hero empty-state`}>
+        <div className="hero-empty">
+          <h2>No featured trucks available</h2>
+          <p>Check back soon for amazing custom builds</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`modern-truck-hero ${isLoaded ? "loaded" : ""}`}>
@@ -97,13 +111,17 @@ const TruckSlider = () => {
         modules={[Navigation, Autoplay, EffectFade, Parallax]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
-        loop={true}
+        loop={trucks.length > 1}
         speed={1500}
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
+        autoplay={
+          trucks.length > 1
+            ? {
+                delay: 6000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }
+            : false
+        }
         parallax={true}
         navigation={{
           nextEl: ".hero-nav-next",
@@ -115,13 +133,17 @@ const TruckSlider = () => {
         onSlideChange={handleSlideChange}
         className="hero-swiper"
       >
-        {truckImages.map((truck, index) => (
-          <SwiperSlide key={truck.id}>
+        {trucks.map((truck, index) => (
+          <SwiperSlide key={truck._id}>
             <div className="hero-slide">
               <div className="hero-image-container">
                 <img
-                  src={truck.image}
-                  alt={truck.alt}
+                  src={
+                    truck.heroImage ||
+                    truck.images?.[0] ||
+                    "/assets/img/trucks/default-truck.jpg"
+                  }
+                  alt={truck.heroAlt || truck.name || "Custom Truck Build"}
                   className="hero-image"
                   data-swiper-parallax="-300"
                 />
@@ -136,20 +158,22 @@ const TruckSlider = () => {
                         className="hero-subtitle"
                         data-swiper-parallax="-200"
                       >
-                        {truck.subtitle}
+                        {truck.heroSubtitle || truck.category || "Custom Build"}
                       </span>
                       <h1 className="hero-title" data-swiper-parallax="-300">
-                        {truck.title}
+                        {truck.heroTitle || truck.name || "PREMIUM BUILD"}
                       </h1>
                       <p
                         className="hero-description"
                         data-swiper-parallax="-100"
                       >
-                        {truck.description}
+                        {truck.heroDescription ||
+                          truck.description ||
+                          "Discover our premium custom truck builds where engineering meets artistry"}
                       </p>
                       <div className="hero-actions" data-swiper-parallax="0">
                         <Link
-                          to={`/truck/${truck.id}`}
+                          to={`/truck/${truck._id}`}
                           className="hero-btn primary"
                         >
                           <span>View Project</span>
@@ -184,62 +208,68 @@ const TruckSlider = () => {
         ))}
       </Swiper>
 
-      {/* Navigation Controls */}
-      <div className="hero-navigation">
-        <button className="hero-nav-btn hero-nav-prev">
-          <div className="nav-btn-bg"></div>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M15 18L9 12L15 6"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
+      {/* Navigation Controls - Only show if more than one truck */}
+      {trucks.length > 1 && (
+        <>
+          <div className="hero-navigation">
+            <button className="hero-nav-btn hero-nav-prev">
+              <div className="nav-btn-bg"></div>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
 
-        <div className="hero-progress">
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{
-                width: `${((currentSlide + 1) / truckImages.length) * 100}%`,
-              }}
-            ></div>
+            <div className="hero-progress">
+              <div className="progress-bar">
+                <div
+                  className="progress-fill"
+                  style={{
+                    width: `${((currentSlide + 1) / trucks.length) * 100}%`,
+                  }}
+                ></div>
+              </div>
+              <span className="slide-counter">
+                {String(currentSlide + 1).padStart(2, "0")} /{" "}
+                {String(trucks.length).padStart(2, "0")}
+              </span>
+            </div>
+
+            <button className="hero-nav-btn hero-nav-next">
+              <div className="nav-btn-bg"></div>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
           </div>
-          <span className="slide-counter">
-            {String(currentSlide + 1).padStart(2, "0")} /{" "}
-            {String(truckImages.length).padStart(2, "0")}
-          </span>
-        </div>
 
-        <button className="hero-nav-btn hero-nav-next">
-          <div className="nav-btn-bg"></div>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M9 18L15 12L9 6"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </div>
-
-      {/* Slide Indicators */}
-      <div className="hero-indicators">
-        {truckImages.map((_, index) => (
-          <button
-            key={index}
-            className={`indicator ${index === currentSlide ? "active" : ""}`}
-            onClick={() => swiperRef.current?.slideToLoop(index)}
-          >
-            <span className="indicator-line"></span>
-          </button>
-        ))}
-      </div>
+          {/* Slide Indicators */}
+          <div className="hero-indicators">
+            {trucks.map((_, index) => (
+              <button
+                key={index}
+                className={`indicator ${
+                  index === currentSlide ? "active" : ""
+                }`}
+                onClick={() => swiperRef.current?.slideToLoop(index)}
+              >
+                <span className="indicator-line"></span>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* Social Media Links */}
       <div className="hero-social">
@@ -272,7 +302,7 @@ const TruckSlider = () => {
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path
-              d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+              d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
               fill="currentColor"
             />
           </svg>

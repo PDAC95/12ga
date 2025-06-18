@@ -123,6 +123,58 @@ router.get("/featured", async (req, res) => {
   }
 });
 
+// GET /api/trucks/slider - Get trucks configured for hero slider
+router.get("/slider", async (req, res) => {
+  try {
+    // Get only trucks specifically configured for slider
+    const sliderTrucks = await Truck.find({
+      active: true,
+      "sliderConfig.isSliderItem": true,
+    })
+      .sort({ "sliderConfig.sliderOrder": 1, createdAt: -1 }) // Order by sliderOrder, then newest
+      .limit(6) // Maximum 6 slides for performance
+      .select(
+        "_id make year model title description category status image sliderConfig"
+      )
+      .lean();
+
+    // Transform data for slider component
+    const sliderData = sliderTrucks.map((truck) => ({
+      _id: truck._id,
+      name: truck.sliderConfig.heroTitle || truck.title,
+      heroImage: truck.sliderConfig.heroImage || truck.image,
+      heroTitle: truck.sliderConfig.heroTitle || truck.title.toUpperCase(),
+      heroSubtitle:
+        truck.sliderConfig.heroSubtitle || truck.category || "Custom Build",
+      heroDescription: truck.sliderConfig.heroDescription || truck.description,
+      heroAlt: `${truck.year} ${truck.make} ${truck.model} Custom Build`,
+      category: truck.category,
+      // Additional fields for link navigation
+      make: truck.make,
+      year: truck.year,
+      model: truck.model,
+      status: truck.status,
+    }));
+
+    res.json({
+      success: true,
+      trucks: sliderData,
+      count: sliderData.length,
+    });
+  } catch (error) {
+    console.error("Error fetching slider trucks:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error fetching slider trucks",
+      trucks: [], // Empty array fallback for frontend
+      error:
+        process.env.NODE_ENV === "development"
+          ? error.message
+          : "Internal server error",
+    });
+  }
+});
+
 // GET /api/trucks/:id - Get single truck by ID
 router.get(
   "/:id",

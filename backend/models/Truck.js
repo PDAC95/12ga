@@ -130,6 +130,39 @@ const truckSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    // Slider-specific fields
+    sliderConfig: {
+      isSliderItem: {
+        type: Boolean,
+        default: false,
+        index: true, // For better query performance
+      },
+      heroTitle: {
+        type: String,
+        trim: true,
+        maxlength: [100, "Hero title cannot be more than 100 characters"],
+      },
+      heroSubtitle: {
+        type: String,
+        trim: true,
+        maxlength: [60, "Hero subtitle cannot be more than 60 characters"],
+      },
+      heroDescription: {
+        type: String,
+        trim: true,
+        maxlength: [300, "Hero description cannot be more than 300 characters"],
+      },
+      heroImage: {
+        type: String,
+        trim: true,
+      },
+      sliderOrder: {
+        type: Number,
+        default: 0,
+        min: [0, "Slider order cannot be negative"],
+        max: [100, "Slider order cannot exceed 100"],
+      },
+    },
     active: {
       type: Boolean,
       default: true,
