@@ -1,51 +1,46 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectCoverflow, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
-
-const truckImages = [
-  {
-    id: 1,
-    image: "/assets/img/trucks/Truck-1.png",
-    alt: "Custom Truck Build 1",
-    title: "Peterbilt 379 Custom",
-    specs: { grade: "304 SS", finish: "Mirror" },
-  },
-  {
-    id: 2,
-    image: "/assets/img/trucks/Truck-2.png",
-    alt: "Custom Truck Build 2",
-    title: "Kenworth W900 Build",
-    specs: { grade: "316 SS", finish: "Brushed" },
-  },
-  {
-    id: 3,
-    image: "/assets/img/trucks/Truck-3.png",
-    alt: "Custom Truck Build 3",
-    title: "Freightliner Classic",
-    specs: { grade: "304 SS", finish: "Polished" },
-  },
-  {
-    id: 4,
-    image: "/assets/img/trucks/Truck-4.png",
-    alt: "Custom Truck Build 4",
-    title: "Mack Anthem Custom",
-    specs: { grade: "304 SS", finish: "Mirror" },
-  },
-  {
-    id: 5,
-    image: "/assets/img/trucks/Truck-5.png",
-    alt: "Custom Truck Build 5",
-    title: "Volvo VNL Custom",
-    specs: { grade: "316 SS", finish: "Satin" },
-  },
-];
 
 const TruckGalleryPreview = () => {
   const swiperRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [trucks, setTrucks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch featured trucks from backend
+  useEffect(() => {
+    const fetchFeaturedTrucks = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "http://localhost:5000/api/trucks/featured"
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch featured trucks");
+        }
+
+        const data = await response.json();
+        // Take only first 5 trucks for preview
+        setTrucks(data.trucks?.slice(0, 5) || []);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching featured trucks:", err);
+        setError(err.message);
+        // Fallback to empty array if fetch fails
+        setTrucks([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeaturedTrucks();
+  }, []);
 
   const handleSlideChange = (swiper) => {
     setCurrentSlide(swiper.realIndex + 1);
@@ -61,9 +56,91 @@ const TruckGalleryPreview = () => {
     setSelectedImage(null);
   };
 
+  // Loading state
+  if (loading) {
+    return (
+      <div className="truck-gallery-new">
+        {/* Header Section - ALWAYS VISIBLE */}
+        <div className="ak-height-125 ak-height-lg-80"></div>
+        <div className="container">
+          <div className="center-section-heading" data-aos="fade-up">
+            <div className="ak-section-heading ak-style-1">
+              <div className="background-text" data-aos="fade-left">
+                Trucks
+              </div>
+              <div className="text-md-center">
+                <h2 className="ak-section-title">Trucks</h2>
+                <p className="ak-section-subtitle">
+                  Loading our featured truck gallery...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="ak-height-75 ak-height-lg-50"></div>
+        <div className="gallery-loading">
+          <div className="loading-spinner"></div>
+        </div>
+        <div className="ak-height-125 ak-height-lg-80"></div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="truck-gallery-new">
+        {/* Header Section - ALWAYS VISIBLE */}
+        <div className="ak-height-125 ak-height-lg-80"></div>
+        <div className="container">
+          <div className="center-section-heading" data-aos="fade-up">
+            <div className="ak-section-heading ak-style-1">
+              <div className="background-text" data-aos="fade-left">
+                Trucks
+              </div>
+              <div className="text-md-center">
+                <h2 className="ak-section-title">Trucks</h2>
+                <p className="ak-section-subtitle">
+                  Unable to load truck gallery. Please try again later.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="ak-height-125 ak-height-lg-80"></div>
+      </div>
+    );
+  }
+
+  // No trucks available
+  if (trucks.length === 0) {
+    return (
+      <div className="truck-gallery-new">
+        {/* Header Section - ALWAYS VISIBLE */}
+        <div className="ak-height-125 ak-height-lg-80"></div>
+        <div className="container">
+          <div className="center-section-heading" data-aos="fade-up">
+            <div className="ak-section-heading ak-style-1">
+              <div className="background-text" data-aos="fade-left">
+                Trucks
+              </div>
+              <div className="text-md-center">
+                <h2 className="ak-section-title">Trucks</h2>
+                <p className="ak-section-subtitle">
+                  No featured trucks available at the moment.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="ak-height-125 ak-height-lg-80"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="truck-gallery-new">
-      {/* Header Section */}
+      {/* Header Section - ALWAYS VISIBLE */}
       <div className="ak-height-125 ak-height-lg-80"></div>
       <div className="container">
         <div className="center-section-heading" data-aos="fade-up">
@@ -95,13 +172,17 @@ const TruckGalleryPreview = () => {
           centeredSlides={true}
           slidesPerView="auto"
           spaceBetween={0}
-          loop={true}
+          loop={trucks.length >= 3}
           speed={1800}
-          autoplay={{
-            delay: 6000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
+          autoplay={
+            trucks.length > 1
+              ? {
+                  delay: 6000,
+                  disableOnInteraction: false,
+                  pauseOnMouseEnter: true,
+                }
+              : false
+          }
           coverflowEffect={{
             rotate: 12,
             stretch: -45,
@@ -115,13 +196,17 @@ const TruckGalleryPreview = () => {
           onSlideChange={handleSlideChange}
           className="truck-swiper"
         >
-          {truckImages.map((truck, index) => (
-            <SwiperSlide key={truck.id} className="truck-slide">
+          {trucks.map((truck, index) => (
+            <SwiperSlide key={truck._id} className="truck-slide">
               <div className="slide-content">
-                <Link to={`/truck/${truck.id}`} className="image-container">
+                <Link to={`/truck/${truck.slug}`} className="image-container">
                   <img
-                    src={truck.image}
-                    alt={truck.alt}
+                    src={
+                      truck.images?.[0] ||
+                      truck.image ||
+                      "/assets/img/trucks/default-truck.jpg"
+                    }
+                    alt={truck.name || `Custom Truck Build ${index + 1}`}
                     className="truck-image"
                   />
                   <div className="image-overlay">
@@ -129,21 +214,25 @@ const TruckGalleryPreview = () => {
                       <div className="truck-number">
                         #{String(index + 1).padStart(2, "0")}
                       </div>
-                      <h3 className="truck-title">{truck.title}</h3>
+                      <h3 className="truck-title">
+                        {truck.title ||
+                          truck.name ||
+                          `${truck.year} ${truck.make} ${truck.model}`}
+                      </h3>
                       <p className="truck-subtitle">
                         Handcrafted Excellence by 12GA Customs
                       </p>
                       <div className="truck-specs">
                         <div className="spec">
-                          <span className="spec-label">Grade</span>
+                          <span className="spec-label">Make</span>
                           <span className="spec-value">
-                            {truck.specs.grade}
+                            {truck.make || "Custom"}
                           </span>
                         </div>
                         <div className="spec">
-                          <span className="spec-label">Finish</span>
+                          <span className="spec-label">Year</span>
                           <span className="spec-value">
-                            {truck.specs.finish}
+                            {truck.year || "2024"}
                           </span>
                         </div>
                       </div>
@@ -170,40 +259,46 @@ const TruckGalleryPreview = () => {
           ))}
         </Swiper>
 
-        {/* Navigation */}
-        <div className="slider-navigation">
-          <button
-            className="nav-btn nav-prev"
-            onClick={() => swiperRef.current?.slidePrev()}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-            </svg>
-          </button>
+        {/* Navigation - Only show if 3 or more trucks */}
+        {trucks.length >= 3 && (
+          <div className="slider-navigation">
+            <button
+              className="nav-btn nav-prev"
+              onClick={() => swiperRef.current?.slidePrev()}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              </svg>
+            </button>
 
-          <div className="slide-counter">
-            <span className="current">
-              {String(currentSlide).padStart(2, "0")}
-            </span>
-            <span className="divider">—</span>
-            <span className="total">
-              {String(truckImages.length).padStart(2, "0")}
-            </span>
+            <div className="slide-counter">
+              <span className="current">
+                {String(currentSlide).padStart(2, "0")}
+              </span>
+              <span className="divider">—</span>
+              <span className="total">
+                {String(trucks.length).padStart(2, "0")}
+              </span>
+            </div>
+
+            <button
+              className="nav-btn nav-next"
+              onClick={() => swiperRef.current?.slideNext()}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              </svg>
+            </button>
           </div>
-
-          <button
-            className="nav-btn nav-next"
-            onClick={() => swiperRef.current?.slideNext()}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" />
-            </svg>
-          </button>
-        </div>
+        )}
       </div>
 
       {/* View All Button */}
@@ -235,7 +330,14 @@ const TruckGalleryPreview = () => {
                 />
               </svg>
             </button>
-            <img src={selectedImage.image} alt={selectedImage.alt} />
+            <img
+              src={
+                selectedImage.images?.[0] ||
+                selectedImage.image ||
+                "/assets/img/trucks/default-truck.jpg"
+              }
+              alt={selectedImage.name || "Custom Truck"}
+            />
           </div>
         </div>
       )}

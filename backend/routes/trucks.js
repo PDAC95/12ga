@@ -104,17 +104,25 @@ router.get(
 // GET /api/trucks/featured - Get featured trucks
 router.get("/featured", async (req, res) => {
   try {
-    const trucks = await Truck.getFeatured();
+    const trucks = await Truck.find({
+      active: true,
+      featured: true,
+    })
+      .sort({ createdAt: -1 })
+      .limit(10)
+      .lean();
 
     res.json({
       success: true,
-      data: trucks,
+      trucks: trucks, // Changed from 'data' to 'trucks' to match frontend expectation
+      count: trucks.length,
     });
   } catch (error) {
     console.error("Error fetching featured trucks:", error);
     res.status(500).json({
       success: false,
       message: "Error fetching featured trucks",
+      trucks: [], // Empty array fallback for frontend
       error:
         process.env.NODE_ENV === "development"
           ? error.message
