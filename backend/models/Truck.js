@@ -31,6 +31,18 @@ const truckSchema = new mongoose.Schema(
       trim: true,
       maxlength: [200, "Title cannot be more than 200 characters"],
     },
+    slug: {
+      type: String,
+      required: [true, "Slug is required"],
+      unique: true,
+      trim: true,
+      lowercase: true,
+      maxlength: [100, "Slug cannot be more than 100 characters"],
+      match: [
+        /^[a-z0-9-]+$/,
+        "Slug can only contain lowercase letters, numbers, and hyphens",
+      ],
+    },
     description: {
       type: String,
       required: [true, "Description is required"],

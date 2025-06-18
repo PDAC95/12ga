@@ -37,6 +37,23 @@ export const trucksService = {
     }
   },
 
+  // Get truck by slug
+  getTruckBySlug: async (slug) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/trucks/slug/${slug}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch truck");
+      }
+
+      return data.data; // Return the truck object from API response
+    } catch (error) {
+      console.error("Error fetching truck by slug:", error);
+      throw error;
+    }
+  },
+
   // Get filtered trucks
   getFilteredTrucks: async (filters = {}) => {
     try {

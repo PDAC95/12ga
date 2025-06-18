@@ -134,7 +134,7 @@ router.get("/slider", async (req, res) => {
       .sort({ "sliderConfig.sliderOrder": 1, createdAt: -1 }) // Order by sliderOrder, then newest
       .limit(6) // Maximum 6 slides for performance
       .select(
-        "_id make year model title description category status image sliderConfig"
+        "_id make year model title description category status image slug sliderConfig"
       )
       .lean();
 
@@ -154,6 +154,7 @@ router.get("/slider", async (req, res) => {
       year: truck.year,
       model: truck.model,
       status: truck.status,
+      slug: truck.slug,
     }));
 
     res.json({
@@ -174,6 +175,43 @@ router.get("/slider", async (req, res) => {
     });
   }
 });
+
+// GET /api/trucks/slug/:slug - Get single truck by slug
+router.get(
+  "/slug/:slug",
+  [param("slug").notEmpty().trim().escape().withMessage("Invalid truck slug")],
+  handleValidationErrors,
+  async (req, res) => {
+    try {
+      const truck = await Truck.findOne({
+        slug: req.params.slug,
+        active: true,
+      }).lean();
+
+      if (!truck) {
+        return res.status(404).json({
+          success: false,
+          message: "Truck not found",
+        });
+      }
+
+      res.json({
+        success: true,
+        data: truck,
+      });
+    } catch (error) {
+      console.error("Error fetching truck by slug:", error);
+      res.status(500).json({
+        success: false,
+        message: "Error fetching truck",
+        error:
+          process.env.NODE_ENV === "development"
+            ? error.message
+            : "Internal server error",
+      });
+    }
+  }
+);
 
 // GET /api/trucks/:id - Get single truck by ID
 router.get(

@@ -173,7 +173,7 @@ const TruckSlider = () => {
                       </p>
                       <div className="hero-actions" data-swiper-parallax="0">
                         <Link
-                          to={`/truck/${truck._id}`}
+                          to={`/truck/${truck.slug}`}
                           className="hero-btn primary"
                         >
                           <span>View Project</span>

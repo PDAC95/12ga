@@ -124,3 +124,40 @@ export const useTruck = (id) => {
     refetch,
   };
 };
+
+// Custom hook for getting a single truck by slug
+export const useTruckBySlug = (slug) => {
+  const [truck, setTruck] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchTruck = async () => {
+      if (!slug) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        setError(null);
+
+        const truckData = await trucksService.getTruckBySlug(slug);
+        setTruck(truckData);
+      } catch (err) {
+        setError(err.message);
+        console.error("Error in useTruckBySlug:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTruck();
+  }, [slug]);
+
+  return {
+    truck,
+    loading,
+    error,
+  };
+};

@@ -4,14 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectFade, Autoplay, Thumbs, Zoom } from "swiper/modules";
 
 import CommonPageHero from "../components/CommonPageHero/CommonPageHero";
-import { useTruck, useTrucks } from "../helper/useTrucks";
+import { useTruckBySlug, useTrucks } from "../helper/useTrucks";
 
 const SingleTruck = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
 
   // Use the custom hook instead of hardcoded data
-  const { truck, loading, error } = useTruck(id);
+  const { truck, loading, error } = useTruckBySlug(slug);
   const { trucks: allTrucks } = useTrucks(); // For navigation between trucks
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -23,24 +23,6 @@ const SingleTruck = () => {
     const timer = setTimeout(() => setIsLoaded(true), 300);
     return () => clearTimeout(timer);
   }, []);
-
-  // Navigation functions
-  const navigateToTruck = (direction) => {
-    if (!allTrucks.length) return;
-
-    const currentId = parseInt(id);
-    const targetId = direction === "next" ? currentId + 1 : currentId - 1;
-    const targetTruck = allTrucks.find((truck) => truck.id === targetId);
-
-    if (targetTruck) {
-      navigate(`/truck/${targetId}`);
-    }
-  };
-
-  // Check if navigation is available
-  const currentId = parseInt(id);
-  const hasPrevTruck = allTrucks.some((truck) => truck.id === currentId - 1);
-  const hasNextTruck = allTrucks.some((truck) => truck.id === currentId + 1);
 
   // Loading state
   if (loading) {
@@ -371,45 +353,6 @@ const SingleTruck = () => {
             </svg>
             <span>Back to Gallery</span>
           </Link>
-
-          <div className="truck-nav-arrows">
-            <button
-              className={`nav-button prev-truck ${
-                !hasPrevTruck ? "disabled" : ""
-              }`}
-              onClick={() => navigateToTruck("prev")}
-              disabled={!hasPrevTruck}
-              title={hasPrevTruck ? "Previous Truck" : "No previous truck"}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M15 18L9 12L15 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <button
-              className={`nav-button next-truck ${
-                !hasNextTruck ? "disabled" : ""
-              }`}
-              onClick={() => navigateToTruck("next")}
-              disabled={!hasNextTruck}
-              title={hasNextTruck ? "Next Truck" : "No next truck"}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M9 18L15 12L9 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-          </div>
         </div>
       </div>
     </div>
