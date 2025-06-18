@@ -16,7 +16,7 @@ const TruckSlider = () => {
     const fetchSliderTrucks = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/api/trucks/slider");
+        const response = await fetch("http://localhost:5000/api/trucks/slider");
 
         if (!response.ok) {
           throw new Error("Failed to fetch slider trucks");
