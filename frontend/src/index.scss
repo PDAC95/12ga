@@ -17,6 +17,11 @@
 
 @import "/public/assets/sass/style.scss";
 
+// Lightgallery styles
+@import "lightgallery/css/lightgallery.css";
+@import "lightgallery/css/lg-zoom.css";
+@import "lightgallery/css/lg-thumbnail.css";
+
 // Pagination Styles for Categories
 .pagination-style {
   margin: 20px 0;
@@ -30,8 +35,8 @@
 
 .pagination-btn {
   background: transparent;
-  border: 2px solid #FF3D24;
-  color: #FF3D24;
+  border: 2px solid #ff3d24;
+  color: #ff3d24;
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
@@ -41,8 +46,7 @@
 
   &:hover,
   &.active {
-    background: #FF3D24;
+    background: #ff3d24;
     color: white;
   }
 }
-

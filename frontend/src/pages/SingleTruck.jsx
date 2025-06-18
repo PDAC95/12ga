@@ -1,28 +1,66 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade, Autoplay, Thumbs, Zoom } from "swiper/modules";
+import { Navigation, EffectFade, Autoplay, Thumbs } from "swiper/modules";
 
 import CommonPageHero from "../components/CommonPageHero/CommonPageHero";
-import { useTruckBySlug, useTrucks } from "../helper/useTrucks";
+import { useTruckBySlug } from "../helper/useTrucks";
 
 const SingleTruck = () => {
   const { slug } = useParams();
-  const navigate = useNavigate();
 
   // Use the custom hook instead of hardcoded data
   const { truck, loading, error } = useTruckBySlug(slug);
-  const { trucks: allTrucks } = useTrucks(); // For navigation between trucks
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   const mainSwiperRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 300);
     return () => clearTimeout(timer);
   }, []);
+
+  // Handle lightbox
+  const openLightbox = (index) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    document.body.style.overflow = "auto";
+  };
+
+  const nextImage = () => {
+    setLightboxIndex((prev) =>
+      prev === truck.gallery.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevImage = () => {
+    setLightboxIndex((prev) =>
+      prev === 0 ? truck.gallery.length - 1 : prev - 1
+    );
+  };
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!lightboxOpen) return;
+
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxOpen]);
 
   // Loading state
   if (loading) {
@@ -107,7 +145,7 @@ const SingleTruck = () => {
         <div className="truck-hero-gallery" data-aos="fade-up">
           <div className="main-gallery">
             <Swiper
-              modules={[Navigation, EffectFade, Autoplay, Thumbs, Zoom]}
+              modules={[Navigation, EffectFade, Autoplay, Thumbs]}
               ref={mainSwiperRef}
               spaceBetween={30}
               effect="fade"
@@ -120,23 +158,61 @@ const SingleTruck = () => {
                 swiper:
                   thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
               }}
-              zoom={true}
               onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-              className="main-swiper"
+              className="main-truck-swiper"
             >
               {truck.gallery.map((image, index) => (
                 <SwiperSlide key={index}>
-                  <div className="truck-image-container">
-                    <div className="swiper-zoom-container">
-                      <img
-                        src={image}
-                        alt={`${truck.title} - View ${index + 1}`}
-                        className="truck-main-image"
-                      />
-                    </div>
+                  <div
+                    className="truck-image-container"
+                    onClick={() => openLightbox(index)}
+                  >
+                    <img
+                      src={image}
+                      alt={`${truck.title} - View ${index + 1}`}
+                      className="truck-main-image"
+                      style={{ cursor: "pointer" }}
+                    />
                     <div className="image-overlay">
                       <div className="image-counter">
                         {index + 1} / {truck.gallery.length}
+                      </div>
+                      <div className="zoom-icon">
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <circle
+                            cx="11"
+                            cy="11"
+                            r="8"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="m21 21-4.35-4.35"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                          <line
+                            x1="8"
+                            y1="11"
+                            x2="14"
+                            y2="11"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                          <line
+                            x1="11"
+                            y1="8"
+                            x2="11"
+                            y2="14"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                        </svg>
                       </div>
                     </div>
                   </div>
@@ -144,33 +220,35 @@ const SingleTruck = () => {
               ))}
             </Swiper>
 
-            {/* Navigation Arrows */}
-            <button className="truck-swiper-prev swiper-nav-btn">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M15 18L9 12L15 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <button className="truck-swiper-next swiper-nav-btn">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M9 18L15 12L9 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+            {/* Navigation Controls */}
+            <div className="swiper-navigation">
+              <button className="truck-swiper-prev swiper-nav-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M15 18L9 12L15 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              <button className="truck-swiper-next swiper-nav-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 18L15 12L9 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          {/* Thumbnails */}
-          <div className="thumbs-gallery">
+          {/* Thumbnails Gallery */}
+          <div className="gallery-thumbnails">
             <Swiper
               modules={[Navigation, Thumbs]}
               onSwiper={setThumbsSwiper}
@@ -178,7 +256,7 @@ const SingleTruck = () => {
               slidesPerView={5}
               freeMode={true}
               watchSlidesProgress={true}
-              className="thumbs-swiper"
+              className="thumbnails-swiper"
               breakpoints={{
                 320: { slidesPerView: 3 },
                 768: { slidesPerView: 4 },
@@ -188,9 +266,10 @@ const SingleTruck = () => {
               {truck.gallery.map((image, index) => (
                 <SwiperSlide key={index}>
                   <div
-                    className={`thumb-container ${
+                    className={`thumbnail-item ${
                       index === activeIndex ? "active" : ""
                     }`}
+                    onClick={() => openLightbox(index)}
                   >
                     <img src={image} alt={`Thumbnail ${index + 1}`} />
                   </div>
@@ -355,6 +434,55 @@ const SingleTruck = () => {
           </Link>
         </div>
       </div>
+
+      {/* Custom Lightbox Modal */}
+      {lightboxOpen && (
+        <div className="lightbox-overlay" onClick={closeLightbox}>
+          <div
+            className="lightbox-container"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className="lightbox-close" onClick={closeLightbox}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" />
+                <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" />
+              </svg>
+            </button>
+
+            <button className="lightbox-prev" onClick={prevImage}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              </svg>
+            </button>
+
+            <button className="lightbox-next" onClick={nextImage}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              </svg>
+            </button>
+
+            <div className="lightbox-image-wrapper">
+              <img
+                src={truck.gallery[lightboxIndex]}
+                alt={`${truck.title} - View ${lightboxIndex + 1}`}
+                className="lightbox-image"
+              />
+            </div>
+
+            <div className="lightbox-counter">
+              {lightboxIndex + 1} / {truck.gallery.length}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
