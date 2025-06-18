@@ -13,8 +13,10 @@ export const useTrucks = (filters = {}) => {
         setLoading(true);
         setError(null);
 
-        // Check if filters are provided
-        const hasFilters = Object.keys(filters).some((key) => filters[key]);
+        // Check if filters are provided and have values
+        const hasFilters = Object.keys(filters).some(
+          (key) => filters[key] && filters[key].trim() !== ""
+        );
 
         let trucksData;
         if (hasFilters) {
@@ -25,8 +27,8 @@ export const useTrucks = (filters = {}) => {
 
         setTrucks(trucksData);
       } catch (err) {
-        setError(err.message);
         console.error("Error in useTrucks:", err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }

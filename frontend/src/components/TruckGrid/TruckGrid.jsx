@@ -14,7 +14,10 @@ const TruckGrid = ({ filters }) => {
 
   // Sort trucks when data or sortBy changes
   useEffect(() => {
-    if (!trucks.length) return;
+    if (!trucks.length) {
+      setSortedTrucks([]);
+      return;
+    }
 
     let sorted = [...trucks];
 
@@ -148,10 +151,10 @@ const TruckGrid = ({ filters }) => {
   return (
     <div className="truck-grid">
       {/* Grid Header with Sort Options */}
-      <div className="truck-grid-header" data-aos="fade-up">
+      <div className="truck-grid-header">
         <div className="results-info">
           <div className="results-count">
-            Showing {sortedTrucks.length} truck
+            Showing {paginatedTrucks.length} of {sortedTrucks.length} truck
             {sortedTrucks.length !== 1 ? "s" : ""}
           </div>
           <p className="results-description">
@@ -280,25 +283,19 @@ const TruckGrid = ({ filters }) => {
       </div>
 
       {/* Trucks Container with Dynamic View */}
-      <div
-        className={`trucks-container ${viewMode}-view`}
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
+      <div className={`trucks-container ${viewMode}-view`}>
         {paginatedTrucks.map((truck, index) => (
           <TruckCard
             key={truck._id || truck.id}
             truck={truck}
             className={`truck-card-${viewMode}`}
-            data-aos="fade-up"
-            data-aos-delay={index * 100}
           />
         ))}
       </div>
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="pagination-section" data-aos="fade-up">
+        <div className="pagination-section">
           <div className="pagination-info">
             Showing {startIndex + 1} - {Math.min(endIndex, sortedTrucks.length)}{" "}
             of {sortedTrucks.length} trucks
