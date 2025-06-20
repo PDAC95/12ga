@@ -27,7 +27,7 @@ router.get(
     query("status").optional().trim().escape(),
     query("featured").optional().isBoolean(),
     query("search").optional().trim().escape(),
-    query("limit").optional().isInt({ min: 1, max: 100 }),
+    query("limit").optional().isInt({ min: 1, max: 200 }),
     query("page").optional().isInt({ min: 1 }),
   ],
   handleValidationErrors,
@@ -109,7 +109,7 @@ router.get("/featured", async (req, res) => {
       featured: true,
     })
       .sort({ createdAt: -1 })
-      .limit(150)
+      .limit(200)
       .lean();
 
     res.json({

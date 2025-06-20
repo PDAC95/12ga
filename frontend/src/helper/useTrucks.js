@@ -1,21 +1,26 @@
 import { useState, useEffect } from "react";
 import { trucksService } from "./trucksService";
 
-// Custom hook for managing trucks data
+/**
+ * Custom hook for managing trucks data with pagination reset functionality
+ * @param {Object} filters - Filter parameters for trucks query
+ * @returns {Object} Trucks data, loading state, error state, refetch function, and resetPage flag
+ */
 export const useTrucks = (filters = {}) => {
   const [trucks, setTrucks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [resetPage, setResetPage] = useState(false);
 
   useEffect(() => {
     const fetchTrucks = async () => {
       try {
         setLoading(true);
         setError(null);
+        setResetPage(true);
 
-        // Check if filters are provided and have values
         const hasFilters = Object.keys(filters).some(
-          (key) => filters[key] && filters[key].trim() !== ""
+          (key) => filters[key] && filters[key].toString().trim() !== ""
         );
 
         let trucksData;
@@ -31,15 +36,20 @@ export const useTrucks = (filters = {}) => {
         setError(err.message);
       } finally {
         setLoading(false);
+        setTimeout(() => setResetPage(false), 100);
       }
     };
 
     fetchTrucks();
-  }, [JSON.stringify(filters)]); // Dependency on filters
+  }, [JSON.stringify(filters)]);
 
-  // Function to refetch data manually
+  /**
+   * Function to manually refetch trucks data
+   */
   const refetch = async () => {
-    const hasFilters = Object.keys(filters).some((key) => filters[key]);
+    const hasFilters = Object.keys(filters).some(
+      (key) => filters[key] && filters[key].toString().trim() !== ""
+    );
 
     try {
       setLoading(true);
@@ -66,10 +76,15 @@ export const useTrucks = (filters = {}) => {
     loading,
     error,
     refetch,
+    resetPage,
   };
 };
 
-// Custom hook for getting a single truck by ID
+/**
+ * Custom hook for getting a single truck by ID
+ * @param {string} id - Truck ID
+ * @returns {Object} Truck data, loading state, error state, and refetch function
+ */
 export const useTruck = (id) => {
   const [truck, setTruck] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -99,7 +114,9 @@ export const useTruck = (id) => {
     fetchTruck();
   }, [id]);
 
-  // Function to refetch truck data manually
+  /**
+   * Function to manually refetch truck data
+   */
   const refetch = async () => {
     if (!id) return;
 
@@ -125,7 +142,11 @@ export const useTruck = (id) => {
   };
 };
 
-// Custom hook for getting a single truck by slug
+/**
+ * Custom hook for getting a single truck by slug
+ * @param {string} slug - Truck slug
+ * @returns {Object} Truck data, loading state, and error state
+ */
 export const useTruckBySlug = (slug) => {
   const [truck, setTruck] = useState(null);
   const [loading, setLoading] = useState(true);

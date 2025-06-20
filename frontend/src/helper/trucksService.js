@@ -58,7 +58,6 @@ export const trucksService = {
   // Get filtered trucks
   getFilteredTrucks: async (filters = {}) => {
     try {
-      // Build query parameters
       const queryParams = new URLSearchParams();
 
       if (filters.make) queryParams.append("make", filters.make);
@@ -66,6 +65,8 @@ export const trucksService = {
       if (filters.name) queryParams.append("search", filters.name);
       if (filters.category) queryParams.append("category", filters.category);
       if (filters.status) queryParams.append("status", filters.status);
+
+      queryParams.append("limit", "200");
 
       const url = `${API_BASE_URL}/trucks${
         queryParams.toString() ? `?${queryParams.toString()}` : ""
@@ -77,7 +78,7 @@ export const trucksService = {
         throw new Error(data.message || "Failed to fetch filtered trucks");
       }
 
-      return data.data; // Return the trucks array from API response
+      return data.data;
     } catch (error) {
       console.error("Error fetching filtered trucks:", error);
       throw error;

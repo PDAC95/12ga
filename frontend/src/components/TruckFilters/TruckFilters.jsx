@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-// Mock data for commercial truck filters
 const truckData = {
   makes: [
     { id: 1, name: "Peterbilt" },
@@ -10,14 +9,14 @@ const truckData = {
     { id: 5, name: "Mack" },
     { id: 6, name: "International" },
   ],
-  years: Array.from({ length: 25 }, (_, i) => 2024 - i), // 2024 to 2000
+  years: Array.from({ length: 25 }, (_, i) => 2024 - i),
 };
 
 const TruckFilters = ({ onFiltersChange }) => {
   const [filters, setFilters] = useState({
     make: "",
     year: "",
-    name: "", // AÑADIDO: campo para búsqueda por nombre
+    name: "",
   });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState({
@@ -25,17 +24,14 @@ const TruckFilters = ({ onFiltersChange }) => {
     year: false,
   });
 
-  // Notify parent component when filters change
   useEffect(() => {
     if (onFiltersChange) {
       onFiltersChange(filters);
     }
   }, [filters, onFiltersChange]);
 
-  // Handle name search with debounce
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      // Only trigger onChange if there's actual name content
       if (filters.name.trim() !== "") {
         onFiltersChange?.(filters);
       }
@@ -44,7 +40,6 @@ const TruckFilters = ({ onFiltersChange }) => {
     return () => clearTimeout(timeoutId);
   }, [filters.name]);
 
-  // Handle click outside to close dropdowns
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".custom-dropdown")) {
@@ -67,7 +62,6 @@ const TruckFilters = ({ onFiltersChange }) => {
       [filterType]: value,
     }));
 
-    // Close dropdown after selection (only for dropdowns)
     if (filterType !== "name") {
       setIsDropdownOpen((prev) => ({
         ...prev,
@@ -78,7 +72,6 @@ const TruckFilters = ({ onFiltersChange }) => {
 
   const toggleDropdown = (filterType) => {
     setIsDropdownOpen((prev) => {
-      // Si el dropdown que queremos abrir ya está abierto, lo cerramos
       if (prev[filterType]) {
         return {
           make: false,
@@ -86,7 +79,6 @@ const TruckFilters = ({ onFiltersChange }) => {
         };
       }
 
-      // Si no, cerramos todos y abrimos solo el seleccionado
       return {
         make: filterType === "make",
         year: filterType === "year",
@@ -98,7 +90,7 @@ const TruckFilters = ({ onFiltersChange }) => {
     setFilters({
       make: "",
       year: "",
-      name: "", // AÑADIDO: limpiar también el campo nombre
+      name: "",
     });
     setIsDropdownOpen({
       make: false,
@@ -106,9 +98,8 @@ const TruckFilters = ({ onFiltersChange }) => {
     });
   };
 
-  const hasActiveFilters = filters.make || filters.year || filters.name; // MODIFICADO: incluir name
+  const hasActiveFilters = filters.make || filters.year || filters.name;
 
-  // Base styles for dropdowns
   const baseDropdownMenuStyle = {
     display: "block",
     position: "absolute",
@@ -127,13 +118,11 @@ const TruckFilters = ({ onFiltersChange }) => {
     animation: "dropdownFadeIn 0.2s ease-out",
   };
 
-  // Make dropdown style
   const makeDropdownStyle = {
     ...baseDropdownMenuStyle,
     zIndex: "99999",
   };
 
-  // Year dropdown style
   const yearDropdownStyle = {
     ...baseDropdownMenuStyle,
     maxHeight: "250px",
@@ -194,7 +183,6 @@ const TruckFilters = ({ onFiltersChange }) => {
     <div className="truck-filters">
       <div className="ak-height-75 ak-height-lg-50"></div>
 
-      {/* Section Heading */}
       <div className="center-section-heading" data-aos="fade-up">
         <div className="ak-section-heading ak-style-1">
           <div
@@ -218,7 +206,6 @@ const TruckFilters = ({ onFiltersChange }) => {
 
       <div className="ak-height-75 ak-height-lg-50"></div>
 
-      {/* Active Filters Display */}
       {hasActiveFilters && (
         <div
           className="filters-container"
@@ -299,17 +286,14 @@ const TruckFilters = ({ onFiltersChange }) => {
         </div>
       )}
 
-      {/* Spacer cuando hay filtros activos */}
       {hasActiveFilters && <div className="ak-height-50 ak-height-lg-30"></div>}
 
-      {/* Filters Container */}
       <div
         className="filters-container"
         data-aos="fade-up"
         data-aos-delay="100"
       >
         <div className="filters-wrapper">
-          {/* NUEVO: Name Search Field */}
           <div className="filter-group">
             <label className="filter-label">Truck Name</label>
             <div className="search-input-container">
@@ -344,7 +328,6 @@ const TruckFilters = ({ onFiltersChange }) => {
             </div>
           </div>
 
-          {/* Make Filter */}
           <div className="filter-group">
             <label className="filter-label">Make</label>
             <div
@@ -415,7 +398,6 @@ const TruckFilters = ({ onFiltersChange }) => {
             </div>
           </div>
 
-          {/* Year Filter */}
           <div className="filter-group">
             <label className="filter-label">Year</label>
             <div
@@ -496,14 +478,13 @@ const TruckFilters = ({ onFiltersChange }) => {
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="filter-actions">
             <button
               className="btn-search"
               type="button"
               onClick={() => {
                 console.log("🔍 Search clicked with filters:", filters);
-                // Aquí puedes agregar la lógica de búsqueda
+                onFiltersChange(filters);
               }}
             >
               <svg

@@ -3,16 +3,20 @@ import TruckCard from "./TruckCard";
 import { useTrucks } from "../../helper/useTrucks";
 
 const TruckGrid = ({ filters }) => {
-  // Use the custom hook instead of hardcoded data
-  const { trucks, loading, error } = useTrucks(filters);
+  const { trucks, loading, error, resetPage } = useTrucks(filters);
 
   const [sortBy, setSortBy] = useState("featured");
   const [sortedTrucks, setSortedTrucks] = useState([]);
-  const [viewMode, setViewMode] = useState("grid"); // grid or list
+  const [viewMode, setViewMode] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const trucksPerPage = 9;
 
-  // Sort trucks when data or sortBy changes
+  useEffect(() => {
+    if (resetPage) {
+      setCurrentPage(1);
+    }
+  }, [resetPage]);
+
   useEffect(() => {
     if (!trucks.length) {
       setSortedTrucks([]);
@@ -23,7 +27,6 @@ const TruckGrid = ({ filters }) => {
 
     switch (sortBy) {
       case "featured":
-        // Keep original order for featured
         break;
       case "newest":
         sorted.sort((a, b) => parseInt(b.year) - parseInt(a.year));
@@ -58,7 +61,6 @@ const TruckGrid = ({ filters }) => {
     setViewMode(mode);
   };
 
-  // Calculate pagination
   const totalPages = Math.ceil(sortedTrucks.length / trucksPerPage);
   const startIndex = (currentPage - 1) * trucksPerPage;
   const endIndex = startIndex + trucksPerPage;
@@ -66,10 +68,28 @@ const TruckGrid = ({ filters }) => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const gridSection = document.querySelector(".truck-grid-section");
+    if (gridSection) {
+      gridSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   };
 
-  // Loading state
+  const getPaginationNumbers = () => {
+    const maxVisible = 3;
+    let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+    let end = Math.min(totalPages, start + maxVisible - 1);
+
+    if (end - start + 1 < maxVisible) {
+      start = Math.max(1, end - maxVisible + 1);
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  };
+
   if (loading) {
     return (
       <div className="truck-grid-loading">
@@ -97,7 +117,6 @@ const TruckGrid = ({ filters }) => {
     );
   }
 
-  // Error state
   if (error) {
     return (
       <div className="truck-grid-error">
@@ -115,7 +134,6 @@ const TruckGrid = ({ filters }) => {
     );
   }
 
-  // No trucks found
   if (!trucks.length) {
     return (
       <div className="truck-grid-empty">
@@ -150,7 +168,6 @@ const TruckGrid = ({ filters }) => {
 
   return (
     <div className="truck-grid">
-      {/* Grid Header with Sort Options */}
       <div className="truck-grid-header">
         <div className="results-info">
           <div className="results-count">
@@ -163,7 +180,6 @@ const TruckGrid = ({ filters }) => {
         </div>
 
         <div className="grid-controls">
-          {/* View Mode Toggle */}
           <div className="view-toggle">
             <button
               className={`view-btn ${viewMode === "grid" ? "active" : ""}`}
@@ -282,7 +298,6 @@ const TruckGrid = ({ filters }) => {
         </div>
       </div>
 
-      {/* Trucks Container with Dynamic View */}
       <div className={`trucks-container ${viewMode}-view`}>
         {paginatedTrucks.map((truck, index) => (
           <TruckCard
@@ -293,7 +308,6 @@ const TruckGrid = ({ filters }) => {
         ))}
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="pagination-section">
           <div className="pagination-info">
@@ -317,19 +331,17 @@ const TruckGrid = ({ filters }) => {
             </button>
 
             <div className="pagination-numbers">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (page) => (
-                  <button
-                    key={page}
-                    className={`pagination-number ${
-                      page === currentPage ? "active" : ""
-                    }`}
-                    onClick={() => handlePageChange(page)}
-                  >
-                    {page}
-                  </button>
-                )
-              )}
+              {getPaginationNumbers().map((page) => (
+                <button
+                  key={page}
+                  className={`pagination-number ${
+                    page === currentPage ? "active" : ""
+                  }`}
+                  onClick={() => handlePageChange(page)}
+                >
+                  {page}
+                </button>
+              ))}
             </div>
 
             <button
