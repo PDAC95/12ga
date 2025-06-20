@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 // Import routes
 import trucksRoutes from "./routes/trucks.js";
 import videosRoutes from "./routes/videos.js";
+import unifiedVideosRoutes from "./routes/unified-videos.js";
 
 // Load environment variables
 dotenv.config();
@@ -80,6 +81,7 @@ app.get("/api", (req, res) => {
       health: "/health",
       trucks: "/api/trucks",
       videos: "/api/videos",
+      unifiedVideos: "/api/unified-videos",
       products: "/api/products (coming soon)",
     },
   });
@@ -88,19 +90,20 @@ app.get("/api", (req, res) => {
 // Use routes
 app.use("/api/trucks", trucksRoutes);
 app.use("/api/videos", videosRoutes);
-
-// TODO: Add more routes when ready
-// import videosRoutes from './routes/videos.js';
-// import productsRoutes from './routes/products.js';
-// app.use('/api/videos', videosRoutes);
-// app.use('/api/products', productsRoutes);
+app.use("/api/unified-videos", unifiedVideosRoutes);
 
 // 404 handler
 app.use("*", (req, res) => {
   res.status(404).json({
     error: "Route not found",
     message: `Cannot ${req.method} ${req.originalUrl}`,
-    availableEndpoints: ["/health", "/api", "/api/trucks"],
+    availableEndpoints: [
+      "/health",
+      "/api",
+      "/api/trucks",
+      "/api/videos",
+      "/api/unified-videos",
+    ],
   });
 });
 
@@ -127,6 +130,10 @@ app.listen(PORT, () => {
   console.log(`🔗 Health check: http://localhost:${PORT}/health`);
   console.log(`🔗 API info: http://localhost:${PORT}/api`);
   console.log(`🔗 Trucks API: http://localhost:${PORT}/api/trucks`);
+  console.log(`🔗 Videos API: http://localhost:${PORT}/api/videos`);
+  console.log(
+    `🔗 Unified Videos API: http://localhost:${PORT}/api/unified-videos`
+  );
   console.log(`📅 Started at: ${new Date().toLocaleString()}`);
   console.log("🚀 ====================================");
 });

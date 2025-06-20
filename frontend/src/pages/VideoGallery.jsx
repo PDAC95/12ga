@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CommonPageHero from "../components/CommonPageHero/CommonPageHero";
-import { videosService } from "../helper/videoService.js";
 
 const VideoGallery = () => {
   const [videos, setVideos] = useState([]);
@@ -23,18 +22,25 @@ const VideoGallery = () => {
       setLoading(true);
       setError(null);
 
-      // Fetch videos and categories in parallel
-      const [videosData, categoriesData] = await Promise.all([
-        videosService.getAllVideos(),
-        videosService.getCategories(),
+      // Use the new unified endpoint
+      const [videosResponse, categoriesResponse] = await Promise.all([
+        fetch("http://localhost:5000/api/unified-videos"),
+        fetch("http://localhost:5000/api/unified-videos/categories"),
       ]);
 
-      setVideos(videosData);
-      setCategories(["All", ...categoriesData]);
+      if (!videosResponse.ok || !categoriesResponse.ok) {
+        throw new Error("Failed to fetch videos or categories");
+      }
+
+      const videosData = await videosResponse.json();
+      const categoriesData = await categoriesResponse.json();
+
+      setVideos(videosData.data || []);
+      setCategories(["All", ...(categoriesData.data || [])]);
 
       // Set first video as selected if available
-      if (videosData.length > 0) {
-        setSelectedVideo(videosData[0]);
+      if (videosData.data && videosData.data.length > 0) {
+        setSelectedVideo(videosData.data[0]);
       }
     } catch (err) {
       console.error("Error fetching videos:", err);
@@ -74,10 +80,6 @@ const VideoGallery = () => {
         videoRef.current.webkitRequestFullscreen();
       }
     }
-  };
-
-  const formatViews = (views) => {
-    return views.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   const formatDate = (dateString) => {
@@ -200,8 +202,6 @@ const VideoGallery = () => {
                 <div className="video-info-simple">
                   <h4 className="video-title">{selectedVideo.title}</h4>
                   <div className="video-meta">
-                    <span>{formatViews(selectedVideo.views)} views</span>
-                    <span>•</span>
                     <span>{formatDate(selectedVideo.publishDate)}</span>
                   </div>
 
@@ -260,9 +260,6 @@ const VideoGallery = () => {
                           <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
                         </svg>
                       </div>
-                      {video.duration && (
-                        <span className="video-duration">{video.duration}</span>
-                      )}
                     </div>
                   </div>
 
@@ -270,9 +267,6 @@ const VideoGallery = () => {
                     <h4 className="video-title">{video.title}</h4>
                     <div className="video-meta">
                       <span className="video-category">{video.category}</span>
-                      <span className="video-views">
-                        {formatViews(video.views)} views
-                      </span>
                     </div>
                     <p className="video-description">{video.description}</p>
 
