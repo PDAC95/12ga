@@ -17,12 +17,28 @@ const SingleTruck = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  // 🆕 NEW: Add video tab support
+  const [activeTab, setActiveTab] = useState("gallery");
   const mainSwiperRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 300);
     return () => clearTimeout(timer);
   }, []);
+
+  // 🆕 NEW: Set default tab based on available content
+  useEffect(() => {
+    if (truck) {
+      const hasVideo = truck.hasVideo && truck.videoUrl;
+      const hasGallery = truck.gallery && truck.gallery.length > 0;
+
+      if (hasVideo && !hasGallery) {
+        setActiveTab("video");
+      } else {
+        setActiveTab("gallery");
+      }
+    }
+  }, [truck]);
 
   // Handle lightbox
   const openLightbox = (index) => {
@@ -134,6 +150,10 @@ const SingleTruck = () => {
     );
   }
 
+  // 🆕 NEW: Check available content
+  const hasVideo = truck.hasVideo && truck.videoUrl;
+  const hasGallery = truck.gallery && truck.gallery.length > 0;
+
   return (
     <div className={`single-truck-container ${isLoaded ? "loaded" : ""}`}>
       <CommonPageHero title={truck.title} />
@@ -141,143 +161,208 @@ const SingleTruck = () => {
       <div className="container">
         <div className="ak-height-75 ak-height-lg-50"></div>
 
-        {/* Hero Gallery Section */}
-        <div className="truck-hero-gallery" data-aos="fade-up">
-          <div className="main-gallery">
-            <Swiper
-              modules={[Navigation, EffectFade, Autoplay, Thumbs]}
-              ref={mainSwiperRef}
-              spaceBetween={30}
-              effect="fade"
-              fadeEffect={{ crossFade: true }}
-              navigation={{
-                nextEl: ".truck-swiper-next",
-                prevEl: ".truck-swiper-prev",
-              }}
-              thumbs={{
-                swiper:
-                  thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
-              }}
-              onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-              className="main-truck-swiper"
+        {/* 🆕 NEW: Media Tabs - only show if both video and gallery exist */}
+        {hasVideo && hasGallery && (
+          <div className="media-tabs" data-aos="fade-up">
+            <button
+              className={`tab-btn ${activeTab === "gallery" ? "active" : ""}`}
+              onClick={() => setActiveTab("gallery")}
             >
-              {truck.gallery.map((image, index) => (
-                <SwiperSlide key={index}>
-                  <div
-                    className="truck-image-container"
-                    onClick={() => openLightbox(index)}
-                  >
-                    <img
-                      src={image}
-                      alt={`${truck.title} - View ${index + 1}`}
-                      className="truck-main-image"
-                      style={{ cursor: "pointer" }}
-                    />
-                    <div className="image-overlay">
-                      <div className="image-counter">
-                        {index + 1} / {truck.gallery.length}
-                      </div>
-                      <div className="zoom-icon">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
-                          <circle
-                            cx="11"
-                            cy="11"
-                            r="8"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          />
-                          <path
-                            d="m21 21-4.35-4.35"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          />
-                          <line
-                            x1="8"
-                            y1="11"
-                            x2="14"
-                            y2="11"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          />
-                          <line
-                            x1="11"
-                            y1="8"
-                            x2="11"
-                            y2="14"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M15 3H6C4.89543 3 4 3.89543 4 5V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V8L15 3Z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <path d="M14 3V9H20" stroke="currentColor" strokeWidth="2" />
+              </svg>
+              Photos ({truck.gallery.length} photos)
+            </button>
+            <button
+              className={`tab-btn ${activeTab === "video" ? "active" : ""}`}
+              onClick={() => setActiveTab("video")}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
+              </svg>
+              Video
+            </button>
+          </div>
+        )}
 
-            {/* Navigation Controls */}
-            <div className="swiper-navigation">
-              <button className="truck-swiper-prev swiper-nav-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M15 18L9 12L15 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-              <button className="truck-swiper-next swiper-nav-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M9 18L15 12L9 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
+        {/* 🆕 NEW: Video Section */}
+        {hasVideo && (activeTab === "video" || !hasGallery) && (
+          <div
+            className="video-section"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div className="video-container">
+              <div className="video-wrapper">
+                <iframe
+                  src={truck.videoUrl}
+                  title={`${truck.title} Build Video`}
+                  className="truck-video"
+                  allowFullScreen
+                  frameBorder="0"
+                />
+              </div>
+
+              <div className="video-info">
+                <h3 className="video-title">{truck.title} Video</h3>
+                <div className="video-meta">
+                  <span className="video-category">Video</span>
+                  <span className="video-separator">•</span>
+                  <span className="video-make">
+                    {truck.year} {truck.make} {truck.model}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
+        )}
 
-          {/* Thumbnails Gallery */}
-          <div className="gallery-thumbnails">
-            <Swiper
-              modules={[Navigation, Thumbs]}
-              onSwiper={setThumbsSwiper}
-              spaceBetween={15}
-              slidesPerView={5}
-              freeMode={true}
-              watchSlidesProgress={true}
-              className="thumbnails-swiper"
-              breakpoints={{
-                320: { slidesPerView: 3 },
-                768: { slidesPerView: 4 },
-                1024: { slidesPerView: 5 },
-              }}
-            >
-              {truck.gallery.map((image, index) => (
-                <SwiperSlide key={index}>
-                  <div
-                    className={`thumbnail-item ${
-                      index === activeIndex ? "active" : ""
-                    }`}
-                    onClick={() => openLightbox(index)}
-                  >
-                    <img src={image} alt={`Thumbnail ${index + 1}`} />
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+        {/* Original Gallery Section - now conditional */}
+        {hasGallery && (activeTab === "gallery" || !hasVideo) && (
+          <div className="truck-hero-gallery" data-aos="fade-up">
+            <div className="main-gallery">
+              <Swiper
+                modules={[Navigation, EffectFade, Autoplay, Thumbs]}
+                ref={mainSwiperRef}
+                spaceBetween={30}
+                effect="fade"
+                fadeEffect={{ crossFade: true }}
+                navigation={{
+                  nextEl: ".truck-swiper-next",
+                  prevEl: ".truck-swiper-prev",
+                }}
+                thumbs={{
+                  swiper:
+                    thumbsSwiper && !thumbsSwiper.destroyed
+                      ? thumbsSwiper
+                      : null,
+                }}
+                onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+                className="main-truck-swiper"
+              >
+                {truck.gallery.map((image, index) => (
+                  <SwiperSlide key={index}>
+                    <div
+                      className="truck-image-container"
+                      onClick={() => openLightbox(index)}
+                    >
+                      <img
+                        src={image}
+                        alt={`${truck.title} - View ${index + 1}`}
+                        className="truck-main-image"
+                        style={{ cursor: "pointer" }}
+                      />
+                      <div className="image-overlay">
+                        <div className="image-counter">
+                          {index + 1} / {truck.gallery.length}
+                        </div>
+                        <div className="zoom-icon">
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                          >
+                            <circle
+                              cx="11"
+                              cy="11"
+                              r="8"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            />
+                            <path
+                              d="m21 21-4.35-4.35"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            />
+                            <line
+                              x1="8"
+                              y1="11"
+                              x2="14"
+                              y2="11"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            />
+                            <line
+                              x1="11"
+                              y1="8"
+                              x2="11"
+                              y2="14"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+
+              {/* Navigation Controls */}
+              <div className="swiper-navigation">
+                <button className="truck-swiper-prev swiper-nav-btn">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M15 18L9 12L15 6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+                <button className="truck-swiper-next swiper-nav-btn">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M9 18L15 12L9 6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Thumbnails Gallery */}
+            <div className="gallery-thumbnails">
+              <Swiper
+                modules={[Navigation, Thumbs]}
+                onSwiper={setThumbsSwiper}
+                spaceBetween={15}
+                slidesPerView={5}
+                freeMode={true}
+                watchSlidesProgress={true}
+                className="thumbnails-swiper"
+                breakpoints={{
+                  320: { slidesPerView: 3 },
+                  768: { slidesPerView: 4 },
+                  1024: { slidesPerView: 5 },
+                }}
+              >
+                {truck.gallery.map((image, index) => (
+                  <SwiperSlide key={index}>
+                    <div
+                      className={`thumbnail-item ${
+                        index === activeIndex ? "active" : ""
+                      }`}
+                      onClick={() => openLightbox(index)}
+                    >
+                      <img src={image} alt={`Thumbnail ${index + 1}`} />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="ak-height-100 ak-height-lg-60"></div>
 
@@ -354,6 +439,59 @@ const SingleTruck = () => {
                 data-aos="fade-left"
                 data-aos-delay="100"
               >
+                {/* 🆕 NEW: Media Status Card */}
+                <div className="media-status-card">
+                  <h3 className="card-title">Available Content</h3>
+                  <div className="media-status-list">
+                    <div className="media-status-item">
+                      <span className="media-icon">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M15 3H6C4.89543 3 4 3.89543 4 5V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V8L15 3Z"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          />
+                        </svg>
+                      </span>
+                      <span className="media-label">Photos:</span>
+                      <span
+                        className={`media-value ${
+                          hasGallery ? "available" : "unavailable"
+                        }`}
+                      >
+                        {hasGallery
+                          ? `${truck.gallery.length} images`
+                          : "Not available"}
+                      </span>
+                    </div>
+                    <div className="media-status-item">
+                      <span className="media-icon">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
+                        </svg>
+                      </span>
+                      <span className="media-label">Video:</span>
+                      <span
+                        className={`media-value ${
+                          hasVideo ? "available" : "unavailable"
+                        }`}
+                      >
+                        {hasVideo ? "Available" : "Not available"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Technical Specs */}
                 <div className="specs-card">
                   <h3 className="card-title">Technical Specifications</h3>
@@ -418,7 +556,7 @@ const SingleTruck = () => {
 
         <div className="ak-height-75 ak-height-lg-50"></div>
 
-        {/* Navigation Section */}
+        {/* 🆕 UPDATED: Navigation Section with dual buttons */}
         <div className="truck-navigation" data-aos="fade-up">
           <Link to="/truck-gallery" className="nav-button back-button">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -432,11 +570,18 @@ const SingleTruck = () => {
             </svg>
             <span>Back to Gallery</span>
           </Link>
+
+          <Link to="/video-gallery" className="nav-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M8 5V19L19 12L8 5Z" fill="currentColor" />
+            </svg>
+            <span>View All Videos</span>
+          </Link>
         </div>
       </div>
 
-      {/* Custom Lightbox Modal */}
-      {lightboxOpen && (
+      {/* Original Lightbox Modal - unchanged */}
+      {lightboxOpen && hasGallery && (
         <div className="lightbox-overlay" onClick={closeLightbox}>
           <div
             className="lightbox-container"

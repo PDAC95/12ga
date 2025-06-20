@@ -121,6 +121,28 @@ const truckSchema = new mongoose.Schema(
         trim: true,
       },
     ],
+
+    hasVideo: {
+      type: Boolean,
+      default: false,
+      index: true, // For better query performance
+    },
+    videoUrl: {
+      type: String,
+      trim: true,
+      validate: {
+        validator: function (v) {
+          // Only validate if hasVideo is true and videoUrl is provided
+          if (this.hasVideo && v) {
+            // Allow YouTube embed URLs, regular YouTube URLs, and other video URLs
+            return /^https?:\/\/.+/.test(v);
+          }
+          return true;
+        },
+        message: "Video URL must be a valid URL",
+      },
+    },
+
     projectDetails: {
       duration: {
         type: String,

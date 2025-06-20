@@ -6,7 +6,8 @@ export const trucksService = {
   // Get all trucks
   getAllTrucks: async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/trucks`);
+      // Add limit parameter to get all trucks (or a higher number)
+      const response = await fetch(`${API_BASE_URL}/trucks?limit=200`);
       const data = await response.json();
 
       if (!response.ok) {

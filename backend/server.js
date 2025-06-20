@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 
 // Import routes
 import trucksRoutes from "./routes/trucks.js";
+import videosRoutes from "./routes/videos.js";
 
 // Load environment variables
 dotenv.config();
@@ -78,7 +79,7 @@ app.get("/api", (req, res) => {
     endpoints: {
       health: "/health",
       trucks: "/api/trucks",
-      videos: "/api/videos (coming soon)",
+      videos: "/api/videos",
       products: "/api/products (coming soon)",
     },
   });
@@ -86,6 +87,7 @@ app.get("/api", (req, res) => {
 
 // Use routes
 app.use("/api/trucks", trucksRoutes);
+app.use("/api/videos", videosRoutes);
 
 // TODO: Add more routes when ready
 // import videosRoutes from './routes/videos.js';

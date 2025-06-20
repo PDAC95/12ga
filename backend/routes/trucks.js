@@ -109,7 +109,7 @@ router.get("/featured", async (req, res) => {
       featured: true,
     })
       .sort({ createdAt: -1 })
-      .limit(10)
+      .limit(150)
       .lean();
 
     res.json({
