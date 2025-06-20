@@ -108,11 +108,13 @@ const TruckSlider = () => {
 
       {/* Main Hero Slider */}
       <Swiper
-        modules={[Navigation, Autoplay, EffectFade, Parallax]}
+        modules={[Navigation, Autoplay, EffectFade]}
         effect="fade"
-        fadeEffect={{ crossFade: true }}
+        fadeEffect={{
+          crossFade: true,
+        }}
         loop={trucks.length > 1}
-        speed={1500}
+        speed={800}
         autoplay={
           trucks.length > 1
             ? {
@@ -122,7 +124,10 @@ const TruckSlider = () => {
               }
             : false
         }
-        parallax={true}
+        spaceBetween={0}
+        slidesPerView={1}
+        centeredSlides={true}
+        watchOverflow={true}
         navigation={{
           nextEl: ".hero-nav-next",
           prevEl: ".hero-nav-prev",
@@ -145,7 +150,6 @@ const TruckSlider = () => {
                   }
                   alt={truck.heroAlt || truck.name || "Custom Truck Build"}
                   className="hero-image"
-                  data-swiper-parallax="-300"
                 />
                 <div className="image-overlay"></div>
               </div>
@@ -153,25 +157,19 @@ const TruckSlider = () => {
               <div className="hero-content">
                 <div className="container">
                   <div className="hero-text-container">
-                    <div className="hero-text" data-swiper-parallax="-400">
-                      <span
-                        className="hero-subtitle"
-                        data-swiper-parallax="-200"
-                      >
+                    <div className="hero-text">
+                      <span className="hero-subtitle">
                         {truck.heroSubtitle || truck.category || "Custom Build"}
                       </span>
-                      <h1 className="hero-title" data-swiper-parallax="-300">
+                      <h1 className="hero-title">
                         {truck.heroTitle || truck.name || "PREMIUM BUILD"}
                       </h1>
-                      <p
-                        className="hero-description"
-                        data-swiper-parallax="-100"
-                      >
+                      <p className="hero-description">
                         {truck.heroDescription ||
                           truck.description ||
                           "Discover our premium custom truck builds where engineering meets artistry"}
                       </p>
-                      <div className="hero-actions" data-swiper-parallax="0">
+                      <div className="hero-actions">
                         <Link
                           to={`/truck/${truck.slug}`}
                           className="hero-btn primary"
